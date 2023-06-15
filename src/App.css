@@ -1,38 +1,105 @@
-.App {
-  text-align: center;
+.primaryColor{
+  color: #162447;
+}
+.btn-primary{
+  background-color: #162447;
+  border: none;
+}
+.bgColor{
+  background-color: #162447;
+}
+.text-danger{
+  color: #bb262c !important;
+}
+.text-red{
+  color: #ff0008 ;
+}
+.btn_anim{
+  transition: .5s;
+}
+.btn_anim:hover{
+  transform: translateY(-2px);
+}
+.height_100{
+  height: 100%;
+}
+.page404{
+  height: 100vh;
+}
+.fontSize12{
+  font-size: 12px;
+}
+.fontSize13{
+  font-size: 13px;
+}
+.fontSize14{
+  font-size: 14px;
+}
+.fontSize15{
+  font-size: 15px;
+}
+.fontSize16{
+  font-size: 16px;
+}
+.fontSize17{
+  font-size: 17px;
+}
+.fontSize18{
+  font-size: 18px;
+}
+.fontSize19{
+  font-size: 19px;
+}
+.fontSize20{
+  font-size: 20px;
+}
+.fontSize21{
+  font-size: 21px;
+}
+.fontSize22{
+  font-size: 22px;
+}
+.fontSize23{
+  font-size: 23px;
+}
+.fontSize24{
+  font-size: 24px;
+}
+.fontSize25{
+  font-size: 25px;
+}
+.fontSize26{
+  font-size: 26px;
+}
+.fontSize27{
+  font-size: 27px;
+}
+.fontSize28{
+  font-size: 28px;
+}
+.fontSize29{
+  font-size: 29px;
+}
+.fontSize30{
+  font-size: 30px;
+}
+.fontSize31{
+  font-size: 31px;
+}
+.fontSize32{
+  font-size: 32px;
+}
+.fontSize33{
+  font-size: 33px;
+}
+.fontSize34{
+  font-size: 34px;
+}
+.fontSize35{
+  font-size: 35px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.fontSize50{
+  font-size: 50px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

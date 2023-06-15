@@ -3,11 +3,30 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
+import $ from 'jquery'
+
+
+$(document).ready(() => {
+  $(window).scroll(() => {
+      if($(window).scrollTop() !== 0 ) {
+
+          $('nav').addClass('shadow')
+      }
+      else{
+        $('nav').removeClass('shadow')
+
+      }
+
+  })
+})
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <BrowserRouter>
     <App />
+    </BrowserRouter>
   </React.StrictMode>
 );
 
