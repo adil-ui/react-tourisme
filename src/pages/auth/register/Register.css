@@ -1,0 +1,9 @@
+.register{
+    background-image: url(/public/assets/slide-2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+form{
+    background-color: #ffffffd2;
+}

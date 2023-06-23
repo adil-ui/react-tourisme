@@ -6,7 +6,7 @@ const Card = ({ elt }) => {
 
 
     return (
-        <article className="col-xl-3 col-lg-4 col-md-6 col-sm-9 col-10 mb-4 mx-auto card_container" >
+        <article className="col-xxl-3 col-lg-4 col-md-6 col-sm-9 col-10 mb-4 mx-auto card_container " >
             <div className="card border-0">
                 <div className='card_img'>
                     <NavLink to={`/details/${elt.id}`}><img src={elt.picture} alt="user_image" className="" /></NavLink>

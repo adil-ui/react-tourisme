@@ -1,0 +1,36 @@
+.dashboard{
+    background-color: #f3f5f8;
+    margin-top: 5.5rem;
+    
+}
+aside{
+    width: 300px;
+   
+}
+.myAside{
+    width: 300px;
+    height: 110vh;
+
+}
+
+aside img {
+    box-shadow: 0px 0px 0px 5px rgba(255, 255, 255, 0.082);
+}
+
+.dash_item {
+    transition: .8s;
+    font-size: 17px;
+}
+.dash_menu{
+    transition: .5s;
+    padding: 12px 0;
+    cursor: pointer;
+ }
+.dash_menu:hover .dash_item{
+    color: #bb262c !important;
+    padding-left: 8px;
+ }
+ .dash_menu:hover {
+    background-color: #ffffff17;
+ }
+ 

@@ -1,18 +1,29 @@
 .primaryColor{
-  color: #162447;
+  color: #17550c;
 }
 .btn-primary{
-  background-color: #162447;
-  border: none;
+  background-color: #17550c !important;
+  border: none !important;
 }
 .bgColor{
-  background-color: #162447;
+  background-color: #17550c;
 }
 .text-danger{
-  color: #bb262c !important;
+  color: #a92220 !important;
 }
 .text-red{
-  color: #ff0008 ;
+  color: #a92220 ;
+}
+.text-redd{
+  color: #ff1814 ;
+}
+.btn-danger{
+  background-color: #a92220 !important;
+  border: 1px solid #a92220 !important;
+}
+.bg-red{
+  background-color: #a92220 !important;
+
 }
 .btn_anim{
   transition: .5s;
@@ -20,86 +31,105 @@
 .btn_anim:hover{
   transform: translateY(-2px);
 }
+.border-secondary{
+  border-color: #17550c !important;
+}
 .height_100{
   height: 100%;
 }
 .page404{
   height: 100vh;
 }
+.myShadow{
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.active {
+  color: #a92220 !important;
+  border: none !important;
+  font-weight: 900 !important;
+  background-color: transparent !important;
+}
+
+.nav-link:focus-visible {
+    box-shadow: 0 0 0 0.25rem rgba(32, 48, 73, 0) !important; 
+}
 .fontSize12{
-  font-size: 12px;
+  font-size: 12px !important;
 }
 .fontSize13{
-  font-size: 13px;
+  font-size: 13px !important;
 }
 .fontSize14{
-  font-size: 14px;
+  font-size: 14px !important;
 }
 .fontSize15{
-  font-size: 15px;
+  font-size: 15px !important;
 }
 .fontSize16{
-  font-size: 16px;
+  font-size: 16px !important;
 }
 .fontSize17{
-  font-size: 17px;
+  font-size: 17px !important;
 }
 .fontSize18{
-  font-size: 18px;
+  font-size: 18px !important;
 }
 .fontSize19{
-  font-size: 19px;
+  font-size: 19px !important;
 }
 .fontSize20{
-  font-size: 20px;
+  font-size: 20px !important;
 }
 .fontSize21{
-  font-size: 21px;
+  font-size: 21px !important;
 }
 .fontSize22{
-  font-size: 22px;
+  font-size: 22px !important;
 }
 .fontSize23{
-  font-size: 23px;
+  font-size: 23px !important;
 }
 .fontSize24{
-  font-size: 24px;
+  font-size: 24px !important;
 }
 .fontSize25{
-  font-size: 25px;
+  font-size: 25px !important;
 }
 .fontSize26{
-  font-size: 26px;
+  font-size: 26px !important;
 }
 .fontSize27{
-  font-size: 27px;
+  font-size: 27px !important;
 }
 .fontSize28{
-  font-size: 28px;
+  font-size: 28px !important;
 }
 .fontSize29{
-  font-size: 29px;
+  font-size: 29px !important;
 }
 .fontSize30{
-  font-size: 30px;
+  font-size: 30px !important;
 }
 .fontSize31{
-  font-size: 31px;
+  font-size: 31px !important;
 }
 .fontSize32{
-  font-size: 32px;
+  font-size: 32px !important;
 }
 .fontSize33{
-  font-size: 33px;
+  font-size: 33px !important;
 }
 .fontSize34{
-  font-size: 34px;
+  font-size: 34px !important;
 }
 .fontSize35{
-  font-size: 35px;
+  font-size: 35px !important;
 }
 
 .fontSize50{
-  font-size: 50px;
+  font-size: 50px !important;
 }
-
+.fontSize60{
+  font-size: 50px !important;
+}

@@ -2,7 +2,6 @@ footer{
     position: relative;
     z-index: 0;
     overflow: hidden;
-    background: url(/public/assets/footer.png);
 
 }
 footer:after {

@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 const Hero = () => {
   return (
     <div className='position-relative hero mb-5' >
-      <div className="hero-back mt-5 pt-5" >
+      <div className="hero-back pt-5 mt-5" >
         <div className="carouselText d-none d-md-block mt-5 pt-5 " >
-          <h1 className='text-light text-carousel mt-5 pt-5 pb-2 fontSize50' >Visite au Maroc</h1>
+          <h1 className='text-light text-carousel mt-5 pt-5 pb-2 fontSize60 fw-semibold' >Votre Guide au Maroc</h1>
           <p className='text-light text-carousel fontSize35 fw-semibold'>Construisons ensemble votre voyage sur mesure au Maroc</p>
 
           <div className="d-flex mt-5">
@@ -38,17 +38,12 @@ const Hero = () => {
           </div>
           <div className="carousel-item position-relative" data-bs-interval="3000">
             <img src="/assets/slide-3.jpg" className="d-block slide_img w-100" alt="..." />
-
+          </div>
+          <div className="carousel-item position-relative" data-bs-interval="3000">
+            <img src="/assets/slide-4.jpg" className="d-block slide_img w-100" alt="..." />
           </div>
         </div>
-        {/* <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Next</span>
-        </button> */}
+       
       </div>
     </div>
 

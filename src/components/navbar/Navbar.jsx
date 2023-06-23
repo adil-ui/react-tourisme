@@ -6,38 +6,41 @@ const Navbar = () => {
     const { user } = useContext(AuthContext);
     return (
 
-        <nav className="navbar fixed-top navbar-expand-lg  bgColor" >
-            <div className="container " >
-                <NavLink to="/" className="navbar-brand fw-bolder  " ><img src="/assets/logo1.png" alt="logo" width="150px" /></NavLink>
-                <button className="navbar-toggler bg-light " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <nav className="navbar fixed-top navbar-expand-xl  bg-white py-1 shadow-sm" >
+            <div className="container-fluid " >
+                <NavLink to="/" className="navbar-brand fw-bolder ms-5" ><img src="/assets/logo.png" alt="logo" width="130px" /></NavLink>
+                <button className="navbar-toggler bg-light me-5" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon "></span>
                 </button>
-                
-                <div className="collapse navbar-collapse " id="navbarSupportedContent">
-                    <ul className="navbar-nav mb-2 mb-lg-0 ms-auto" >
 
-                        <li className='nav-item me-3 mt-0 mb-1 mt-lg-3' >
-                            <NavLink className=" fontSize18 nav-link navLink text-light  " to='accueil' >Accueil</NavLink>
+                <div className="collapse navbar-collapse " id="navbarSupportedContent">
+                    <ul className="navbar-nav mb-2  ms-auto pe-5" >
+
+                        <li className='nav-item me-3 align-middle mt-lg-3' >
+                            <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='/' >Accueil</NavLink>
                         </li>
-                        <li className='nav-item me-3 mt-0 mb-1 mt-lg-3' >
-                            <NavLink className=" fontSize18 nav-link navLink text-light  " to='annonces' >Hôtels</NavLink>
+                        <li className='nav-item me-3 align-middle mt-lg-3' >
+                            <NavLink className=" fontSize17 nav-link navLink primaryColor" to='les-hotels' >Hôtels</NavLink>
                         </li>
-                        <li className='nav-item me-3 mt-0 mb-1 mt-lg-3' >
-                            <NavLink className=" fontSize18 nav-link navLink text-light  " to='annonces' >Voitures</NavLink>
+                        <li className='nav-item me-3 align-middle mt-lg-3' >
+                            <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='les-agences' >Agences de Location</NavLink>
                         </li>
-                        <li className='nav-item me-3 mt-0 mb-1 mt-lg-3' >
-                            <NavLink className=" fontSize18 nav-link navLink text-light  " to='annonces' >Monuments</NavLink>
+                        <li className='nav-item me-3 align-middle mt-lg-3' >
+                            <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='les-monuments' >Monuments</NavLink>
                         </li>
-                        <li className='nav-item me-3 mt-0 mb-1 mt-lg-3' >
-                            <NavLink className=" fontSize18 nav-link navLink text-light  " to='contact' >Contact</NavLink>
+                        <li className='nav-item me-3 align-middle mt-lg-3' >
+                            <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='les-guides' >Guides</NavLink>
+                        </li>
+                        <li className='nav-item me-3 align-middle mt-lg-3' >
+                            <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='contact' >Contact</NavLink>
                         </li>
                         {user ?
-                            <li className='nav-item me-3 mt-0 mb-1 mt-lg-3' >
-                                <NavLink className=" fontSize18 nav-link navLink text-light  " to='connexion' >Mon compte</NavLink>
+                            <li className='nav-item me-3 align-middle mt-lg-3' >
+                                <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='compte' >Mon compte</NavLink>
                             </li>
                             :
                             <li className='nav-item mt-2 mt-lg-3'>
-                                <NavLink className="btn btn-danger  rounded-2 fontSize18 shadow-sm px-4 btn_anim" to='/publier-annonce'>Se connecter</NavLink>
+                                <NavLink className="btn btn-danger  rounded-2 fontSize17  px-4 btn_anim" to='/connexion'>Se connecter</NavLink>
                             </li>
                         }
 

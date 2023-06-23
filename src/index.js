@@ -11,10 +11,10 @@ $(document).ready(() => {
   $(window).scroll(() => {
       if($(window).scrollTop() !== 0 ) {
 
-          $('nav').addClass('shadow')
+          $('nav').removeClass('shadow-sm').addClass('shadow')
       }
       else{
-        $('nav').removeClass('shadow')
+        $('nav').removeClass('shadow').addClass('shadow-sm')
 
       }
 

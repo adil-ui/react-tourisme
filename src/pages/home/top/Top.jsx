@@ -72,7 +72,7 @@ const Top = () => {
     const monuments = [
         {
             id: 1,
-            title: 'La kasbah de Chefchaouen,',
+            title: 'La kasbah de Chefchaouen',
             picture: '/assets/monument-1.jpg',
             ville: 'Chefchaouen',
         },
@@ -100,7 +100,9 @@ const Top = () => {
     return (
         <section className='my-5 pt-4 container'>
             <div>
-                <h2 className='text-center mb-5 text-danger fw-semibold'>MEILLEURS HÔTELS</h2>
+                <h2 className='text-center  text-danger fw-semibold'>MEILLEURS HÔTELS</h2>
+                <h6 className='text-center mb-3  primaryColor fw-semibold'>Visite au Maroc</h6>
+                <div className=' bgColor mb-5 mx-auto rounded-5' style={{height:'2px', width: '60px',}}></div>
                 <div class="row">
                     {hotels.map(elt => <Card elt={elt} />)}
                 </div>
@@ -110,7 +112,9 @@ const Top = () => {
             </div>
 
             <div>
-                <h2 className='text-center mb-5 mt-5 pt-5 text-danger fw-semibold'>MEILLEURS AGENCES DE VOITURES</h2>
+                <h2 className='text-center  mt-5 pt-5 text-danger fw-semibold'>MEILLEURS AGENCES DE VOITURES</h2>
+                <h6 className='text-center mb-3  primaryColor fw-semibold'>Visite au Maroc</h6>
+                <div className=' bgColor mb-5 mx-auto rounded-5' style={{height:'2px', width: '60px',}}></div>
                 <div class="row">
                     {cars.map(elt => <Card elt={elt} />)}
                 </div>
@@ -120,7 +124,9 @@ const Top = () => {
             </div>
 
             <div>
-                <h2 className='text-center mb-5 mt-5 pt-5 text-danger fw-semibold'>MEILLEURS DESTINATIONS</h2>
+                <h2 className='text-center mt-5 pt-5 text-danger fw-semibold'>MEILLEURS DESTINATIONS</h2>
+                <h6 className='text-center mb-3  primaryColor fw-semibold'>Visite au Maroc</h6>
+                <div className=' bgColor mb-5 mx-auto rounded-5' style={{height:'2px', width: '60px',}}></div>
                 <div class="row">
                     {monuments.map(elt => <Card elt={elt} />)}
                 </div>
@@ -128,7 +134,6 @@ const Top = () => {
                     <Link to="" className='btn btn-primary px-4 py-2 fontSize18'>Découvrir plus</Link>
                 </div>
             </div>
-
         </section>
     )
 }
