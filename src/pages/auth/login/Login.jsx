@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import AuthContext from '../../../context/auth-context'
 import { NavLink, useNavigate } from 'react-router-dom';
+import { API_URL } from '../../../config/constants';
+
 import axios from 'axios';
 import './Login.css'
 
@@ -11,7 +13,6 @@ const Login = () => {
     const [message, setMessage] = useState("");
     const { setUser } = useContext(AuthContext);
     const navigate = useNavigate();
-    const emailRef = useRef();
 
     const clickLogin = async (e) => {
         e.preventDefault();
@@ -19,15 +20,14 @@ const Login = () => {
         formData.append("email", email);
         formData.append("password", password);
         try {
-            let res = await axios.post("api/login", formData)
+            let res = await axios.post(API_URL+"api/login", formData)
             console.log(res);
-            setUser({ ...res.data.user, token: res.data.token });
-            localStorage.setItem('user', JSON.stringify({ ...res.data.user, token: res.data.token }));
+            setUser(res.data.user);
+            localStorage.setItem('user', res.data.user);
             navigate('/dashboard')
         } catch (err) {
-            console.log(err.response.data);
-
-            setMessage('Utilisateur introuvable');
+            console.log(err.response);
+            setMessage(err.response.data.message);
         }
     }
 
@@ -36,36 +36,33 @@ const Login = () => {
     }, [])
 
     return (
-        <section className='login'>
-            <div className='container mt-5 pt-5'>
-                <form onSubmit={clickLogin} className="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-10 mt-5 py-3 px-4 rounded-4 shadow-lg mx-auto">
-                    <h4 className='text-center fw-bolder  mt-4 text-danger'>Connectez-vous</h4>
-                    <div className='bg-secondary my-4 bg-opacity-50 mx-auto rounded-5' style={{ height: '0.1px', width: '100%', }}></div>
+            <div className='row g-0 my-5 pt-4' >
+                <form onSubmit={clickLogin} className="col-xxl-3 col-xl-4 col-lg-5 col-md-6 col-sm-8 col-10  py-3 px-4 rounded-4 shadow mx-auto">
+                    <div className='text-center mb-4'><img src="/assets/logo.png" alt="logo" width="140px" /></div>
 
-                    <div className="mb-2 ">
-                        <label className="form-label fw-semibold">Email</label>
-                        <input type="email" ref={emailRef} className="form-control" name='email' value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    <div className="mb-3 ">
+                        <label className="form-label m-0">Email</label>
+                        <input type="email"  className="form-control" name='email' onChange={(e) => setEmail(e.target.value)} required />
                     </div>
                     <div className="">
-                        <label className="form-label fw-semibold">Mot de passe</label>
-                        <input type="password" className="form-control" name='password' value={password} onChange={(e) => setPassword(e.target.value)} required />
+                        <label className="form-label m-0">Password</label>
+                        <input type="password" className="form-control" name='password' onChange={(e) => setPassword(e.target.value)} required />
                     </div>
 
-                    {message && <p className='alert alert-danger py-3 text-center alert-dismissible fade show' role="alert">{message}
+                    {message && <p className='alert alert-danger  text-center alert-dismissible fade show mt-2' role="alert">{message}
                         <button type="button" onClick={() => setMessage("")} class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </p>}
-                    <div className='text-center mt-3'>
-                        <NavLink to={'/mot-de-passe-oublier'} className="text-primary fw-semibold text-center text-decoration-none">Mot de passe oublier ?</NavLink>
+                    <div className='text-center mt-4'>
+                        <NavLink to={'/mot-de-passe-oublier'} className="text-primary  text-center text-decoration-none">Forgot password ?</NavLink>
                     </div>
                     <div className="mt-3">
                         <button type="submit" className="btn btn-primary py-2 col-12 fw-semibold px-4" >Se Connecter</button>
                     </div>
-                    <p className='text-center mt-2'>Vous n'avez pas de compte ? <NavLink to={'/inscription'} className="text-primary fw-semibold text-decoration-none">S'inscire</NavLink></p>
+                    <p className='text-center mt-3'>Don't have an account ? <NavLink to={'/inscription'} className="text-primary fw-semibold text-decoration-none">Sign up</NavLink></p>
                
                 </form>
             </div>
 
-        </section>
     )
 }
 

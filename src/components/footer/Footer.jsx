@@ -4,7 +4,7 @@ import './Footer.css'
 
 const Footer = () => {
   return (
-    <footer className='bgColor'>
+    <footer className='footerColor'>
 			<section className="container">
 				<div className="row mt-5">
 					<div className="col-md-6 col-lg-3 mb-4 mb-md-0 ">
@@ -20,8 +20,9 @@ const Footer = () => {
 					<div className="col-md-6 col-lg-3 mb-4 mb-md-0">
 						<h4 className="text-red mb-4 fw-semibold">Nos Categories</h4>
 						<p><Link to='/' className="py-1 fontSize17 d-block text">Hôtels</Link></p>
-						<p><Link to='/' className="py-1 fontSize17 d-block text">Voitures</Link></p>
-						<p><Link to='/' className="py-1 fontSize17 d-block text">Monuments</Link></p>
+						<p><Link to='/' className="py-1 fontSize17 d-block text">Agences de locations</Link></p>
+						<p><Link to='/' className="py-1 fontSize17 d-block text">Guides</Link></p>
+						<p><Link to='/' className="py-1 fontSize17 d-block text">Infos pratiques</Link></p>
 					</div>
 					<div className="col-md-6 col-lg-3 pl-lg-5 mb-4 mb-md-0">
 						<h4 className="text-red mb-4 fw-semibold">Liens directs</h4>
@@ -32,7 +33,6 @@ const Footer = () => {
 					<div className="col-md-6 col-lg-3 mb-4 mb-md-0">
 						<h4 className="text-red fw-semibold">Vous avez des questions ?</h4>
 						<div className="my-4">
-							<address className="fontSize17 lh-lg"><i class="bi bi-geo-alt-fill text-red align-middle fontSize17 me-1"></i><span className="text">18 Hay Al Firdouss Avenue My Ali Chrif, Témara 20000</span></address>
 							<p className="fontSize17"><i class="bi bi-telephone-fill text-red align-middle fontSize17 me-1"></i><span className="text">+212 625 856 345</span></p>
 							<p className="fontSize17"><i class="bi bi-envelope-fill text-red align-middle fontSize17 me-1"></i><span className="text">guidemorrocco@gmail.com</span></p>
 							
@@ -41,7 +41,7 @@ const Footer = () => {
 				</div>
 				<div className="mt-5">
 					<div className="text-center">
-						<p>Copyright &copy; 2023 GUIDEMORROCCO. All rights reserved Developed By <Link to='https://adil-ui.github.io/Portfolio/' target='_blank'  className="text-red fw-semibold text-decoration-none">KingAdil</Link> </p>
+						<p>Copyright &copy; 2023 GUIDEMORROCCO. All rights reserved Developed By <Link to='https://adil-ui.github.io/Portfolio/' target='_blank'  className="text-red fw-semibold text-decoration-none">Adil Boussalem</Link> </p>
 					</div>
 				</div>
 			</section>

@@ -52,63 +52,7 @@ const Hotels = () => {
     //         })
     // }, [])
 
-    // const filter = async (e) => {
-    //     e.preventDefault();
-    //     setFiltered(true);
-    //     const formData = new FormData();
-    //     formData.append('city', city);
-    //     formData.append('sector', sector);
-    //     formData.append('category', category);
-    //     formData.append('type', type);
-    //     formData.append('livingRoom', livingRoom);
-    //     formData.append('bedroom', bedroom);
-    //     formData.append('bathroom', bathroom);
-    //     formData.append('floor', floor);
-    //     formData.append('areaMin', areaMin);
-    //     formData.append('areaMax', areaMax);
-    //     formData.append('priceMin', priceMin);
-    //     formData.append('priceMax', priceMax);
-    //     setFormData(formData);
-    //     try {
-    //         const response = await axios.post(API_URL + 'api/filter-properties', formData)
-    //         setData(response.data.properties)
-    //         window.scroll(0, 0);
-    //         console.log(response.data);
-
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-
-    // }
-
-    // const filterByDate = () => {
-
-    //     fetch(API_URL + 'api/properties/1')
-    //         .then(response => response.json())
-    //         .then(result => {
-    //             setData(result.properties);
-    //         })
-    //     $('.dateActive').addClass('active')
-    //     $('.ascActive').removeClass('active')
-    //     $('.descActive').removeClass('active')
-
-    // }
-    // const orderByAsc = () => {
-    //     const copyData = [...data];
-    //     copyData.sort((a, b) => (a.price < b.price ? 1 : -1));
-    //     setData(copyData);
-    //     $('.dateActive').removeClass('active')
-    //     $('.ascActive').addClass('active')
-    //     $('.descActive').removeClass('active')
-    // }
-    // const orderByDesc = () => {
-    //     const copyData = [...data];
-    //     copyData.sort((a, b) => (a.price > b.price ? 1 : -1));
-    //     setData(copyData);
-    //     $('.dateActive').removeClass('active')
-    //     $('.ascActive').removeClass('active')
-    //     $('.descActive').addClass('active')
-    // }
+   
 
     useEffect(() => {
         window.scroll(0, 0);
@@ -116,64 +60,66 @@ const Hotels = () => {
     const hotels = [
         {
             id: 1,
-            title: 'Hôtel la Tour Hassan',
-            picture: '/assets/slide-1.jpg',
+            title: 'Tented Erg Chebbi',
+            picture: '/assets/hotel-1.jpg',
             price: 300,
             star: 3,
-            ville: 'Rabat',
+            ville: 'Marzouga',
         },
         {
             id: 2,
-            title: 'Hôtel la Tour Hassan',
-            picture: '/assets/slide-2.jpg',
+            title: 'Farah Rabat',
+            picture: '/assets/hotel-2.jpg',
             price: 300,
             star: 3,
             ville: 'Rabat',
         },
         {
             id: 3,
-            title: 'Hôtel la Tour Hassan',
-            picture: '/assets/slide-3.jpg',
+            title: "Les Mérinides",
+            picture: '/assets/hotel-3.jpg',
             price: 300,
             star: 3,
-            ville: 'Rabat',
+            ville: 'Fès',
         },
         {
             id: 4,
-            title: 'Hôtel la Tour Hassan',
-            picture: '/assets/slide-1.jpg',
+            title: 'Waves Aqua Resort',
+            picture: '/assets/hotel-4.jpg',
             price: 300,
             star: 3,
-            ville: 'Rabat',
+            ville: 'Kénitra',
         },
         {
             id: 5,
-            title: 'Hôtel la Tour Hassan',
-            picture: '/assets/slide-1.jpg',
+            title: "Les Mérinides",
+            picture: '/assets/hotel-3.jpg',
             price: 300,
             star: 3,
-            ville: 'Rabat',
+            ville: 'Fès',
         },
+      
+        
         {
             id: 6,
-            title: 'Hôtel la Tour Hassan',
-            picture: '/assets/slide-3.jpg',
+            title: 'Tented Erg Chebbi',
+            picture: '/assets/hotel-1.jpg',
             price: 300,
             star: 3,
-            ville: 'Rabat',
+            ville: 'Marzouga',
         },
         {
             id: 7,
-            title: 'Hôtel la Tour Hassan',
-            picture: '/assets/slide-1.jpg',
+            title: 'Waves Aqua Resort',
+            picture: '/assets/hotel-4.jpg',
             price: 300,
             star: 3,
-            ville: 'Rabat',
+            ville: 'Kénitra',
         },
         {
             id: 8,
-            title: 'Hôtel la Tour Hassan',
-            picture: '/assets/slide-2.jpg',
+            title: 'Farah Rabat',
+            picture: '/assets/hotel-2.jpg',
             price: 300,
             star: 3,
             ville: 'Rabat',
@@ -262,7 +208,7 @@ const Hotels = () => {
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="flexRadioDefaultt" id="flexRadioDefault3" />
                                     <label class="form-check-label" for="flexRadioDefault3">
-                                        Monuments
+                                        Infos pratiques
                                     </label>
                                 </div>
                                 <div class="form-check">
@@ -283,7 +229,7 @@ const Hotels = () => {
                 </aside>
 
                 <div className='col-9 mx-auto mt-xl-0 mt-lg-5 mt-5'>
-                    <div class="row">
+                    <div class="row gx-3">
                         {hotels.map(elt => <Card elt={elt} key={elt.id} />)}
                     </div>
                     {/* {filtered && data.length > 5 && <PaginationFilter

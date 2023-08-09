@@ -10,9 +10,9 @@ const Register = () => {
     const [phone, setPhone] = useState("");
     const [picture, setPicture] = useState("");
     const [email, setEmail] = useState("");
+    const [type, setType] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
-    const [role, setRole] = useState("user");
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -21,61 +21,67 @@ const Register = () => {
         formData.append("name", name);
         formData.append("address", address);
         formData.append("phone", phone);
+        formData.append("type", type);
         formData.append("picture", picture);
         formData.append("email", email);
         formData.append("password", password);
-        formData.append("role", role);
-        console.log(role);
         try {
             const res = await axios.post(API_URL + "api/register", formData);
             console.log(res.data);
-            navigate('/connexion');
+            setMessage('Ajouter avec succes');
         } catch (err) {
-            setMessage('Email existe dèja');
+            setMessage(err.data);
             console.log(err.response);
         }
     };
 
     return (
-        <section class="register">
-            <div className='container mt-5 pt-3'>
-                <form className='col-xl-4 col-lg-6 col-md-7 col-sm-9 col-10 mt-5 py-3 px-4 rounded-4 shadow-lg mx-auto' onSubmit={handleSubmit} encType="multipart/form-data">
-                    <h4 className='text-center fw-bolder mt-2 text-danger'>Inscrivez-vous</h4>
-                    <div className='bg-secondary my-3 bg-opacity-25 mx-auto rounded-5' style={{ height: '0.1px', width: '100%', }}></div>
+        <div className='row g-0'>
+            <form className='col-xl-4 col-lg-6 col-md-7 col-sm-9 col-10  py-2 px-4 rounded-4 shadow mx-auto row gy-0 gx-4' onSubmit={handleSubmit} encType="multipart/form-data">
+                <div className='text-center mb-4'><img src="/assets/logo.png" alt="logo" width="130px" /></div>
+                <div className="col-md-6 mb-1">
+                    <label for="type " className="form-label m-0">Type <span className="text-danger">*</span></label>
+                    <select id="type" name='type' className="form-select" onChange={(e) => setType(e.target.value)} required>
+                        <option selected disabled>Select an option</option>
+                        <option value='tourist'>Tourist</option>
+                        <option value='hotel'>Hotel</option>
+                        <option value='agence'>Car rental agency</option>
+                        <option value='guide'>Tourist Guide</option>
+                    </select>
+                </div>
+                <div class="mb-1 col-md-6">
+                    <label class="form-label m-0 ">Full name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name='name' onChange={(e) => setName(e.target.value)} required />
+                </div>
+                <div class="mb-1 ">
+                    <label class="form-label m-0 ">Phone <span class="text-danger">*</span></label>
+                    <input type="tel" class="form-control" name='phone' onChange={(e) => setPhone(e.target.value)} required />
+                </div>
+                <div className="mb-1">
+                    <label for="formFile" className="form-label m-0">Picture <span className="text-danger">*</span></label>
+                    <input className="form-control" type="file" id="formFile" name='picture' onChange={(e) => setPicture(e.target.files[0])} />
+                </div>
+                <div class="mb-1 ">
+                    <label class="form-label m-0 ">Address <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name='address' onChange={(e) => setAddress(e.target.value)} required />
+                </div>
+                <div class="mb-1">
+                    <label class="form-label m-0 ">Email <span class="text-danger">*</span></label>
+                    <input type="email" class="form-control" name='email' onChange={(e) => setEmail(e.target.value)} required />
+                </div>
+                <div class="mb-1">
+                    <label class="form-label m-0 ">Password<span class="text-danger">*</span></label>
+                    <input type="password" class="form-control" name='password' onChange={(e) => setPassword(e.target.value)} required />
+                </div>
+                {message && <div className="message text-warning"><p>{message}</p></div>}
+                <div className="mt-3">
+                    <button type="submit" className="btn btn-primary py-2 col-12 fw-semibold px-4" >Send</button>
+                </div>
+                <p className='text-center mt-2'>Already have an account? <NavLink to={'/connexion'} className="text-primary fw-semibold text-decoration-none">Sign in</NavLink></p>
 
-                    <div class="mb-1 ">
-                        <label class="form-label m-0 fw-semibold">Nom et Prénom <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name='name' onChange={(e) => setName(e.target.value)} required />
-                    </div>
-                    <div class="mb-1 ">
-                        <label class="form-label m-0 fw-semibold">Téléphone <span class="text-danger">*</span></label>
-                        <input type="tel" class="form-control" name='phone' onChange={(e) => setPhone(e.target.value)} required />
-                    </div>
-                    <div class="mb-2">
-                        <label for="formFile" class="form-label m-0 fw-semibold">Photo</label>
-                        <input class="form-control" type="file" id="formFile" name="picture" onChange={(e) => setPicture(e.target.files[0])} />
-                    </div>
-                    <div class="mb-1 ">
-                        <label class="form-label m-0 fw-semibold">Addresse <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name='address' onChange={(e) => setAddress(e.target.value)} required />
-                    </div>
-                    <div class="mb-1">
-                        <label class="form-label m-0 fw-semibold">Email <span class="text-danger">*</span></label>
-                        <input type="email" class="form-control" name='email' onChange={(e) => setEmail(e.target.value)} required />
-                    </div>
-                    <div class="mb-1">
-                        <label class="form-label m-0 fw-semibold">Mot de passe <span class="text-danger">*</span></label>
-                        <input type="password" class="form-control" name='password' onChange={(e) => setPassword(e.target.value)} required />
-                    </div>
-                    {message && <div className="message text-warning"><p>{message}</p></div>}
-                    <div className="mt-3">
-                        <button type="submit" className="btn btn-primary py-2 col-12 fw-semibold px-4" >Envoyer</button>
-                    </div>
-                    <p className='text-center mt-2'>Vous avez dèja un compte ? <NavLink to={'/connexion'} className="text-primary fw-semibold text-decoration-none">Se connecter</NavLink></p>
+            </form>
+        </div>
 
-                </form>
-            </div>
-        </section>
     )
 }
 

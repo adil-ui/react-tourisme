@@ -20,8 +20,8 @@ const Card = ({ elt }) => {
                             <p className='fw-semibold text-warning '>{elt.star} étoiles</p>
                         </>}
                     <div className='d-flex justify-content-between align-items-center mt-4'>
-                        <p className='text-secondary fontSize17'><i class="bi bi-geo-alt-fill"></i> {elt.ville}</p>
-                        {elt.price && <p className="fw-semibold text-danger fontSize19" >{elt.price} Dh/nuit</p>}
+                        <p className='text-secondary fontSize16'><i class="bi bi-geo-alt-fill"></i> {elt.ville}</p>
+                        {elt.price && <p className="fw-semibold text-danger fontSize15" ><span className='text-dark'>A partir</span>  {elt.price} Dh/nuit</p>}
                         {elt.tel && <p className="fw-semibold text-danger fontSize18" ><i class="bi bi-telephone-fill text-danger fontSize16 align-middle"></i> {elt?.tel} </p>}
 
                     </div>

@@ -41,39 +41,39 @@ const Aside = () => {
         <section className="dashboard pt-4 mt-5">
             <div className="d-flex ">
                 <aside className="">
-                    <div className="pt-1 shadow-sm bgColor myAside pb-5">
+                    <div className="pt-1 shadow-sm bg-white shadow myAside pb-5">
                         <div className="text-center mt-5 mb-4">
                             <img src='/assets/logoo.jpg' className="img-fluid avater rounded-circle mb-2" alt="" width='75px ' />
                             {/* <img src={API_URL + userPicture} className="img-fluid avater rounded-circle mb-3" alt="" width='80px ' /> */}
-                            <h5 className='fw-semibold text-light mb-3 text-opacity-75'>User Admin</h5>
+                            <h5 className='fw-semibold primaryColor mb-3 text-opacity-75'>Adil Boussalem</h5>
                             {/* <h4 className='fw-semibold'>{userName}</h4> */}
                         </div>
                         {userRole === 'admin' ?
                             <div className='pb-3 '>
                                 <div className='dash_menu' >
-                                    <Link to="/dashboard" className='text-light text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa fa-tachometer-alt text-danger"></i>Dashboard</Link>
+                                    <Link to="/dashboard" className='primaryColor text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa fa-tachometer-alt text-danger"></i>Dashboard</Link>
                                 </div>
                                 <div className='dash_menu' >
-                                    <Link to="/dashboard/profile" className='text-light text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa fa-user-tie text-danger"></i>Profile</Link>
+                                    <Link to="/dashboard/profile" className='primaryColor text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa fa-user-tie text-danger"></i>Profile</Link>
                                 </div>
                                 <div className='dash_menu' >
-                                    <Link to="/dashboard/utilisateurs" className='text-light text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 bi bi-people-fill text-danger"></i>Utilisateurs</Link>
+                                    <Link to="/dashboard/utilisateurs" className='primaryColor text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 bi bi-people-fill text-danger"></i>Utilisateurs</Link>
                                 </div>
                                 <div className='dash_menu' >
-                                    <Link to="/dashboard/hotels" className='text-light text-decoration-none  ms-4 dash_item'><i class="fa-solid fa-hotel mx-2 fontSize22 pe-3 text-danger"></i>Hôtels</Link>
+                                    <Link to="/dashboard/hotels" className='primaryColor text-decoration-none  ms-4 dash_item'><i class="fa-solid fa-hotel mx-2 fontSize22 pe-3 text-danger"></i>Hôtels</Link>
                                 </div>
                                 <div className='dash_menu' >
-                                    <Link to="/dashboard/voitures" className='text-light text-decoration-none  ms-4 dash_item '><i class="fa-solid fa-car-rear mx-2 fontSize22 pe-3 text-danger"></i>Agences</Link>
+                                    <Link to="/dashboard/voitures" className='primaryColor text-decoration-none  ms-4 dash_item '><i class="fa-solid fa-car-rear mx-2 fontSize22 pe-3 text-danger"></i>Agences</Link>
                                 </div>
                                 <div className='dash_menu' >
-                                    <Link to="/dashboard/monuments" className='text-light text-decoration-none  ms-4 dash_item '><i class="fa-solid fa-landmark mx-2 fontSize22 pe-3 text-danger"></i>Monuments</Link>
+                                    <Link to="/dashboard/monuments" className='primaryColor text-decoration-none  ms-4 dash_item '><i class="fa-solid fa-circle-info mx-2 fontSize22 pe-3 text-danger"></i>Informations</Link>
                                 </div>
                                 <div className='dash_menu' >
-                                    <Link to="/dashboard/guides" className='text-light text-decoration-none  ms-4 dash_item '><i class="fa-regular fa-compass mx-2 fontSize22 pe-3 text-danger"></i>Guides</Link>
+                                    <Link to="/dashboard/guides" className='primaryColor text-decoration-none  ms-4 dash_item '><i class="fa-regular fa-compass mx-2 fontSize22 pe-3 text-danger"></i>Guides</Link>
                                 </div>
                                 
                                 <div className='dash_menu' >
-                                    <Link onClick={logout} className='text-light text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa-solid fa-right-from-bracket text-danger"></i>Déconnexion</Link>
+                                    <Link onClick={logout} className='primaryColor text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa-solid fa-right-from-bracket text-danger"></i>Déconnexion</Link>
                                 </div>
                             </div>
                             :

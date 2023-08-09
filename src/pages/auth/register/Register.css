@@ -1,9 +1,5 @@
-.register{
-    background-image: url(/public/assets/slide-2.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100vh;
-}
+
 form{
-    background-color: #ffffffd2;
+    margin-bottom: 150px;
+    margin-top: 100px !important;
 }
