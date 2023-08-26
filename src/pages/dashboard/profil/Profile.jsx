@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from 'react';
 import { API_URL } from '../../../config/constants';
 import AuthContext from '../../../context/auth-context';
 import axios from 'axios';
-import Textarea from '../../../components/textarea/Textarea';
 
 const Profile = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -13,18 +12,116 @@ const Profile = () => {
   const [userPicture, setUserPicture] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const [token, setToken] = useState('');
+  const [userRole, setUserRole] = useState('');
+  const [city, setCity] = useState('');
   const [message, setMessage] = useState('');
+  const [cityNames, setCityNames] = useState([]);
+  const cities = [
+    "Casablanca",
+    "Rabat",
+    "Marrakech",
+    "Fès",
+    "Tanger",
+    "Agadir",
+    "Meknès",
+    "Oujda",
+    "Kenitra",
+    "Tétouan",
+    "Salé",
+    "Nador",
+    "Beni Mellal",
+    "Mohammedia",
+    "Témara",
+    "El Jadida",
+    "Taza",
+    "Khémisset",
+    "Taourirt",
+    "Ouarzazate",
+    "Safi",
+    "Béni Tadjit",
+    "Larache",
+    "Ksar el Kébir",
+    "Guelmim",
+    "Berrechid",
+    "Tifelt",
+    "Tiznit",
+    "Inezgane",
+    "Khenifra",
+    "Skhirat",
+    "Essaouira",
+    "Sidi Slimane",
+    "Tiznit",
+    "Tan-Tan",
+    "Oulad Teïma",
+    "Berrechid",
+    "Ben Guerir",
+    "Sidi Bennour",
+    "Azrou",
+    "Youssoufia",
+    "Lqliaa",
+    "Dakhla",
+    "Tiznit",
+    "Sefrou",
+    "Midelt",
+    "Khouribga",
+    "Kalaât Sraghna",
+    "Beni Ansar",
+    "Martil",
+    "Ouazzane",
+    "Berkane",
+    "Sidi Yahya El Gharb",
+    "Sidi Kacem",
+    "Lahraouyine",
+    "Ksar el Kébir",
+    "Oued Zem",
+    "Beni Mellal",
+    "Fkih Ben Salah",
+    "Azemmour",
+    "Sidi Bennour",
+    "Sidi Ifni",
+    "Chefchaouen",
+    "Imzouren",
+    "Agdz",
+    "Ahfir",
+    "Aïn Harrouda",
+    "Aït Melloul",
+    "Aït Ourir",
+    "Al Hoceïma",
+    "Aousserd",
+    "Assa",
+    "Aïn Cheggag",
+    "Azilal",
+    "Bouznika",
+    "Bouskoura",
+    "Boujdour",
+    "Casablanca",
+    "Dakhla",
+    "El Kelâa des Sraghna",
+    "El Jadida",
+    "Errachidia",
+    "Essaouira",
+    "Fès",
+    "Figuig",
+    "Fquih Ben Salah",
+    "Guelmim",
+    "Guercif",
+  ];
 
+  const handleCityChange = (event) => {
+    setCity(event.target.value);
+
+  };
   useEffect(() => {
     if (user) {
-      setUserId(user.id);
+      setUserId(user.user_id);
       setUserName(user.name);
       setUserAddress(user.address);
       setUserPhone(user.phone);
       setUserPicture(user.picture);
       setUserEmail(user.email);
       setUserPassword(user.password);
+      setUserRole(user.role);
+
     }
   }, [user])
   const updateUser = async (e) => {
@@ -36,30 +133,23 @@ const Profile = () => {
     formData.append("phone", userPhone);
     formData.append("email", userEmail);
     formData.append("password", userPassword);
-    setToken(user.token)
 
     try {
-      const response = await axios.post(API_URL + 'api/edit-user/' + userId, formData, {
-        headers: {
-          Authorization: `Bearer ${user.token}`
-        }
-      });
-      console.log(user.token);
-      response.data.token = user.token;
+      const response = await axios.post(API_URL + 'api/update-user/' + userId, formData);
       setMessage(response.data.success);
-      setUser({ ...response.data.user, token: user.token });
-      localStorage.setItem("user", JSON.stringify({ ...response.data.user, token: response.data.token }));
+      setUser(response.data.user);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
     } catch (error) {
-      setMessage(error.message);
+      console.log(error);
     }
 
   }
   return (
-    <div className="mx-auto  py-4 mt-5" >
-      <form className="row w-75 mx-auto bg-transparent" onSubmit={updateUser} encType="multipart/form-data">
+    <div className="mx-auto  py-4 mt-2" >
+      <form className="row px-5 mx-auto bg-transparent" onSubmit={updateUser} encType="multipart/form-data">
         <h4 className="fw-semibold mb-4">Mes informations</h4>
         <div className="col-md-6 mt-4">
-          <label className="form-label fw-semibold">Nom et Prénom</label>
+          <label className="form-label fw-semibold">Nom complet</label>
           <input type="text" className="form-control py-2" name='name' value={userName} onChange={(e) => setUserName(e.target.value)} required />
         </div>
         <div className="col-md-6 mt-4">
@@ -68,16 +158,58 @@ const Profile = () => {
         </div>
         <div className="col-md-12 mt-4">
           <label className="form-label fw-semibold">Addresse</label>
-          <Textarea />
-        </div>
-        <div className="col-md-12 mt-4">
-          <label className="form-label fw-semibold">Addresse</label>
           <input type="text" className="form-control py-2" name='address' value={userAddress} onChange={(e) => setUserAddress(e.target.value)} required />
         </div>
         <div className=" mt-4">
           <label for="formFile" className="form-label fw-semibold">Photo</label>
-          <input className="form-control py-2" type="file" id="formFile" name="picture" onChange={(e) => setUserPicture(e.target.files[0])} />
+          <input className="form-control py-2 mb-1" type="file" id="formFile" name="picture" onChange={(e) => setUserPicture(e.target.files[0])} />
+          <img src={API_URL + userPicture} className="img-fluid avater rounded-circle mb-2" alt="" width='75px ' />
+
         </div>
+        {userRole === 'Hotel' || userRole === 'Agence' || userRole === 'Guide' ?
+          <>
+            <div className="col-md-12 mt-4">
+              <label className="form-label fw-semibold">Description</label>
+              <textarea name="" id="" rows="5" className="form-control "></textarea>
+            </div>
+            <div className="col-md-6 mt-4">
+              <label className="form-label fw-semibold">Longitude</label>
+              <input type="text" className="form-control py-2" name='name' value={userName} onChange={(e) => setUserName(e.target.value)} required />
+            </div>
+            <div className="col-md-6 mt-4">
+              <label className="form-label fw-semibold">Latitude</label>
+              <input type="text" className="form-control py-2" name='name' value={userName} onChange={(e) => setUserName(e.target.value)} required />
+            </div>
+            <div className="col-md-6 mt-4">
+              <label className="form-label fw-semibold">lien web</label>
+              <input type="text" className="form-control py-2" name='name' value={userName} onChange={(e) => setUserName(e.target.value)} required />
+            </div>
+            <div className="col-md-6 mt-4">
+              <label for="city" className="form-label fw-semibold">Ville</label>
+              <select id='city' className='form-select' onChange={handleCityChange}>
+                <option value="">Sélectionnez une ville</option>
+                {cities.map(city => (
+                  <option key={city} value={city}>{city}</option>
+                ))}
+              </select>
+            </div>
+
+          </>
+          : null
+        }
+        {userRole === 'Hotel' || userRole === 'Agence' ?
+          
+            <div className="col-md-6 mt-4">
+              <label className="form-label fw-semibold">Prix Minimum</label>
+              <input type="number" className="form-control py-2" min='1' name='name' value={userName} onChange={(e) => setUserName(e.target.value)} required />
+            </div>
+          : null}
+          {userRole === 'Hotel' &&
+            <div className="col-md-6 mt-4">
+              <label className="form-label fw-semibold">Etoile</label>
+              <input type="number" className="form-control py-2" min='1' max='5' name='name' value={userName} onChange={(e) => setUserName(e.target.value)} required />
+            </div>
+          }
         <div className="col-md-6 mb-3 mt-4">
           <label className="form-label fw-semibold">Email</label>
           <input type="email" className="form-control py-2" name='email' value={userEmail} onChange={(e) => setUserEmail(e.target.value)} required />
@@ -87,9 +219,9 @@ const Profile = () => {
           <input type="password" className="form-control py-2" name='password' value={userPassword} onChange={(e) => setUserPassword(e.target.value)} required />
         </div>
         {/* <div className=" fw-semibold text-center ">{message ? <p className='alert alert-success'>{message}</p> : null}</div> */}
-          {message && <p className='alert alert-success text-center alert-dismissible fade show' role="alert">{message}
-          <button type="button" onClick={()=> setMessage("")} class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </p> }
+        {message && <p className='alert alert-success text-center alert-dismissible fade show' role="alert">{message}
+          <button type="button" onClick={() => setMessage("")} class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </p>}
 
         <div className="col-12 d-flex justify-content-end mt-3">
           <button type="submit" className="btn btn-primary px-4 fw-semibold py-2">Enregistrer modification</button>

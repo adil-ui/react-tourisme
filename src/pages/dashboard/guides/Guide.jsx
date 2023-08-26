@@ -18,11 +18,7 @@ const Guide = () => {
     //         })
     // }, [])
     const deleteUser = (id) => {
-        axios.delete(API_URL + 'api/delete-user/' + id, {
-            headers: {
-                Authorization: `Bearer ${user.token}`
-            }
-        })
+        axios.delete(API_URL + 'api/delete-user/' + id)
             .then(() => {
                 setUsers(users.filter(f=>f.id !== id ))
             });

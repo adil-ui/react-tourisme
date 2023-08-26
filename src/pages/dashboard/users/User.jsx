@@ -4,25 +4,16 @@ import Pagination from "../../../components/Pagination/Pagination";
 import { API_URL } from "../../../config/constants"
 const User = () => {
     const [users, setUsers] = useState([])
-    const user = JSON.parse(localStorage.getItem('user'));
 
     // useEffect(() => {
-    //     fetch(API_URL + "api/list-users/1", {
-    //         headers: {
-    //             'Authorization': `Bearer ${user.token}`
-    //         }
-    //     })
+    //     fetch(API_URL + "api/list-users/1")
     //         .then(response => response.json())
     //         .then(result => {
     //             setUsers(result.users);
     //         })
     // }, [])
     const deleteUser = (id) => {
-        axios.delete(API_URL + 'api/delete-user/' + id, {
-            headers: {
-                Authorization: `Bearer ${user.token}`
-            }
-        })
+        axios.delete(API_URL + 'api/delete-user/' + id)
             .then(() => {
                 setUsers(users.filter(f=>f.id !== id ))
             });

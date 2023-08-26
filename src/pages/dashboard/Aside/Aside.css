@@ -25,6 +25,7 @@ aside img {
     transition: .5s;
     padding: 12px 0;
     cursor: pointer;
+    vertical-align: middle;
  }
 .dash_menu:hover .dash_item{
     color: #bb262c !important;

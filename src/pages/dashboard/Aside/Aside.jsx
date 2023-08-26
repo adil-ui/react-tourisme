@@ -19,20 +19,13 @@ const Aside = () => {
         }
     }, [user])
     const logout = () => {
-        axios.post(API_URL + 'api/revoke-tokens/', { id: user.id }, {
-            headers: {
-                Authorization: `Bearer ${user.token}`
-            }
-        })
-            .then(response => {
-                localStorage.removeItem("user");
-                setUserName("");
-                setUserPicture("");
-                setUser(null);
-                navigate('/connexion')
-            }).catch(error => {
-                console.log(error);
-            });
+
+        localStorage.removeItem("user");
+        setUserName("");
+        setUserPicture("");
+        setUser(null);
+        navigate('/login')
+
     }
     useEffect(() => {
         window.scroll(0, 0);
@@ -42,10 +35,10 @@ const Aside = () => {
             <div className="d-flex ">
                 <aside className="">
                     <div className="pt-1 shadow-sm bg-white shadow myAside pb-5">
-                        <div className="text-center mt-5 mb-4">
-                            <img src='/assets/logoo.jpg' className="img-fluid avater rounded-circle mb-2" alt="" width='75px ' />
+                        <div className="text-center mt-4 mb-4">
+                            <img src={API_URL + userPicture} className="img-fluid avater rounded-circle mb-2" alt="" width='75px ' />
                             {/* <img src={API_URL + userPicture} className="img-fluid avater rounded-circle mb-3" alt="" width='80px ' /> */}
-                            <h5 className='fw-semibold primaryColor mb-3 text-opacity-75'>Adil Boussalem</h5>
+                            <h5 className='fw-semibold primaryColor mb-3 text-opacity-75'>{userName}</h5>
                             {/* <h4 className='fw-semibold'>{userName}</h4> */}
                         </div>
                         {userRole === 'admin' ?
@@ -54,24 +47,27 @@ const Aside = () => {
                                     <Link to="/dashboard" className='primaryColor text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa fa-tachometer-alt text-danger"></i>Dashboard</Link>
                                 </div>
                                 <div className='dash_menu' >
-                                    <Link to="/dashboard/profile" className='primaryColor text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa fa-user-tie text-danger"></i>Profile</Link>
+                                    <Link to="/dashboard/profile" className='primaryColor text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa-solid fa-id-card text-danger"></i>Profile</Link>
                                 </div>
                                 <div className='dash_menu' >
-                                    <Link to="/dashboard/utilisateurs" className='primaryColor text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 bi bi-people-fill text-danger"></i>Utilisateurs</Link>
+                                    <Link to="/dashboard/users" className='primaryColor text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa fa-user-tie text-danger"></i> Employés</Link>
+                                </div>
+                                <div className='dash_menu' >
+                                    <Link to="/dashboard/users" className='primaryColor text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 bi bi-people-fill text-danger"></i>Utilisateurs</Link>
                                 </div>
                                 <div className='dash_menu' >
                                     <Link to="/dashboard/hotels" className='primaryColor text-decoration-none  ms-4 dash_item'><i class="fa-solid fa-hotel mx-2 fontSize22 pe-3 text-danger"></i>Hôtels</Link>
                                 </div>
                                 <div className='dash_menu' >
-                                    <Link to="/dashboard/voitures" className='primaryColor text-decoration-none  ms-4 dash_item '><i class="fa-solid fa-car-rear mx-2 fontSize22 pe-3 text-danger"></i>Agences</Link>
-                                </div>
-                                <div className='dash_menu' >
-                                    <Link to="/dashboard/monuments" className='primaryColor text-decoration-none  ms-4 dash_item '><i class="fa-solid fa-circle-info mx-2 fontSize22 pe-3 text-danger"></i>Informations</Link>
+                                    <Link to="/dashboard/agencies" className='primaryColor text-decoration-none  ms-4 dash_item '><i class="fa-solid fa-car-rear mx-2 fontSize22 pe-3 text-danger"></i>Agences</Link>
                                 </div>
                                 <div className='dash_menu' >
                                     <Link to="/dashboard/guides" className='primaryColor text-decoration-none  ms-4 dash_item '><i class="fa-regular fa-compass mx-2 fontSize22 pe-3 text-danger"></i>Guides</Link>
                                 </div>
-                                
+                                <div className='dash_menu' >
+                                    <Link to="/dashboard/info" className='primaryColor text-decoration-none  ms-4 dash_item '><i class="fa-solid fa-circle-info mx-2 fontSize22 pe-3 text-danger"></i>Informations</Link>
+                                </div>
+                               
                                 <div className='dash_menu' >
                                     <Link onClick={logout} className='primaryColor text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa-solid fa-right-from-bracket text-danger"></i>Déconnexion</Link>
                                 </div>

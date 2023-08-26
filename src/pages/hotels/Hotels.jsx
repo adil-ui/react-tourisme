@@ -131,7 +131,6 @@ const Hotels = () => {
 
             <div className="row pb-5 pt-4 px-5 mx-auto g-0">
                 <aside className='col-xl-3 col-12 ps-0 pe-xl-5 mx-auto  aside'>
-
                     <form onSubmit='{filter}' className="shadow-sm  bg-white rounded-3 pb-4 mx-auto">
                         <div className="bgColor w-100 rounded-top-3 px-3 pt-2 pb-1 mb-3 d-flex justify-content-between align-items-center">
                             <h4 className="mt-1 fw-semibold text-light">Filtre </h4>

@@ -17,29 +17,29 @@ const Navbar = () => {
                     <ul className="navbar-nav mb-2  ms-auto pe-5" >
 
                         <li className='nav-item me-3 align-middle mt-lg-3' >
-                            <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='/' >Accueil</NavLink>
+                            <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='/' >Home</NavLink>
                         </li>
                         <li className='nav-item me-3 align-middle mt-lg-3' >
-                            <NavLink className=" fontSize17 nav-link navLink primaryColor" to='les-hotels' >Hôtels</NavLink>
+                            <NavLink className=" fontSize17 nav-link navLink primaryColor" to='hotels' >Hotels</NavLink>
                         </li>
                         <li className='nav-item me-3 align-middle mt-lg-3' >
-                            <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='les-agences' >Agences de Location</NavLink>
+                            <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='agencies' >Car rental agencies</NavLink>
                         </li>
                        
                         <li className='nav-item me-3 align-middle mt-lg-3' >
-                            <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='les-guides' >Guides</NavLink>
+                            <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='guides' >Tourist guide</NavLink>
                         </li>
                         <li className='nav-item me-3 align-middle mt-lg-3' >
-                            <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='les-monuments' >Infos Pratiques</NavLink>
+                            <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='info' >Practical info</NavLink>
                         </li>
                         
                         {user ?
                             <li className='nav-item me-3 align-middle mt-lg-3' >
-                                <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='compte' >Mon compte</NavLink>
+                                <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='dashboard' >My account</NavLink>
                             </li>
                             :
                             <li className='nav-item mt-2 mt-lg-3'>
-                                <NavLink className="btn btn-danger  rounded-2 fontSize17  px-4 btn_anim" to='/connexion'>Se connecter</NavLink>
+                                <NavLink className="fontSize17 nav-link navLink primaryColor" to='/login'>Sign in</NavLink>
                             </li>
                         }
 

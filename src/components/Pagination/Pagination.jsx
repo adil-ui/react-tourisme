@@ -11,11 +11,7 @@ const Pagination = ({ setElements, elementName, url, allElementsUrl }) => {
     const user = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
-        axios.get(API_URL + allElementsUrl, {
-            headers: {
-                Authorization: `Bearer ${user.token}`
-            }
-        })
+        axios.get(API_URL + allElementsUrl)
             .then(result => {
                 setNumberPages(Math.ceil(result.data[`${elementName}`].length / ITEMS_PER_PAGE));
             })
@@ -23,11 +19,7 @@ const Pagination = ({ setElements, elementName, url, allElementsUrl }) => {
     const next = () => {
         let newPage = currentPage + 1;
         setCurrentPage(newPage);
-        axios.get(API_URL + url + newPage, {
-            headers: {
-                Authorization: `Bearer ${user.token}`
-            }
-        }).then(result => {
+        axios.get(API_URL + url + newPage).then(result => {
             setElements(result.data[`${elementName}`]);
         })
     };
@@ -35,22 +27,14 @@ const Pagination = ({ setElements, elementName, url, allElementsUrl }) => {
     const previous = () => {
         let newPage = currentPage - 1;
         setCurrentPage(newPage);
-        axios.get(API_URL + url + newPage, {
-            headers: {
-                Authorization: `Bearer ${user.token}`
-            }
-        }).then(result => {
+        axios.get(API_URL + url + newPage).then(result => {
             setElements(result.data[`${elementName}`]);
         })
     };
 
     const goToPage = (page) => {
         setCurrentPage(page);
-        fetch(API_URL + url + page, {
-            headers: {
-                'Authorization': `Bearer ${user.token}`
-            }
-        })
+        fetch(API_URL + url + page)
             .then(response => response.json())
             .then(result => {
                 setElements(result[`${elementName}`]);

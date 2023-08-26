@@ -98,7 +98,7 @@ const Top = () => {
 
     ]
     return (
-        <section className='my-5 pt-4 container'>
+        <section className='my-5 pt-4 container' id='top'>
             <div>
                 <h2 className='text-center  text-danger fw-semibold'>MEILLEURS HÔTELS</h2>
                 <h6 className='text-center mb-3  primaryColor fw-semibold'>Visite au Maroc</h6>

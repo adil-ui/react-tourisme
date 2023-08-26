@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react"
 import Pagination from "../../../components/Pagination/Pagination";
 import { API_URL } from "../../../config/constants"
-const Monument = () => {
+const Info = () => {
     const [users, setUsers] = useState([])
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -18,11 +18,7 @@ const Monument = () => {
     //         })
     // }, [])
     const deleteUser = (id) => {
-        axios.delete(API_URL + 'api/delete-user/' + id, {
-            headers: {
-                Authorization: `Bearer ${user.token}`
-            }
-        })
+        axios.delete(API_URL + 'api/delete-user/' + id)
             .then(() => {
                 setUsers(users.filter(f=>f.id !== id ))
             });
@@ -30,7 +26,7 @@ const Monument = () => {
     
     return (
         <section className="mx-auto  py-4 mt-5 w-75 mx-auto" >
-            <h4 className="fw-semibold mb-4">Liste des monuments</h4>
+            <h4 className="fw-semibold mb-4">Liste des informations</h4>
             <div class="table-responsive col-12  mx-auto  mytable rounded-3  mt-3">
                 <table class="table bg-white table-hover  rounded-3  m-0">
                     <thead>
@@ -73,4 +69,4 @@ const Monument = () => {
     )
 }
 
-export default Monument
+export default Info
