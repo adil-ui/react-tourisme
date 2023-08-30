@@ -14,8 +14,13 @@ const Profile = () => {
   const [userPassword, setUserPassword] = useState('');
   const [userRole, setUserRole] = useState('');
   const [city, setCity] = useState('');
+  const [star, setStar] = useState();
+  const [price, setPrice] = useState();
+  const [link, setLink] = useState('');
+  const [longitude, setLongitude] = useState('');
+  const [latitude, setLatitude] = useState('');
+  const [description, setDescription] = useState('');
   const [message, setMessage] = useState('');
-  const [cityNames, setCityNames] = useState([]);
   const cities = [
     "Casablanca",
     "Rabat",
@@ -111,6 +116,10 @@ const Profile = () => {
     setCity(event.target.value);
 
   };
+  const handleStarChange = (event) => {
+    setStar(event.target.value);
+
+  };
   useEffect(() => {
     if (user) {
       setUserId(user.user_id);
@@ -120,6 +129,13 @@ const Profile = () => {
       setUserPicture(user.picture);
       setUserEmail(user.email);
       setUserPassword(user.password);
+      setDescription(user.description);
+      setStar(user.star);
+      setPrice(user.price);
+      setLongitude(user.longitude);
+      setLatitude(user.latitude);
+      setLink(user.link);
+      setCity(user.city);
       setUserRole(user.role);
 
     }
@@ -133,6 +149,13 @@ const Profile = () => {
     formData.append("phone", userPhone);
     formData.append("email", userEmail);
     formData.append("password", userPassword);
+    formData.append("description", description);
+    formData.append("longitude", longitude);
+    formData.append("latitude", latitude);
+    formData.append("link", link);
+    formData.append("star", star);
+    formData.append("price", price);
+    formData.append("city", city);
 
     try {
       const response = await axios.post(API_URL + 'api/update-user/' + userId, formData);
@@ -145,8 +168,8 @@ const Profile = () => {
 
   }
   return (
-    <div className="mx-auto  py-4 mt-2" >
-      <form className="row px-5 mx-auto bg-transparent" onSubmit={updateUser} encType="multipart/form-data">
+    <div className="mx-auto  pt-4 pb-5 mt-2" >
+      <form className="row px-5 mx-auto bg-transparent pb-5" onSubmit={updateUser} encType="multipart/form-data">
         <h4 className="fw-semibold mb-4">Mes informations</h4>
         <div className="col-md-6 mt-4">
           <label className="form-label fw-semibold">Nom complet</label>
@@ -170,24 +193,28 @@ const Profile = () => {
           <>
             <div className="col-md-12 mt-4">
               <label className="form-label fw-semibold">Description</label>
-              <textarea name="" id="" rows="5" className="form-control "></textarea>
+              <textarea name="" id="" rows="5" className="form-control " value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
             </div>
             <div className="col-md-6 mt-4">
               <label className="form-label fw-semibold">Longitude</label>
-              <input type="text" className="form-control py-2" name='name' value={userName} onChange={(e) => setUserName(e.target.value)} required />
+              <input type="text" className="form-control py-2" name='name' value={longitude} onChange={(e) => setLongitude(e.target.value)} required />
             </div>
             <div className="col-md-6 mt-4">
               <label className="form-label fw-semibold">Latitude</label>
-              <input type="text" className="form-control py-2" name='name' value={userName} onChange={(e) => setUserName(e.target.value)} required />
+              <input type="text" className="form-control py-2" name='name' value={latitude} onChange={(e) => setLatitude(e.target.value)} required />
             </div>
             <div className="col-md-6 mt-4">
               <label className="form-label fw-semibold">lien web</label>
-              <input type="text" className="form-control py-2" name='name' value={userName} onChange={(e) => setUserName(e.target.value)} required />
+              <input type="text" className="form-control py-2" name='name' value={link} onChange={(e) => setLink(e.target.value)} required />
             </div>
             <div className="col-md-6 mt-4">
               <label for="city" className="form-label fw-semibold">Ville</label>
-              <select id='city' className='form-select' onChange={handleCityChange}>
+              <select id='city' className='form-select' onChange={handleCityChange} >
+              {city &&
+                 <option value={city}>{city}</option> 
+                }
                 <option value="">Sélectionnez une ville</option>
+                
                 {cities.map(city => (
                   <option key={city} value={city}>{city}</option>
                 ))}
@@ -198,18 +225,28 @@ const Profile = () => {
           : null
         }
         {userRole === 'Hotel' || userRole === 'Agence' ?
-          
-            <div className="col-md-6 mt-4">
-              <label className="form-label fw-semibold">Prix Minimum</label>
-              <input type="number" className="form-control py-2" min='1' name='name' value={userName} onChange={(e) => setUserName(e.target.value)} required />
-            </div>
+
+          <div className="col-md-6 mt-4">
+            <label className="form-label fw-semibold">Prix Minimum</label>
+            <input type="number" className="form-control py-2" min='1' name='name' value={price} onChange={(e) => setPrice(e.target.value)} required />
+          </div>
           : null}
-          {userRole === 'Hotel' &&
-            <div className="col-md-6 mt-4">
-              <label className="form-label fw-semibold">Etoile</label>
-              <input type="number" className="form-control py-2" min='1' max='5' name='name' value={userName} onChange={(e) => setUserName(e.target.value)} required />
+        {userRole === 'Hotel' &&
+        <div className="col-md-6 mt-4">
+              <label for="star" className="form-label fw-semibold">Etoile</label>
+              <select id='star' className='form-select' onChange={handleStarChange} required>
+              {star !== '' &&
+                 <option value={star} selected>{star}</option> 
+                }
+                <option value="">Sélectionnez un nombre</option>
+                  <option  value='1'>1</option>
+                  <option  value='2'>2</option>
+                  <option  value='3'>3</option>
+                  <option  value='4'>4</option>
+                  <option  value='5'>5</option>
+              </select>
             </div>
-          }
+        }
         <div className="col-md-6 mb-3 mt-4">
           <label className="form-label fw-semibold">Email</label>
           <input type="email" className="form-control py-2" name='email' value={userEmail} onChange={(e) => setUserEmail(e.target.value)} required />

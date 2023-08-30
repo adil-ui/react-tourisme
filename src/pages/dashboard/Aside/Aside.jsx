@@ -24,7 +24,7 @@ const Aside = () => {
         setUserName("");
         setUserPicture("");
         setUser(null);
-        navigate('/login')
+        navigate('/')
 
     }
     useEffect(() => {

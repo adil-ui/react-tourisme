@@ -28,9 +28,8 @@ const Register = () => {
         try {
             const res = await axios.post(API_URL + "api/register", formData);
             console.log(res.data);
-            setMessage('Ajouter avec succes');
+            setMessage('Your registration request has been sent');
         } catch (err) {
-            setMessage(err.data);
             console.log(err.response);
         }
     };
@@ -73,7 +72,9 @@ const Register = () => {
                     <label class="form-label m-0 ">Password<span class="text-danger">*</span></label>
                     <input type="password" class="form-control" name='password' onChange={(e) => setPassword(e.target.value)} required />
                 </div>
-                {message && <div className="message text-warning"><p>{message}</p></div>}
+                {message && <p className='alert alert-success  text-center alert-dismissible fade show mt-2' role="alert">{message}
+                    <button type="button" onClick={() => setMessage("")} class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </p>}
                 <div className="mt-3">
                     <button type="submit" className="btn btn-primary py-2 col-12 fw-semibold px-4" >Send</button>
                 </div>
