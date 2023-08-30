@@ -18,6 +18,7 @@ import Cars from './pages/cars/Cars';
 import AuthContext from './context/auth-context';
 import { useEffect, useState } from 'react';
 import Info from './pages/dashboard/info/Info';
+import UpdateHotel from './pages/dashboard/hotels/UpdateHotel';
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
             <Route path='profile' element={<Profile />} />
             <Route path='users' element={<User />} />
             <Route path='hotels' element={<Hotel />} />
+            <Route path='edit-hotel/:id' element={<UpdateHotel />} />
             <Route path='info' element={<Info />} />
             <Route path='guides' element={<Guide />} />
             <Route path='agencies' element={<Car />} />

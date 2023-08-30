@@ -1,8 +1,9 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import Pagination from "../../../components/Pagination/Pagination";
 import { API_URL } from "../../../config/constants"
-import AuthContext from "../../../context/auth-context";
+
+import { Link } from "react-router-dom";
 const cities = [
     "Casablanca",
     "Rabat",
@@ -94,8 +95,7 @@ const cities = [
     "Guercif",
 ];
 const Hotel = () => {
-    const [users, setUsers] = useState([])
-    const { user, setUser } = useContext(AuthContext);
+    const [hotels, setHotels] = useState([])
     const [name, setName] = useState('');
     const [id, setId] = useState('');
     const [address, setAddress] = useState('');
@@ -111,7 +111,7 @@ const Hotel = () => {
     const [latitude, setLatitude] = useState('33.976389');
     const [description, setDescription] = useState('');
     const [message, setMessage] = useState('');
-   
+
     const handleCityChange = (event) => {
         setCity(event.target.value);
     };
@@ -135,28 +135,24 @@ const Hotel = () => {
         formData.append("price", price);
         formData.append("city", city);
         try {
-          const response = await axios.post(API_URL + 'api/add-hotel' , formData);
-          setMessage(response.data.message);
+            const response = await axios.post(API_URL + 'api/add-hotel', formData);
+            setMessage(response.data.message);
         } catch (error) {
-          console.log(error);
+            console.log(error);
         }
-    
-      }
-    // useEffect(() => {
-    //     fetch(API_URL + "api/list-users/1", {
-    //         headers: {
-    //             'Authorization': `Bearer ${user.token}`
-    //         }
-    //     })
-    //         .then(response => response.json())
-    //         .then(result => {
-    //             setUsers(result.users);
-    //         })
-    // }, [])
-    const deleteUser = (id) => {
-        axios.delete(API_URL + 'api/delete-user/' + id)
+
+    }
+    useEffect(() => {
+        fetch(API_URL + "api/all-hotel")
+            .then(response => response.json())
+            .then(result => {
+                setHotels(result.hotels);
+            })
+    }, [])
+    const deleteHotel = (id) => {
+        axios.delete(API_URL + 'api/delete-hotel/' + id)
             .then(() => {
-                setUsers(users.filter(f => f.id !== id))
+                setHotels(hotels.filter(f => f.id !== id))
             });
     }
 
@@ -269,24 +265,25 @@ const Hotel = () => {
                         <tr>
                             <th scope="col" className='primaryColor'>#</th>
                             <th scope="col" className='primaryColor'>Photo</th>
-                            <th scope="col" className='primaryColor'>Nom et Prénom</th>
-                            <th scope="col" className='primaryColor'>Email</th>
-                            <th scope="col" className='primaryColor'>Addresse</th>
+                            <th scope="col" className='primaryColor'>Nom Complet</th>
+                            <th scope="col" className='primaryColor'>Etoile</th>
+                            <th scope="col" className='primaryColor'>Ville</th>
                             <th scope="col" className='primaryColor'>Téléphone</th>
                             <th scope="col" className='primaryColor'>Action</th>
                         </tr>
                     </thead>
                     <tbody className=''>
-                        {users.map(user => (
+                        {hotels.map(hotel => (
                             <tr>
-                                <th scope="row" className="pt-3">{user.id}</th>
-                                <td><img src={API_URL + user.picture} className="img-fluid rounded-circle" alt="categorie_picture" width='48px ' /></td>
-                                <td className="pt-3">{user.name}</td>
-                                <td className="pt-3">{user.email}</td>
-                                <td className="pt-3">{user.address}</td>
-                                <td className="pt-3">{user.phone}</td>
+                                <th scope="row" className="pt-3">{hotel.id}</th>
+                                <td><img src={API_URL + hotel.picture} className="img-fluid rounded-circle" alt="categorie_picture" width='48px ' /></td>
+                                <td className="pt-3">{hotel.name}</td>
+                                <td className="pt-3">{hotel.star}</td>
+                                <td className="pt-3">{hotel.city?.name}</td>
+                                <td className="pt-3">{hotel.phone}</td>
                                 <td className="align-middle">
-                                    <button onClick={() => deleteUser(user.id)} className="btn btn-danger"><i class="bi bi-trash3-fill"></i></button>
+                                    <Link to={`/dashboard/edit-hotel/${hotel.id}`} className="btn btn-primary me-1"><i class="bi bi-pencil-square"></i></Link>
+                                    <button onClick={() => deleteHotel(hotel.id)} className="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
                                 </td>
 
                             </tr>
@@ -294,12 +291,12 @@ const Hotel = () => {
 
                     </tbody>
                 </table>
-                <Pagination
-                    setElements={setUsers}
-                    elementName="users"
-                    url={"api/list-users/"}
-                    allElementsUrl={"api/list-users"}
-                />
+                {/* <Pagination
+                    setElements={setHotels}
+                    elementName="hotels"
+                    url={"api/list-hotels/"}
+                    allElementsUrl={"api/list-hotels"}
+                /> */}
             </div>
         </section>
     )

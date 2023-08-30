@@ -57,74 +57,13 @@ const Hotels = () => {
     useEffect(() => {
         window.scroll(0, 0);
     }, [])
-    const hotels = [
-        {
-            id: 1,
-            title: 'Tented Erg Chebbi',
-            picture: '/assets/hotel-1.jpg',
-            price: 300,
-            star: 3,
-            ville: 'Marzouga',
-        },
-        {
-            id: 2,
-            title: 'Farah Rabat',
-            picture: '/assets/hotel-2.jpg',
-            price: 300,
-            star: 3,
-            ville: 'Rabat',
-        },
-        {
-            id: 3,
-            title: "Les Mérinides",
-            picture: '/assets/hotel-3.jpg',
-            price: 300,
-            star: 3,
-            ville: 'Fès',
-        },
-        {
-            id: 4,
-            title: 'Waves Aqua Resort',
-            picture: '/assets/hotel-4.jpg',
-            price: 300,
-            star: 3,
-            ville: 'Kénitra',
-        },
-        {
-            id: 5,
-            title: "Les Mérinides",
-            picture: '/assets/hotel-3.jpg',
-            price: 300,
-            star: 3,
-            ville: 'Fès',
-        },
-      
-        
-        {
-            id: 6,
-            title: 'Tented Erg Chebbi',
-            picture: '/assets/hotel-1.jpg',
-            price: 300,
-            star: 3,
-            ville: 'Marzouga',
-        },
-        {
-            id: 7,
-            title: 'Waves Aqua Resort',
-            picture: '/assets/hotel-4.jpg',
-            price: 300,
-            star: 3,
-            ville: 'Kénitra',
-        },
-        {
-            id: 8,
-            title: 'Farah Rabat',
-            picture: '/assets/hotel-2.jpg',
-            price: 300,
-            star: 3,
-            ville: 'Rabat',
-        },
-    ]
+    useEffect(() => {
+        fetch(API_URL + "api/all-hotel")
+            .then(response => response.json())
+            .then(result => {
+                setData(result.hotels);
+            })
+    }, [])
 
     return (
         <section className="search py-5 mt-5">
@@ -229,7 +168,7 @@ const Hotels = () => {
 
                 <div className='col-9 mx-auto mt-xl-0 mt-lg-5 mt-5'>
                     <div class="row gx-3">
-                        {hotels.map(elt => <Card elt={elt} key={elt.id} />)}
+                        {data.map(elt => <Card elt={elt} key={elt.id} />)}
                     </div>
                     {/* {filtered && data.length > 5 && <PaginationFilter
                         setElements={setData}
