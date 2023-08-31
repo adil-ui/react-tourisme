@@ -19,6 +19,8 @@ import AuthContext from './context/auth-context';
 import { useEffect, useState } from 'react';
 import Info from './pages/dashboard/info/Info';
 import UpdateHotel from './pages/dashboard/hotels/UpdateHotel';
+import ForgotPassword from './pages/auth/forgot-password/ForgetPassword';
+import ResetPassword from './pages/auth/reset-password/ResetPassword';
 
 
 function App() {
@@ -39,6 +41,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='login' element={<Login />} />
+          <Route path='forgot-password' element={<ForgotPassword />} />
+          <Route path='reset-password/:token' element={<ResetPassword />} />
           <Route path='sign-up' element={<Register />} />
           <Route path='details/:id' element={<Details />} />
           <Route path='hotels' element={<Hotels />} />

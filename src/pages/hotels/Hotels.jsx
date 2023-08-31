@@ -7,26 +7,18 @@ import $ from 'jquery'
 import './Hotels.css'
 import axios from "axios"
 import Card from "../../components/card/Card"
+import Pagination from "../../components/Pagination/Pagination"
 
 const Hotels = () => {
 
-    const [data, setData] = useState([]);
+    const [hotels, setHotels] = useState([]);
     const [result, setResult] = useState(0);
     const [categories, setCategories] = useState([]);
+    const [city, setCity] = useState('');
+    const [priceMax, setPriceMax] = useState('');
+    const [priceMin, setPriceMin] = useState('');
     const [cities, setCities] = useState([]);
-    const [category, setCategory] = useState("");
-    const [city, setCity] = useState("");
-    const [sector, setSector] = useState("");
-    const [type, setType] = useState('');
-    const [livingRoom, setLivingRoom] = useState("");
-    const [bedroom, setBedroom] = useState("");
-    const [bathroom, setBathroom] = useState("");
-    const [floor, setFloor] = useState("");
-    const [areaMin, setAreaMin] = useState("");
-    const [areaMax, setAreaMax] = useState("");
-    const [priceMax, setPriceMax] = useState("");
-    const [priceMin, setPriceMin] = useState("");
-    const [formData, setFormData] = useState();
+
     const [filtered, setFiltered] = useState(false);
 
     // useEffect(() => {
@@ -52,16 +44,16 @@ const Hotels = () => {
     //         })
     // }, [])
 
-   
+
 
     useEffect(() => {
         window.scroll(0, 0);
     }, [])
     useEffect(() => {
-        fetch(API_URL + "api/all-hotel")
+        fetch(API_URL + "api/home-hotel-per-page/1")
             .then(response => response.json())
             .then(result => {
-                setData(result.hotels);
+                setHotels(result.hotels);
             })
     }, [])
 
@@ -95,9 +87,12 @@ const Hotels = () => {
 
                             <div className='col-xl-12 col-md-6'>
                                 <h5 className="mb-3 fw-semibold">Recherche par étoile</h5>
-
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked />
+                                    <label class="form-check-label" for="flexRadioDefault1">All</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         <i class="bi bi-star-fill text-warning me-1"></i><i class="bi bi-star-fill text-warning me-1"></i><i class="bi bi-star-fill text-warning me-1"></i><i class="bi bi-star-fill text-warning me-1"></i><i class="bi bi-star-fill text-warning me-1"></i>
                                     </label>
@@ -168,7 +163,7 @@ const Hotels = () => {
 
                 <div className='col-9 mx-auto mt-xl-0 mt-lg-5 mt-5'>
                     <div class="row gx-3">
-                        {data.map(elt => <Card elt={elt} key={elt.id} />)}
+                        {hotels.map(elt => <Card elt={elt} key={elt.id} />)}
                     </div>
                     {/* {filtered && data.length > 5 && <PaginationFilter
                         setElements={setData}
@@ -183,6 +178,12 @@ const Hotels = () => {
                             url={"api/properties/"}
                             allElementsUrl={"api/properties"}
                         />} */}
+                    <Pagination
+                        setElements={setHotels}
+                        elementName="hotels"
+                        url={"api/home-hotel-per-page/"}
+                        allElementsUrl={"api/all-hotel"}
+                    />
                 </div>
             </div>
         </section>

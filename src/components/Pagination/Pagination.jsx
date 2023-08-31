@@ -3,12 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { API_URL } from '../../config/constants';
 import './Pagination.css'
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 8;
 
 const Pagination = ({ setElements, elementName, url, allElementsUrl }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [numberPages, setNumberPages] = useState(1);
-    const user = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
         axios.get(API_URL + allElementsUrl)
@@ -41,7 +40,7 @@ const Pagination = ({ setElements, elementName, url, allElementsUrl }) => {
             })
     };
     return (
-        <nav aria-label="..." className='mt-3 d-flex justify-content-center bg-transparent shadow-none  myPagination'>
+        <nav  className='mt-3 d-flex justify-content-center  bg-transparent shadow-none  myPagination'>
             <ul className="pagination ">
                 <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
                     <span onClick={previous} class="page-link">Previous</span>

@@ -35,7 +35,7 @@ const Navbar = () => {
                         
                         {user ?
                             <li className='nav-item me-3 align-middle mt-lg-3' >
-                                <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='dashboard' >My account</NavLink>
+                                <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='dashboard' >Account</NavLink>
                             </li>
                             :
                             <li className='nav-item mt-2 mt-lg-3'>

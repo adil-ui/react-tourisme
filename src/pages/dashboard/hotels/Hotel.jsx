@@ -111,6 +111,9 @@ const Hotel = () => {
     const [latitude, setLatitude] = useState('33.976389');
     const [description, setDescription] = useState('');
     const [message, setMessage] = useState('');
+    const [search, setSearch] = useState('all');
+    const [searchValue, setSearchValue] = useState('');
+    const [dataLenght, setDataLenght] = useState(0);
 
     const handleCityChange = (event) => {
         setCity(event.target.value);
@@ -133,7 +136,7 @@ const Hotel = () => {
         formData.append("link", link);
         formData.append("star", star);
         formData.append("price", price);
-        formData.append("city", city);
+        formData.append("city", ' Saidia');
         try {
             const response = await axios.post(API_URL + 'api/add-hotel', formData);
             setMessage(response.data.message);
@@ -143,10 +146,11 @@ const Hotel = () => {
 
     }
     useEffect(() => {
-        fetch(API_URL + "api/all-hotel")
+        fetch(API_URL + "api/hotel-per-page/1")
             .then(response => response.json())
             .then(result => {
                 setHotels(result.hotels);
+                setDataLenght(result.hotelsLenght);
             })
     }, [])
     const deleteHotel = (id) => {
@@ -155,22 +159,36 @@ const Hotel = () => {
                 setHotels(hotels.filter(f => f.id !== id))
             });
     }
+    const searchData = (e) => {
+        e.preventDefault();
+
+        axios.post(API_URL + "api/search/1", { search, searchValue })
+            .then(response => {
+                console.log(response.data)
+                setHotels(response.data.hotels)
+                setDataLenght(response.data.hotelsLenght)
+            })
+
+            .catch(error =>
+                console.log(error)
+            )
+    }
 
     return (
-        <section className="mx-auto  py-4 mt-3 w-100 px-5" >
-            <div className="d-flex justify-content-between align-items-center mb-5">
+        <section className="mx-auto  py-4 mt-2 w-100 px-5" >
+            <div className="d-flex justify-content-between align-items-center mb-4">
                 <h4 className="fw-semibold">Liste des hôtels</h4>
-                <button type="button" class="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Ajouter</button>
+                <button type="button" className="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Ajouter</button>
             </div>
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Ajout hôtel</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-lg">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-5" id="exampleModalLabel">Ajout hôtel</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
                             <form className="row mx-auto" onSubmit={addHotel} encType="multipart/form-data">
                                 <div className="col-md-6 mt-4">
                                     <label className="form-label fw-semibold">Nom complet</label>
@@ -243,15 +261,15 @@ const Hotel = () => {
                                 </div>
                                 <div className="col-md-6 mb-3 mt-4">
                                     <label className="form-label fw-semibold">Mot de passe</label>
-                                    <input type="password" className="form-control py-2" name='password' value={password} onChange={(e) => setPassword(e.target.value)} required />
+                                    <input type="password" className="form-control py-2" name='password' value={password} onChange={(e) => setPassword(e.target.value)} />
                                 </div>
                                 {/* <div className=" fw-semibold text-center ">{message ? <p className='alert alert-success'>{message}</p> : null}</div> */}
                                 {message && <p className='alert alert-success text-center alert-dismissible fade show' role="alert">{message}
-                                    <button type="button" onClick={() => setMessage("")} class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" onClick={() => setMessage("")} className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </p>}
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary px-4">Enregistrer</button>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" className="btn btn-primary px-4">Enregistrer</button>
                                 </div>
                             </form>
                         </div>
@@ -259,8 +277,26 @@ const Hotel = () => {
                     </div>
                 </div>
             </div>
-            <div class="table-responsive col-12  mx-auto  mytable rounded-3  mt-3">
-                <table class="table bg-white table-hover  rounded-3  m-0">
+            <form onSubmit={searchData}>
+                    <div className="input-group mx-auto">
+                        <select className="form-select" onChange={(e) => {
+                            setSearch(e.target.value)
+                            setSearchValue("")
+                        }}>
+                            <option value="all" selected>Tout</option>
+                            <option value="id">Id</option>
+                            <option value="name">Nom complet</option>
+                            <option value="city">Ville</option>
+                            <option value="star">Etoile</option>
+                        </select>
+                        <input type="text" className="form-control w-50" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="Recherche..." />
+                        <button className="btn btn-outline-secondary px-4 " type="submit" >Chercher</button>
+                    </div>
+
+                </form>
+            <div className="table-responsive col-12 bg-white shadow-sm  mx-auto  mytable   mt-2">
+               
+                <table className="table  table-hover  rounded-3  m-0">
                     <thead>
                         <tr>
                             <th scope="col" className='primaryColor'>#</th>
@@ -273,30 +309,37 @@ const Hotel = () => {
                         </tr>
                     </thead>
                     <tbody className=''>
-                        {hotels.map(hotel => (
+                    {hotels?.length > 0 ?
+                        hotels.map(hotel => (
                             <tr>
-                                <th scope="row" className="pt-3">{hotel.id}</th>
-                                <td><img src={API_URL + hotel.picture} className="img-fluid rounded-circle" alt="categorie_picture" width='48px ' /></td>
-                                <td className="pt-3">{hotel.name}</td>
-                                <td className="pt-3">{hotel.star}</td>
-                                <td className="pt-3">{hotel.city?.name}</td>
-                                <td className="pt-3">{hotel.phone}</td>
+                                <th scope="row" className="align-middle">{hotel.id}</th>
+                                <td><img src={API_URL + hotel.picture} className="rounded-circle" alt="hotel_picture" width='45px ' /></td>
+                                <td className="align-middle">{hotel.name}</td>
+                                <td className="align-middle">{hotel.star}</td>
+                                <td className="align-middle">{hotel.city?.name}</td>
+                                <td className="align-middle">{hotel.phone}</td>
                                 <td className="align-middle">
-                                    <Link to={`/dashboard/edit-hotel/${hotel.id}`} className="btn btn-primary me-1"><i class="bi bi-pencil-square"></i></Link>
-                                    <button onClick={() => deleteHotel(hotel.id)} className="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                                    <Link to={`/dashboard/edit-hotel/${hotel.id}`} className="btn btn-primary me-1"><i className="bi bi-pencil-square"></i></Link>
+                                    <button onClick={() => deleteHotel(hotel.id)} className="btn btn-danger"><i className="fa-solid fa-trash-can"></i></button>
                                 </td>
 
                             </tr>
-                        ))}
-
+                        ))
+                        :
+                        <tr>
+                            <td colSpan='7' className="text-center py-5">Aucune résultat n'a été trouvé</td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
-                {/* <Pagination
-                    setElements={setHotels}
-                    elementName="hotels"
-                    url={"api/list-hotels/"}
-                    allElementsUrl={"api/list-hotels"}
-                /> */}
+                {dataLenght > 7 &&
+                    <Pagination
+                        setElements={setHotels}
+                        elementName="hotels"
+                        url={"api/hotel-per-page/"}
+                        allElementsUrl={"api/all-hotel"}
+                    />
+                }
             </div>
         </section>
     )

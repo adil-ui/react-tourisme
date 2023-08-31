@@ -22,7 +22,7 @@ const Card = ({ elt }) => {
                     {elt.star &&
                         <>
                             <p className='text-warning fontSize12 mb-0'>{stars}</p>
-                            <p className='fw-semibold text-warning '>{elt.star} star</p>
+                            <p className='fw-semibold text-warning '>{elt.star}-star</p>
                         </>}
                     <div className='d-flex justify-content-between align-items-center mt-3'>
                         <p className='text-secondary fontSize16'><i class="bi bi-geo-alt-fill"></i> {elt.city?.name}</p>
