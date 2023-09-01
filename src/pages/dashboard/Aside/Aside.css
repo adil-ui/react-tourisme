@@ -12,9 +12,6 @@ aside{
 
 }
 
-aside img {
-    box-shadow: 0px 0px 0px 5px rgba(255, 255, 255, 0.082);
-}
 
 .dash_item {
     transition: .8s;
@@ -22,7 +19,7 @@ aside img {
 }
 .dash_menu{
     transition: .5s;
-    padding: 12px 0;
+    padding: 10.5px 0;
     cursor: pointer;
     vertical-align: middle;
  }
@@ -31,6 +28,6 @@ aside img {
     padding-left: 8px;
  }
  .dash_menu:hover {
-    background-color: #ffffff17;
+    background-color: #f3f5f8 !important;
  }
  

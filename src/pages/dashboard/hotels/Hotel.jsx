@@ -4,106 +4,105 @@ import Pagination from "../../../components/Pagination/Pagination";
 import { API_URL } from "../../../config/constants"
 
 import { Link } from "react-router-dom";
-const cities = [
-    "Casablanca",
-    "Rabat",
-    "Marrakech",
-    "Fès",
-    "Tanger",
-    "Agadir",
-    "Meknès",
-    "Oujda",
-    "Kenitra",
-    "Tétouan",
-    "Salé",
-    "Nador",
-    "Beni Mellal",
-    "Mohammedia",
-    "Témara",
-    "El Jadida",
-    "Taza",
-    "Khémisset",
-    "Taourirt",
-    "Ouarzazate",
-    "Safi",
-    "Béni Tadjit",
-    "Larache",
-    "Ksar el Kébir",
-    "Guelmim",
-    "Berrechid",
-    "Tifelt",
-    "Tiznit",
-    "Inezgane",
-    "Khenifra",
-    "Skhirat",
-    "Essaouira",
-    "Sidi Slimane",
-    "Tiznit",
-    "Tan-Tan",
-    "Oulad Teïma",
-    "Berrechid",
-    "Ben Guerir",
-    "Sidi Bennour",
-    "Azrou",
-    "Youssoufia",
-    "Lqliaa",
-    "Dakhla",
-    "Tiznit",
-    "Sefrou",
-    "Midelt",
-    "Khouribga",
-    "Kalaât Sraghna",
-    "Beni Ansar",
-    "Martil",
-    "Ouazzane",
-    "Berkane",
-    "Sidi Yahya El Gharb",
-    "Sidi Kacem",
-    "Lahraouyine",
-    "Ksar el Kébir",
-    "Oued Zem",
-    "Beni Mellal",
-    "Fkih Ben Salah",
-    "Azemmour",
-    "Sidi Bennour",
-    "Sidi Ifni",
-    "Chefchaouen",
-    "Imzouren",
-    "Agdz",
-    "Ahfir",
-    "Aïn Harrouda",
-    "Aït Melloul",
-    "Aït Ourir",
-    "Al Hoceïma",
-    "Aousserd",
-    "Assa",
-    "Aïn Cheggag",
-    "Azilal",
-    "Bouznika",
-    "Bouskoura",
-    "Boujdour",
-    "Casablanca",
-    "Dakhla",
-    "El Kelâa des Sraghna",
-    "El Jadida",
-    "Errachidia",
-    "Essaouira",
-    "Fès",
-    "Figuig",
-    "Fquih Ben Salah",
-    "Guelmim",
-    "Guercif",
-];
+// const cities = [
+//     "Casablanca",
+//     "Rabat",
+//     "Marrakech",
+//     "Fès",
+//     "Tanger",
+//     "Agadir",
+//     "Meknès",
+//     "Oujda",
+//     "Kenitra",
+//     "Tétouan",
+//     "Salé",
+//     "Nador",
+//     "Beni Mellal",
+//     "Mohammedia",
+//     "Témara",
+//     "El Jadida",
+//     "Taza",
+//     "Khémisset",
+//     "Taourirt",
+//     "Ouarzazate",
+//     "Safi",
+//     "Béni Tadjit",
+//     "Larache",
+//     "Ksar el Kébir",
+//     "Guelmim",
+//     "Berrechid",
+//     "Tifelt",
+//     "Tiznit",
+//     "Inezgane",
+//     "Khenifra",
+//     "Skhirat",
+//     "Essaouira",
+//     "Sidi Slimane",
+//     "Tiznit",
+//     "Tan-Tan",
+//     "Oulad Teïma",
+//     "Berrechid",
+//     "Ben Guerir",
+//     "Sidi Bennour",
+//     "Azrou",
+//     "Youssoufia",
+//     "Lqliaa",
+//     "Dakhla",
+//     "Tiznit",
+//     "Sefrou",
+//     "Midelt",
+//     "Khouribga",
+//     "Kalaât Sraghna",
+//     "Beni Ansar",
+//     "Martil",
+//     "Ouazzane",
+//     "Berkane",
+//     "Sidi Yahya El Gharb",
+//     "Sidi Kacem",
+//     "Lahraouyine",
+//     "Ksar el Kébir",
+//     "Oued Zem",
+//     "Beni Mellal",
+//     "Fkih Ben Salah",
+//     "Azemmour",
+//     "Sidi Bennour",
+//     "Sidi Ifni",
+//     "Chefchaouen",
+//     "Imzouren",
+//     "Agdz",
+//     "Ahfir",
+//     "Aïn Harrouda",
+//     "Aït Melloul",
+//     "Aït Ourir",
+//     "Al Hoceïma",
+//     "Aousserd",
+//     "Assa",
+//     "Aïn Cheggag",
+//     "Azilal",
+//     "Bouznika",
+//     "Bouskoura",
+//     "Boujdour",
+//     "Casablanca",
+//     "Dakhla",
+//     "El Kelâa des Sraghna",
+//     "El Jadida",
+//     "Errachidia",
+//     "Essaouira",
+//     "Fès",
+//     "Figuig",
+//     "Fquih Ben Salah",
+//     "Guelmim",
+//     "Guercif",
+// ];
 const Hotel = () => {
     const [hotels, setHotels] = useState([])
     const [name, setName] = useState('');
-    const [id, setId] = useState('');
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('0620356950');
     const [picture, setPicture] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('1234');
     const [city, setCity] = useState('');
+    const [cities, setCities] = useState([]);
     const [star, setStar] = useState();
     const [price, setPrice] = useState();
     const [link, setLink] = useState('');
@@ -129,7 +128,6 @@ const Hotel = () => {
         formData.append("picture", picture);
         formData.append("phone", phone);
         formData.append("email", email);
-        formData.append("password", password);
         formData.append("description", description);
         formData.append("longitude", longitude);
         formData.append("latitude", latitude);
@@ -173,6 +171,18 @@ const Hotel = () => {
                 console.log(error)
             )
     }
+    useEffect(() => {
+        fetch('http://api.geonames.org/searchJSON?country=MA&maxRows=1000&username=ethisko')
+          .then(response => response.json())
+          .then(result => {
+            if (Array.isArray(result.geonames)) {
+              setCities(result.geonames.map(obj => obj.toponymName))
+            } else {
+              console.error("geonames is not an array:", result.geonames);
+            }
+          })
+      }, []);
+
 
     return (
         <section className="mx-auto  py-4 mt-2 w-100 px-5" >
@@ -188,7 +198,7 @@ const Hotel = () => {
                             <h1 className="modal-title fs-5" id="exampleModalLabel">Ajout hôtel</h1>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div className="modal-body">
+                        <div className="modal-body  py-0">
                             <form className="row mx-auto" onSubmit={addHotel} encType="multipart/form-data">
                                 <div className="col-md-6 mt-4">
                                     <label className="form-label fw-semibold">Nom complet</label>
@@ -202,11 +212,14 @@ const Hotel = () => {
                                     <label className="form-label fw-semibold">Addresse</label>
                                     <input type="text" className="form-control py-2" name='address' value={address} onChange={(e) => setAddress(e.target.value)} required />
                                 </div>
-                                <div className=" mt-4">
+                                <div className="col-md-6 mt-4">
                                     <label for="formFile" className="form-label fw-semibold">Photo</label>
                                     <input className="form-control py-2 mb-1" type="file" id="formFile" name="picture" onChange={(e) => setPicture(e.target.files[0])} />
                                 </div>
-
+                                <div className="col-md-6 mb-3 mt-4">
+                                    <label className="form-label fw-semibold">Email</label>
+                                    <input type="email" className="form-control py-2" name='email' value={email} onChange={(e) => setEmail(e.target.value)} required />
+                                </div>
                                 <div className="col-md-12 mt-4">
                                     <label className="form-label fw-semibold">Description</label>
                                     <textarea name="" id="" rows="5" className="form-control " value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
@@ -231,11 +244,12 @@ const Hotel = () => {
                                         }
                                         <option value="">Sélectionnez une ville</option>
 
-                                        {cities.map(city => (
+                                        {cities?.map(city => (
                                             <option key={city} value={city}>{city}</option>
                                         ))}
                                     </select>
                                 </div>
+
                                 <div className="col-md-6 mt-4">
                                     <label className="form-label fw-semibold">Prix Minimum</label>
                                     <input type="number" className="form-control py-2" min='1' name='name' value={price} onChange={(e) => setPrice(e.target.value)} required />
@@ -255,21 +269,15 @@ const Hotel = () => {
                                     </select>
                                 </div>
 
-                                <div className="col-md-6 mb-3 mt-4">
-                                    <label className="form-label fw-semibold">Email</label>
-                                    <input type="email" className="form-control py-2" name='email' value={email} onChange={(e) => setEmail(e.target.value)} required />
-                                </div>
-                                <div className="col-md-6 mb-3 mt-4">
-                                    <label className="form-label fw-semibold">Mot de passe</label>
-                                    <input type="password" className="form-control py-2" name='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-                                </div>
+
+
                                 {/* <div className=" fw-semibold text-center ">{message ? <p className='alert alert-success'>{message}</p> : null}</div> */}
                                 {message && <p className='alert alert-success text-center alert-dismissible fade show' role="alert">{message}
                                     <button type="button" onClick={() => setMessage("")} className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </p>}
-                                <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <div className="modal-footer mt-3">
                                     <button type="submit" className="btn btn-primary px-4">Enregistrer</button>
+                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 </div>
                             </form>
                         </div>
@@ -278,24 +286,24 @@ const Hotel = () => {
                 </div>
             </div>
             <form onSubmit={searchData}>
-                    <div className="input-group mx-auto">
-                        <select className="form-select" onChange={(e) => {
-                            setSearch(e.target.value)
-                            setSearchValue("")
-                        }}>
-                            <option value="all" selected>Tout</option>
-                            <option value="id">Id</option>
-                            <option value="name">Nom complet</option>
-                            <option value="city">Ville</option>
-                            <option value="star">Etoile</option>
-                        </select>
-                        <input type="text" className="form-control w-50" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="Recherche..." />
-                        <button className="btn btn-outline-secondary px-4 " type="submit" >Chercher</button>
-                    </div>
+                <div className="input-group mx-auto">
+                    <select className="form-select" onChange={(e) => {
+                        setSearch(e.target.value)
+                        setSearchValue("")
+                    }}>
+                        <option value="all" selected>Tout</option>
+                        <option value="id">Id</option>
+                        <option value="name">Nom complet</option>
+                        <option value="city">Ville</option>
+                        <option value="star">Etoile</option>
+                    </select>
+                    <input type="text" className="form-control w-50" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="Recherche..." />
+                    <button className="btn btn-outline-secondary px-4 " type="submit" >Chercher</button>
+                </div>
 
-                </form>
+            </form>
             <div className="table-responsive col-12 bg-white shadow-sm  mx-auto  mytable   mt-2">
-               
+
                 <table className="table  table-hover  rounded-3  m-0">
                     <thead>
                         <tr>
@@ -309,27 +317,27 @@ const Hotel = () => {
                         </tr>
                     </thead>
                     <tbody className=''>
-                    {hotels?.length > 0 ?
-                        hotels.map(hotel => (
-                            <tr>
-                                <th scope="row" className="align-middle">{hotel.id}</th>
-                                <td><img src={API_URL + hotel.picture} className="rounded-circle" alt="hotel_picture" width='45px ' /></td>
-                                <td className="align-middle">{hotel.name}</td>
-                                <td className="align-middle">{hotel.star}</td>
-                                <td className="align-middle">{hotel.city?.name}</td>
-                                <td className="align-middle">{hotel.phone}</td>
-                                <td className="align-middle">
-                                    <Link to={`/dashboard/edit-hotel/${hotel.id}`} className="btn btn-primary me-1"><i className="bi bi-pencil-square"></i></Link>
-                                    <button onClick={() => deleteHotel(hotel.id)} className="btn btn-danger"><i className="fa-solid fa-trash-can"></i></button>
-                                </td>
+                        {hotels?.length > 0 ?
+                            hotels.map(hotel => (
+                                <tr>
+                                    <th scope="row" className="align-middle">{hotel.id}</th>
+                                    <td><img src={API_URL + hotel.picture} className="rounded-circle" alt="hotel_picture" width='45px ' /></td>
+                                    <td className="align-middle">{hotel.name}</td>
+                                    <td className="align-middle">{hotel.star}</td>
+                                    <td className="align-middle">{hotel.city?.name}</td>
+                                    <td className="align-middle">{hotel.phone}</td>
+                                    <td className="align-middle">
+                                        <Link to={`/dashboard/edit-hotel/${hotel.id}`} className="btn btn-primary me-1"><i className="bi bi-pencil-square"></i></Link>
+                                        <button onClick={() => deleteHotel(hotel.id)} className="btn btn-danger"><i className="fa-solid fa-trash-can"></i></button>
+                                    </td>
 
+                                </tr>
+                            ))
+                            :
+                            <tr>
+                                <td colSpan='7' className="text-center py-5">Aucune résultat n'a été trouvé</td>
                             </tr>
-                        ))
-                        :
-                        <tr>
-                            <td colSpan='7' className="text-center py-5">Aucune résultat n'a été trouvé</td>
-                        </tr>
-                    }
+                        }
                     </tbody>
                 </table>
                 {dataLenght > 7 &&
