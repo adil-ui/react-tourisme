@@ -24,3 +24,24 @@
 .textTitle{
     text-decoration: none;
 }
+.bookmarkIcon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    border-radius: 50% !important;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom right,#179700,#ff0400);
+    transition: .3s;
+    margin-top: -20px;
+    cursor: pointer;
+}
+.bookmarkIcon i{
+    color: white;
+}
+.book{
+    display: none;
+}

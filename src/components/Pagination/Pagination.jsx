@@ -21,6 +21,7 @@ const Pagination = ({ setElements, elementName, url, allElementsUrl }) => {
         axios.get(API_URL + url + newPage).then(result => {
             setElements(result.data[`${elementName}`]);
         })
+        window.scroll(0, 0);
     };
 
     const previous = () => {
@@ -29,6 +30,7 @@ const Pagination = ({ setElements, elementName, url, allElementsUrl }) => {
         axios.get(API_URL + url + newPage).then(result => {
             setElements(result.data[`${elementName}`]);
         })
+        window.scroll(0, 0);
     };
 
     const goToPage = (page) => {
@@ -38,7 +40,9 @@ const Pagination = ({ setElements, elementName, url, allElementsUrl }) => {
             .then(result => {
                 setElements(result[`${elementName}`]);
             })
+            window.scroll(0, 0);
     };
+   
     return (
         <nav  className='mt-3 d-flex justify-content-center  bg-transparent shadow-none  myPagination'>
             <ul className="pagination ">

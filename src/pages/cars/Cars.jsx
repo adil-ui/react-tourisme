@@ -2,48 +2,23 @@ import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { API_URL } from "../../config/constants"
 
-import $ from 'jquery'
-
 import './Cars.css'
 import axios from "axios"
-import Card from "../../components/card/Card"
+import { Pagination } from "swiper"
+import CardAgency from "../../components/card-agency/CardAgency"
 
 const Cars = () => {
 
-    const [data, setData] = useState([]);
+    const [agencies, setAgencies] = useState([]);
     const [result, setResult] = useState(0);
-    const [categories, setCategories] = useState([]);
     const [cities, setCities] = useState([]);
-    const [category, setCategory] = useState("");
     const [city, setCity] = useState("");
-    const [sector, setSector] = useState("");
-    const [type, setType] = useState('');
-    const [livingRoom, setLivingRoom] = useState("");
-    const [bedroom, setBedroom] = useState("");
-    const [bathroom, setBathroom] = useState("");
-    const [floor, setFloor] = useState("");
-    const [areaMin, setAreaMin] = useState("");
-    const [areaMax, setAreaMax] = useState("");
     const [priceMax, setPriceMax] = useState("");
     const [priceMin, setPriceMin] = useState("");
     const [formData, setFormData] = useState();
     const [filtered, setFiltered] = useState(false);
 
-    // useEffect(() => {
-    //     fetch(API_URL + 'api/properties/1')
-    //         .then(response => response.json())
-    //         .then(result => {
-    //             setData(result.properties);
-    //             setResult(result.nbrProperties);
-    //         })
-    // }, [])
-    // useEffect(() => {
-    //     fetch(API_URL + 'api/list-categories')
-    //         .then(response => response.json())
-    //         .then(result => {
-    //             setCategories(result.categories);
-    //         })
-    // }, [])
+  
     // useEffect(() => {
     //     fetch(API_URL + 'api/list-cities')
     //         .then(response => response.json())
@@ -80,107 +55,25 @@ const Cars = () => {
     //     }
 
     // }
-
-    // const filterByDate = () => {
-
-    //     fetch(API_URL + 'api/properties/1')
-    //         .then(response => response.json())
-    //         .then(result => {
-    //             setData(result.properties);
-    //         })
-    //     $('.dateActive').addClass('active')
-    //     $('.ascActive').removeClass('active')
-    //     $('.descActive').removeClass('active')
-
-    // }
-    // const orderByAsc = () => {
-    //     const copyData = [...data];
-    //     copyData.sort((a, b) => (a.price < b.price ? 1 : -1));
-    //     setData(copyData);
-    //     $('.dateActive').removeClass('active')
-    //     $('.ascActive').addClass('active')
-    //     $('.descActive').removeClass('active')
-    // }
-    // const orderByDesc = () => {
-    //     const copyData = [...data];
-    //     copyData.sort((a, b) => (a.price > b.price ? 1 : -1));
-    //     setData(copyData);
-    //     $('.dateActive').removeClass('active')
-    //     $('.ascActive').removeClass('active')
-    //     $('.descActive').addClass('active')
-    // }
+    useEffect(() => {
+        fetch(API_URL + "api/home-agency-per-page/1")
+            .then(response => response.json())
+            .then(result => {
+                setAgencies(result.agencies);
+            })
+    }, [])
+   
 
     useEffect(() => {
         window.scroll(0, 0);
     }, [])
-    const cars = [
-        {
-            id: 1,
-            title: 'Las Vidas Car Rabat',
-            picture: '/assets/voiture.png',
-            tel: '0625145639',
-            ville: 'Rabat',
-        },
-        {
-            id: 2,
-            title: 'Blue Line Car Rabat',
-            picture: '/assets/voituree.jpg',
-            tel: '0625145639',
-            ville: 'Rabat',
-        },
-        {
-            id: 3,
-            title: 'Bab El Had Cars',
-            picture: '/assets/voiture.png',
-            tel: '0625145639',
-            ville: 'Rabat',
-        },
-        {
-            id: 4,
-            title: 'Araba Location',
-            picture: '/assets/voiture.jpg',
-            tel: '0625145639',
-            ville: 'Rabat',
-        },
-        {
-            id: 5,
-            title: 'Las Vidas Car Rabat',
-            picture: '/assets/voiture.png',
-            tel: '0625145639',
-            ville: 'Rabat',
-        },
-        {
-            id: 6,
-            title: 'Blue Line Car Rabat',
-            picture: '/assets/voituree.jpg',
-            tel: '0625145639',
-            ville: 'Rabat',
-        },
-        {
-            id: 7,
-            title: 'Bab El Had Cars',
-            picture: '/assets/voiture.png',
-            tel: '0625145639',
-            ville: 'Rabat',
-        },
-        {
-            id: 8,
-            title: 'Araba Location',
-            picture: '/assets/voiture.jpg',
-            tel: '0625145639',
-            ville: 'Rabat',
-        },
-
-
-
-    ]
+    
 
     return (
         <section className="search py-5 mt-5">
 
             <div className="row pb-5 pt-4 px-5 mx-auto g-0">
                 <aside className='col-xl-3 col-12 ps-0 pe-xl-5 mx-auto  aside'>
-
                     <form onSubmit='{filter}' className="shadow-sm  bg-white rounded-3 pb-4 mx-auto">
                         <div className="bgColor w-100 rounded-top-3 px-3 pt-2 pb-1 mb-3 d-flex justify-content-between align-items-center">
                             <h4 className="mt-1 fw-semibold text-light">Filtre </h4>
@@ -245,7 +138,7 @@ const Cars = () => {
 
                 <div className='col-9 mx-auto mt-xl-0 mt-lg-5 mt-5'>
                     <div class="row">
-                        {cars.map(elt => <Card elt={elt} key={elt.id} />)}
+                        {agencies.map(elt => <CardAgency elt={elt} key={elt.id} />)}
                     </div>
                     {/* {filtered && data.length > 5 && <PaginationFilter
                         setElements={setData}
@@ -260,6 +153,7 @@ const Cars = () => {
                             url={"api/properties/"}
                             allElementsUrl={"api/properties"}
                         />} */}
+                         
                 </div>
             </div>
         </section>

@@ -2,6 +2,13 @@ import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import './Card.css'
 import { API_URL } from '../../config/constants'
+import $ from 'jquery'
+const book = (id) =>{
+
+        $(`#book_${id}`).css("display", "none");
+        $(`#bookk_${id}`).css("display", "block");
+
+}
 
 const Card = ({ elt }) => {
     const stars = [];
@@ -13,11 +20,15 @@ const Card = ({ elt }) => {
     return (
         <article className="col-xxl-3 col-lg-4 col-md-6 col-sm-9 col-10 mb-4 mx-auto card_container " >
             <div className="card border-0">
-                <div className='card_img'>
-                    <NavLink to={`/details/${elt.id}`}><img src={API_URL + elt.picture} alt="user_image" className="" /></NavLink>
+                <div className='card_img position-relative'>
+                    <NavLink to={`/hotel-details/${elt.id}`}><img src={API_URL + elt.picture} alt="user_image" className="" /></NavLink>
+                    <div class="bookmarkIcon" onClick={() => book(elt?.id)}>
+                        <div id={`book_${elt?.id}`} ><i class="fa-regular fa-bookmark "></i></div>
+                        <div className='book' id={`bookk_${elt?.id}`} ><i class="fa-solid fa-bookmark "></i></div>
+                    </div>
                 </div>
                 <div className="pt-3 px-2">
-                    <Link to={`/details/${elt.id}`} className='text-decoration-none '><h5 className="fw-semibold primaryColor">{elt.name}</h5></Link>
+                    <Link to={`/hotel-details/${elt.id}`} className='text-decoration-none '><h5 className="fw-semibold primaryColor">{elt.name}</h5></Link>
 
                     {elt.star &&
                         <>
@@ -32,7 +43,7 @@ const Card = ({ elt }) => {
                     </div>
                 </div>
             </div>
-        </article>
+        </article >
     )
 }
 

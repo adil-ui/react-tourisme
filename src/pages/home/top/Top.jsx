@@ -1,42 +1,24 @@
-import React from 'react'
-import Card from '../../../components/card/Card'
+import React, { useEffect, useState } from 'react'
+import Card from '../../../components/card-hotel/Card'
 import { Link } from 'react-router-dom'
+import { API_URL } from '../../../config/constants';
+import CardAgency from '../../../components/card-agency/CardAgency';
+import CardGuide from '../../../components/card-guide/CardGuide';
 
 const Top = () => {
-    const hotels = [
-        {
-            id: 1,
-            title: 'Luxury Tented Erg Chebbi',
-            picture: '/assets/hotel-1.jpg',
-            price: 300,
-            star: 3,
-            ville: 'Marzouga',
-        },
-        {
-            id: 2,
-            title: 'Farah Rabat',
-            picture: '/assets/hotel-2.jpg',
-            price: 300,
-            star: 3,
-            ville: 'Rabat',
-        },
-        {
-            id: 3,
-            title: "Les Mérinides",
-            picture: '/assets/hotel-3.jpg',
-            price: 300,
-            star: 3,
-            ville: 'Fès',
-        },
-        {
-            id: 4,
-            title: 'Waves Aqua Resort',
-            picture: '/assets/hotel-4.jpg',
-            price: 300,
-            star: 3,
-            ville: 'Kénitra',
-        },
-    ]
+    const [hotels, setHotels]= useState([]);
+    const [guides, setGuides]= useState([]);
+    const [agences, setAgences]= useState([]);
+    useEffect(() => {
+        fetch(API_URL + "api/home")
+            .then(response => response.json())
+            .then(result => {
+                setHotels(result.hotels);
+                setGuides(result.guides);
+                setAgences(result.agences);
+            })
+    }, [])
+  
     const cars = [
         {
             id: 1,
@@ -100,38 +82,47 @@ const Top = () => {
     return (
         <section className='my-5 pt-4 container' id='top'>
             <div>
-                <h2 className='text-center  text-danger fw-semibold'>MEILLEURS HÔTELS</h2>
-                <h6 className='text-center mb-3  primaryColor fw-semibold'>Visite au Maroc</h6>
-                <div className=' bgColor mb-5 mx-auto rounded-5' style={{height:'2px', width: '60px',}}></div>
+                <h2 className='text-center  text-danger fw-semibold'>OUR HOTELS</h2>
+                <h6 className='text-center mb-3  primaryColor fw-semibold'>Guide to morocco</h6>
+                <div className=' bgColor mb-5 mx-auto rounded-5' style={{ height: '2px', width: '60px', }}></div>
                 <div class="row">
                     {hotels.map(elt => <Card elt={elt} />)}
                 </div>
                 <div className='text-center mt-3'>
-                    <Link to="" className='btn btn-primary px-4 py-2 fontSize18'>Découvrir plus</Link>
+                    <Link to='hotels' className='btn btn-primary px-4 py-2 fontSize18'>Discover more</Link>
                 </div>
             </div>
-
             <div>
-                <h2 className='text-center  mt-5 pt-5 text-danger fw-semibold'>MEILLEURS AGENCES DE VOITURES</h2>
-                <h6 className='text-center mb-3  primaryColor fw-semibold'>Visite au Maroc</h6>
-                <div className=' bgColor mb-5 mx-auto rounded-5' style={{height:'2px', width: '60px',}}></div>
+                <h2 className='text-center  mt-5 pt-5 text-danger fw-semibold'>OUR CAR RENTAL AGENCIES</h2>
+                <h6 className='text-center mb-3  primaryColor fw-semibold'>Guide to morocco</h6>
+                <div className=' bgColor mb-5 mx-auto rounded-5' style={{ height: '2px', width: '60px', }}></div>
                 <div class="row">
-                    {cars.map(elt => <Card elt={elt} />)}
+                    {agences.map(elt => <CardAgency elt={elt} />)}
                 </div>
                 <div className='text-center mt-3'>
-                    <Link to="" className='btn btn-primary px-4 py-2 fontSize18'>Découvrir plus</Link>
+                    <Link to='agencies' className='btn btn-primary px-4 py-2 fontSize18'>Discover more</Link>
                 </div>
             </div>
-
             <div>
-                <h2 className='text-center mt-5 pt-5 text-danger fw-semibold'>MEILLEURS DESTINATIONS</h2>
-                <h6 className='text-center mb-3  primaryColor fw-semibold'>Visite au Maroc</h6>
-                <div className=' bgColor mb-5 mx-auto rounded-5' style={{height:'2px', width: '60px',}}></div>
+                <h2 className='text-center  mt-5 pt-5 text-danger fw-semibold'>OUR TOURIST GUIDESS</h2>
+                <h6 className='text-center mb-3  primaryColor fw-semibold'>Guide to morocco</h6>
+                <div className=' bgColor mb-5 mx-auto rounded-5' style={{ height: '2px', width: '60px', }}></div>
+                <div class="row">
+                    {guides.map(elt => <CardGuide elt={elt} />)}
+                </div>
+                <div className='text-center mt-3'>
+                    <Link to='guides' className='btn btn-primary px-4 py-2 fontSize18'>Discover more</Link>
+                </div>
+            </div>
+            <div>
+                <h2 className='text-center mt-5 pt-5 text-danger fw-semibold'>TOP DESTINATIONS</h2>
+                <h6 className='text-center mb-3  primaryColor fw-semibold'>Guide to morocco</h6>
+                <div className=' bgColor mb-5 mx-auto rounded-5' style={{ height: '2px', width: '60px', }}></div>
                 <div class="row">
                     {monuments.map(elt => <Card elt={elt} />)}
                 </div>
                 <div className='text-center mt-3'>
-                    <Link to="" className='btn btn-primary px-4 py-2 fontSize18'>Découvrir plus</Link>
+                    <Link to="info" className='btn btn-primary px-4 py-2 fontSize18'>Discover more</Link>
                 </div>
             </div>
         </section>

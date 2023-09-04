@@ -4,28 +4,37 @@ import { API_URL } from '../../config/constants';
 import './Dashboard.css'
 
 const Dashboard = () => {
-    const [properties, setProperties] = useState([])
+
     const [nbrUsers, setNbrUsers] = useState(0)
-    const [nbrProperty, setNbrProperty] = useState(0)
-    const [nbrCategory, setnbrCategory] = useState(0)
+    const [nbrHotels, setNbrHotels] = useState(0)
+    const [nbrCategory, setNbrCategory] = useState(0)
+    const [nbrCity, setNbrCity] = useState(0)
+    const [nbrGuide, setNbrGuide] = useState(0)
+    const [nbrAgency, setNbrAgency] = useState(0)
+    const [nbrInfo, setNbrInfo] = useState(0)
+    const [nbrEmployes, setNbrEmployes] = useState(0)
     const user = JSON.parse(localStorage.getItem('user'));
 
-    // useEffect(() => {
-    //     fetch(API_URL + "api/last-properties", {
-    //         headers: {
-    //             'Authorization': `Bearer ${user.token}`
-    //         }
-    //     })
-    //         .then(response => response.json())
-    //         .then(result => {
-    //             setProperties(result.properties);
-    //             setNbrUsers(result.nbrUser);
-    //             setNbrProperty(result.nbrProperty);
-    //             setnbrCategory(result.nbrCategory);
-    //         })
-    // }, [])
+    useEffect(() => {
+        fetch(API_URL + "api/stats")
+            .then(response => response.json())
+            .then(result => {
+                setNbrHotels(result.hotels);
+                setNbrUsers(result.users);
+                setNbrCity(result.cities);
+                setNbrCategory(result.categories);
+                setNbrGuide(result.guides);
+                setNbrAgency(result.agencies);
+                setNbrInfo(result.informations);
+                setNbrEmployes(result.employees);
+            })
+    }, [])
+
+    useEffect(() => {
+        window.scroll(0, 0);
+    }, [])
     return (
-        <section className=" g-0 mx-auto col-8 mt-5 pt-2 dashboard_container" >
+        <section className=" g-0 mx-auto col-8 mt-5 pt-4 dashboard_container" >
             <div className="row gx-2 ">
                 <div class="col-xxl-4 col-md-6 col-10 mb-5 mx-lg-0 mx-auto dash_card">
                     <div className='shadow-sm bg-white border-start  border-5 d-flex align-items-center border-info row px-4 py-3 rounded-4 mx-lg-0 mx-md-auto'>
@@ -43,8 +52,8 @@ const Dashboard = () => {
                 <div class="col-xxl-4 col-md-6 col-10 mb-5 mx-lg-0 mx-auto dash_card">
                     <div className='shadow-sm bg-white border-start border-5 d-flex align-items-center border-success row px-4 py-3 rounded-4 mx-lg-0 mx-md-auto'>
                         <div className='col-6'>
-                            <p className='fw-semibold fs-4'>{nbrProperty}</p>
-                            {nbrProperty > 1 ? <p className='fw-semibold fs-5'>Hôtels</p> :
+                            <p className='fw-semibold fs-4'>{nbrHotels}</p>
+                            {nbrHotels > 1 ? <p className='fw-semibold fs-5'>Hôtels</p> :
                                 <p className='fw-semibold fs-5'>Hôtel</p>
                             }
 
@@ -57,13 +66,53 @@ const Dashboard = () => {
                 <div class="col-xxl-4 col-md-6 col-10 mb-5 mx-lg-0 mx-auto dash_card">
                     <div className='shadow-sm bg-white border-start border-5 d-flex align-items-center border-warning row px-4 py-3 rounded-4 mx-lg-0 mx-md-auto'>
                         <div className='col-6'>
-                            <p className='fw-semibold fs-4'>{nbrCategory}</p>
-                            {nbrCategory > 1 ? <p className='fw-semibold fs-5'>Agences</p> :
+                            <p className='fw-semibold fs-4'>{nbrAgency}</p>
+                            {nbrAgency > 1 ? <p className='fw-semibold fs-5'>Agences</p> :
                                 <p className='fw-semibold fs-5'>Agence</p>
                             }
                         </div>
                         <div className='col-6 text-end'>
                             <i class="fa-solid fa-car-rear fontSize60 text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-4 col-md-6 col-10 mb-5 mx-lg-0 mx-auto dash_card">
+                    <div className='shadow-sm bg-white border-start  border-5 d-flex align-items-center border-danger row px-4 py-3 rounded-4 mx-lg-0 mx-md-auto'>
+                        <div className='col-6'>
+                            <p className='fw-semibold fs-4'>{nbrGuide}</p>
+                            {nbrGuide > 1 ? <p className='fw-semibold fs-5'>Guides</p> :
+                                <p className='fw-semibold fs-5'>Guide</p>
+                            }
+                        </div>
+                        <div className='col-6 text-end'>
+                            <i class="fa-regular fa-compass fontSize60 text-danger"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-4 col-md-6 col-10 mb-5 mx-lg-0 mx-auto dash_card">
+                    <div className='shadow-sm bg-white border-start border-5 d-flex align-items-center border-warning border-opacity-50 row px-4 py-3 rounded-4 mx-lg-0 mx-md-auto'>
+                        <div className='col-6'>
+                            <p className='fw-semibold fs-4'>{nbrInfo}</p>
+                            {nbrInfo > 1 ? <p className='fw-semibold fs-5'>Catégories</p> :
+                                <p className='fw-semibold fs-5'>Catégorie</p>
+                            }
+
+                        </div>
+                        <div className='col-6 text-end'>
+                            <i class="bi bi-tags-fill fontSize60 text-warning text-opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-4 col-md-6 col-10 mb-5 mx-lg-0 mx-auto dash_card">
+                    <div className='shadow-sm bg-white border-start  border-5 d-flex align-items-center border-dark row px-4 py-3 rounded-4 mx-lg-0 mx-md-auto'>
+                        <div className='col-6'>
+                            <p className='fw-semibold fs-4'>{nbrEmployes}</p>
+                            {nbrEmployes > 1 ? <p className='fw-semibold fs-5'>Employés</p> :
+                                <p className='fw-semibold fs-5'>Employé</p>
+                            }
+                        </div>
+                        <div className='col-6 text-end'>
+                            <i className="fa fa-user-tie fontSize60 text-dark"></i>
                         </div>
                     </div>
                 </div>
@@ -81,23 +130,24 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div class="col-xxl-4 col-md-6 col-10 mb-5 mx-lg-0 mx-auto dash_card">
-                    <div className='shadow-sm bg-white border-start  border-5 d-flex align-items-center border-danger row px-4 py-3 rounded-4 mx-lg-0 mx-md-auto'>
+                    <div className='shadow-sm bg-white border-start border-5 d-flex align-items-center border-success border-opacity-50 row px-4 py-3 rounded-4 mx-lg-0 mx-md-auto'>
                         <div className='col-6'>
-                            <p className='fw-semibold fs-4'>{nbrUsers}</p>
-                            {nbrUsers > 1 ? <p className='fw-semibold fs-5'>Guides</p> :
-                                <p className='fw-semibold fs-5'>Guide</p>
+                            <p className='fw-semibold fs-4'>{nbrInfo}</p>
+                            {nbrInfo > 1 ? <p className='fw-semibold fs-5'>Informations</p> :
+                                <p className='fw-semibold fs-5'>Information</p>
                             }
+
                         </div>
                         <div className='col-6 text-end'>
-                            <i class="fa-regular fa-compass fontSize60 text-danger"></i>
+                            <i class="fa-solid fa-circle-info fontSize60 text-success text-opacity-50"></i>
                         </div>
                     </div>
                 </div>
                 <div class="col-xxl-4 col-md-6 col-10 mb-5 mx-lg-0 mx-auto dash_card">
                     <div className='shadow-sm bg-white border-start border-5 d-flex align-items-center border-dark border-opacity-50 row px-4 py-3 rounded-4 mx-lg-0 mx-md-auto'>
                         <div className='col-6'>
-                            <p className='fw-semibold fs-4'>{nbrProperty}</p>
-                            {nbrProperty > 1 ? <p className='fw-semibold fs-5'>Villes</p> :
+                            <p className='fw-semibold fs-4'>{nbrCity}</p>
+                            {nbrCity > 1 ? <p className='fw-semibold fs-5'>Villes</p> :
                                 <p className='fw-semibold fs-5'>Ville</p>
                             }
 
@@ -108,50 +158,8 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
-      
-            <div >
-                <h4 className='fw-semibold '>Les derniers offres</h4>
-                <div class="table-responsive mx-auto my-table rounded-3 border shadow-sm  mt-3">
-                    <table class="table bg-white table-hover  rounded-3  m-0">
-                        <thead>
-                            <tr>
-                                <th scope="col" className='primaryColor'>#</th>
-                                <th scope="col" className='primaryColor'>Photo</th>
-                                <th scope="col" className='primaryColor'>Titre</th>
-                                <th scope="col" className='primaryColor'>Prix</th>
-                                <th scope="col" className='primaryColor'>Propriétaire</th>
-                                <th scope="col" className='primaryColor'>Categorie</th>
-                                <th scope="col" className='primaryColor'>Type</th>
-                                <th scope="col" className='primaryColor'>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody className=''>
-                            {properties.map(annonce => (
-                                <>
-                                    <tr>
-                                        <th scope="row" className="align-middle">{annonce.id}</th>
-                                        <td className="align-middle">
-                                            <img src={API_URL + annonce.picture} className="img-fluid rounded-circle" alt="property_picture" width='42px' style={{ height: '42px' }} />
-                                        </td>
-                                        <td className="align-middle">{annonce.title}</td>
-                                        <td className="align-middle">{annonce.price} Dh</td>
-                                        <td className="align-middle">{annonce.user.name}</td>
-                                        <td className="align-middle">{annonce.category?.name}</td>
-                                        <td className="align-middle">{annonce.type}</td>
-                                        <td className="align-middle">
-                                            <button className="btn btn-success me-1"><i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target={`#details-${annonce.id}`}></i></button>
-                                        </td>
-                                    </tr>
-
-                                </>
 
 
-                            ))}
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </section>
 
     )

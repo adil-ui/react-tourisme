@@ -4,7 +4,7 @@ import { API_URL } from '../../../config/constants';
 import { useParams } from 'react-router-dom';
 
 const UpdateHotel = () => {
-  
+
   const [hotel, setHotel] = useState(null)
   const [cities, setCities] = useState([])
   const [name, setName] = useState('');
@@ -30,11 +30,11 @@ const UpdateHotel = () => {
   };
   useEffect(() => {
     fetch('http://api.geonames.org/searchJSON?country=MA&maxRows=1000&username=ethisko')
-        .then(response => response.json())
-        .then(result => {
-            setCities(Array.from(result.geonames).map(obj => obj.toponymName))
-        })
-    }, [])
+      .then(response => response.json())
+      .then(result => {
+        setCities(Array.from(result.geonames).map(obj => obj.toponymName))
+      })
+  }, [])
 
   useEffect(() => {
     fetch(API_URL + 'api/details-hotel/' + params.id)
@@ -85,6 +85,9 @@ const UpdateHotel = () => {
   }
 
 
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, [])
 
   return (
     <div>
@@ -154,8 +157,8 @@ const UpdateHotel = () => {
           </select>
         </div>
 
-        
-        
+
+
         {/* <div className=" fw-semibold text-center ">{message ? <p className='alert alert-success'>{message}</p> : null}</div> */}
         {message && <p className='alert alert-success text-center alert-dismissible fade show' role="alert">{message}
           <button type="button" onClick={() => setMessage("")} class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

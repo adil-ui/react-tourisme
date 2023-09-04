@@ -6,7 +6,7 @@ import $ from 'jquery'
 
 import './Hotels.css'
 import axios from "axios"
-import Card from "../../components/card/Card"
+import Card from "../../components/card-hotel/Card"
 import Pagination from "../../components/Pagination/Pagination"
 
 const Hotels = () => {

@@ -1,33 +1,38 @@
-.dashboard{
+.dashboard {
     background-color: #f3f5f8;
     margin-top: 5.5rem;
-    
+
 }
-aside{
+
+aside {
     width: 300px;
-   
+    height: 700px;
 }
-.myAside{
+
+.myAside {
     width: 300px;
+    height: 650px;
 
 }
 
 
 .dash_item {
     transition: .8s;
-    font-size: 17px;
+    font-size: 16px;
 }
-.dash_menu{
+
+.dash_menu {
     transition: .5s;
-    padding: 10.5px 0;
+    padding: 8.6px 0;
     cursor: pointer;
     vertical-align: middle;
- }
-.dash_menu:hover .dash_item{
+}
+
+.dash_menu:hover .dash_item {
     color: #bb262c !important;
     padding-left: 8px;
- }
- .dash_menu:hover {
+}
+
+.dash_menu:hover {
     background-color: #f3f5f8 !important;
- }
- 
+}

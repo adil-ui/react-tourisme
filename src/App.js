@@ -12,7 +12,6 @@ import User from './pages/dashboard/users/User';
 import Hotel from './pages/dashboard/hotels/Hotel';
 import Guide from './pages/dashboard/guides/Guide';
 import Car from './pages/dashboard/cars/Car';
-import Details from './pages/details/Details';
 import Hotels from './pages/hotels/Hotels';
 import Cars from './pages/cars/Cars';
 import AuthContext from './context/auth-context';
@@ -21,6 +20,10 @@ import Info from './pages/dashboard/info/Info';
 import UpdateHotel from './pages/dashboard/hotels/UpdateHotel';
 import ForgotPassword from './pages/auth/forgot-password/ForgetPassword';
 import ResetPassword from './pages/auth/reset-password/ResetPassword';
+import DetailsHotel from './pages/details-hotel/DetailsHotel';
+import Employee from './pages/dashboard/Employee/Employee';
+import UpdateEmployee from './pages/dashboard/Employee/UpdateEmployee';
+import UpdateCar from './pages/dashboard/cars/UpdateCar';
 
 
 function App() {
@@ -44,18 +47,21 @@ function App() {
           <Route path='forgot-password' element={<ForgotPassword />} />
           <Route path='reset-password/:token' element={<ResetPassword />} />
           <Route path='sign-up' element={<Register />} />
-          <Route path='details/:id' element={<Details />} />
+          <Route path='hotel-details/:id' element={<DetailsHotel />} />
           <Route path='hotels' element={<Hotels />} />
           <Route path='agencies' element={<Cars />} />
           <Route path='/dashboard' element={<Aside />}>
             <Route path='' element={<Dashboard />} />
             <Route path='profile' element={<Profile />} />
             <Route path='users' element={<User />} />
+            <Route path='employees' element={<Employee />} />
+            <Route path='edit-employe/:id' element={<UpdateEmployee />} />
             <Route path='hotels' element={<Hotel />} />
             <Route path='edit-hotel/:id' element={<UpdateHotel />} />
             <Route path='info' element={<Info />} />
             <Route path='guides' element={<Guide />} />
             <Route path='agencies' element={<Car />} />
+            <Route path='edit-agency/:id' element={<UpdateCar />} />
           </Route>
         </Routes>
       </main>
