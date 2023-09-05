@@ -2,14 +2,13 @@ import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { API_URL } from "../../config/constants"
 
-import './Cars.css'
 import axios from "axios"
-import CardAgency from "../../components/card-agency/CardAgency"
 import Pagination from "../../components/Pagination/Pagination"
+import CardGuide from "../../components/card-guide/CardGuide"
 
-const Cars = () => {
+const Guides = () => {
 
-    const [agencies, setAgencies] = useState([]);
+    const [guides, setGuides] = useState([]);
     const [result, setResult] = useState(0);
     const [cities, setCities] = useState([]);
     const [city, setCity] = useState("");
@@ -18,7 +17,7 @@ const Cars = () => {
     const [formData, setFormData] = useState();
     const [filtered, setFiltered] = useState(false);
 
-  
+
     // useEffect(() => {
     //     fetch(API_URL + 'api/list-cities')
     //         .then(response => response.json())
@@ -56,18 +55,17 @@ const Cars = () => {
 
     // }
     useEffect(() => {
-        fetch(API_URL + "api/home-agency-per-page/1")
-            .then(response => response.json())
+        axios.get(API_URL + "api/home-guide-per-page/1")
             .then(result => {
-                setAgencies(result.agencies);
+                setGuides(result.data.guides);
             })
     }, [])
-   
+
 
     useEffect(() => {
         window.scroll(0, 0);
     }, [])
-    
+
 
     return (
         <section className="search py-5 mt-5">
@@ -97,12 +95,17 @@ const Cars = () => {
                                 <input type="number" onChange={(e) => setPriceMax(e.target.value)} className="form-control my_input" name='price' placeholder="Prix max" id="price" />
                             </div>
 
-                         
+
                             <div className='col-xl-12 col-md-6'>
                                 <h5 className="my-3 fw-semibold">Recherche par catégorie</h5>
-
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categorie" id="flexRadioDefault1"  />
+                                    <input class="form-check-input" type="radio" name="categorie" id="flexRadioDefault4" />
+                                    <label class="form-check-label" for="flexRadioDefault4">
+                                        Guides
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="categorie" id="flexRadioDefault1" />
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         Hôtels
                                     </label>
@@ -119,12 +122,7 @@ const Cars = () => {
                                         Monuments
                                     </label>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categorie" id="flexRadioDefault4" />
-                                    <label class="form-check-label" for="flexRadioDefault4">
-                                        Guides
-                                    </label>
-                                </div>
+
 
                             </div>
                         </div>
@@ -138,15 +136,15 @@ const Cars = () => {
 
                 <div className='col-9 mx-auto mt-xl-0 mt-lg-5 mt-5'>
                     <div class="row">
-                        {agencies.map(elt => <CardAgency elt={elt} key={elt.id} />)}
+                        {guides.map(elt => <CardGuide elt={elt} key={elt.id} />)}
                     </div>
-                    <Pagination
-                        setElements={setAgencies}
-                        elementName="agencies"
-                        url={"api/home-agency-per-page/"}
-                        allElementsUrl={"api/all-agency"}
-                    />
-                         
+                    {/* <Pagination
+                        setElements={setGuides}
+                        elementName="guides"
+                        url={"api/home-guide-per-page/"}
+                        allElementsUrl={"api/all-guide"}
+                    /> */}
+
                 </div>
             </div>
         </section>
@@ -154,4 +152,4 @@ const Cars = () => {
     )
 }
 
-export default Cars
+export default Guides

@@ -10,7 +10,6 @@ import Dashboard from './pages/dashboard/Dashboard';
 import Profile from './pages/dashboard/profil/Profile';
 import User from './pages/dashboard/users/User';
 import Hotel from './pages/dashboard/hotels/Hotel';
-import Guide from './pages/dashboard/guides/Guide';
 import Car from './pages/dashboard/cars/Car';
 import Hotels from './pages/hotels/Hotels';
 import Cars from './pages/cars/Cars';
@@ -22,8 +21,17 @@ import ForgotPassword from './pages/auth/forgot-password/ForgetPassword';
 import ResetPassword from './pages/auth/reset-password/ResetPassword';
 import DetailsHotel from './pages/details-hotel/DetailsHotel';
 import Employee from './pages/dashboard/Employee/Employee';
+import Guide from './pages/dashboard/guides/Guide';
 import UpdateEmployee from './pages/dashboard/Employee/UpdateEmployee';
 import UpdateCar from './pages/dashboard/cars/UpdateCar';
+import DetailsAgency from './pages/details-agency/DetailsAgency';
+import Guides from './pages/guide/Guides';
+import UpdateGuide from './pages/dashboard/guides/UpdateGuide';
+import DetailsGuide from './pages/details-guide/DetailsGuide';
+import Category from './pages/dashboard/categories/Category';
+import UpdateCategory from './pages/dashboard/categories/UpdateCategory';
+import UpdateInfo from './pages/dashboard/info/UpdateInfo';
+import Infos from './pages/pratical-info/Infos';
 
 
 function App() {
@@ -48,8 +56,12 @@ function App() {
           <Route path='reset-password/:token' element={<ResetPassword />} />
           <Route path='sign-up' element={<Register />} />
           <Route path='hotel-details/:id' element={<DetailsHotel />} />
+          <Route path='agency-details/:id' element={<DetailsAgency/>} />
+          <Route path='guide-details/:id' element={<DetailsGuide/>} />
           <Route path='hotels' element={<Hotels />} />
+          <Route path='practical-info' element={<Infos />} />
           <Route path='agencies' element={<Cars />} />
+          <Route path='guides' element={<Guides />} />
           <Route path='/dashboard' element={<Aside />}>
             <Route path='' element={<Dashboard />} />
             <Route path='profile' element={<Profile />} />
@@ -58,8 +70,12 @@ function App() {
             <Route path='edit-employe/:id' element={<UpdateEmployee />} />
             <Route path='hotels' element={<Hotel />} />
             <Route path='edit-hotel/:id' element={<UpdateHotel />} />
-            <Route path='info' element={<Info />} />
+            <Route path='categories' element={<Category />} />
+            <Route path='edit-category/:id' element={<UpdateCategory />} />
+            <Route path='informations' element={<Info />} />
+            <Route path='edit-information/:id' element={<UpdateInfo />} />
             <Route path='guides' element={<Guide />} />
+            <Route path='edit-guide/:id' element={<UpdateGuide />} />
             <Route path='agencies' element={<Car />} />
             <Route path='edit-agency/:id' element={<UpdateCar />} />
           </Route>

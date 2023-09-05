@@ -2,14 +2,15 @@ import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { API_URL } from "../../config/constants"
 
-import './Cars.css'
 import axios from "axios"
-import CardAgency from "../../components/card-agency/CardAgency"
 import Pagination from "../../components/Pagination/Pagination"
+import CardInfo from "../../components/card-info/CardInfo"
 
-const Cars = () => {
+const Infos = () => {
 
-    const [agencies, setAgencies] = useState([]);
+    const [informations, setInformations] = useState([]);
+    const [categories, setCategories] = useState([])
+    const [category, setCategory] = useState();
     const [result, setResult] = useState(0);
     const [cities, setCities] = useState([]);
     const [city, setCity] = useState("");
@@ -18,7 +19,7 @@ const Cars = () => {
     const [formData, setFormData] = useState();
     const [filtered, setFiltered] = useState(false);
 
-  
+
     // useEffect(() => {
     //     fetch(API_URL + 'api/list-cities')
     //         .then(response => response.json())
@@ -56,18 +57,26 @@ const Cars = () => {
 
     // }
     useEffect(() => {
-        fetch(API_URL + "api/home-agency-per-page/1")
-            .then(response => response.json())
+        axios.get(API_URL + "api/home-information-per-page/1")
             .then(result => {
-                setAgencies(result.agencies);
+                setInformations(result.data.informations);
             })
     }, [])
-   
+    useEffect(() => {
+        axios.get(API_URL + "api/all-category")
+            .then(result => {
+                setCategories(result.data.categories);
+                console.log(result.data);
+            })
+    }, [])
+    const handleCategoryChange = (event) => {
+        setCategory(event.target.value);
+    };
 
     useEffect(() => {
         window.scroll(0, 0);
     }, [])
-    
+
 
     return (
         <section className="search py-5 mt-5">
@@ -81,14 +90,14 @@ const Cars = () => {
                         </div>
                         <div className="form_search row px-2 w-100 mx-auto">
 
-                            <div className="col-xl-12 col-lg-4 col-md-12 col-sm-12 col-12">
-                                <select className="form-select py-2" id="ville" onChange={(e) => setCity(e.target.value)}>
-                                    <option selected disabled>Ville</option>
-                                    {cities.map(city => (
-                                        <option value={city.id}>{city.name}</option>
-                                    ))}
-                                </select>
-                            </div>
+                        <div className="col-md-12 mt-2">
+                                    <select id='category' className='form-select py-2' onChange={handleCategoryChange} >
+                                        <option value="" disabled selected>Sélectionnez un type</option>
+                                        {categories?.map(elt => (
+                                            <option value={elt.id}>{elt.name}</option>
+                                        ))}
+                                    </select>
+                                </div>
 
                             <div className="col-xl-6 col-lg-4 col-sm-6 col-12">
                                 <input type="number" onChange={(e) => setPriceMin(e.target.value)} className="form-control my_input" name='price' placeholder="Prix min" id="price" />
@@ -97,12 +106,17 @@ const Cars = () => {
                                 <input type="number" onChange={(e) => setPriceMax(e.target.value)} className="form-control my_input" name='price' placeholder="Prix max" id="price" />
                             </div>
 
-                         
+
                             <div className='col-xl-12 col-md-6'>
                                 <h5 className="my-3 fw-semibold">Recherche par catégorie</h5>
-
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categorie" id="flexRadioDefault1"  />
+                                    <input class="form-check-input" type="radio" name="categorie" id="flexRadioDefault4" checked/>
+                                    <label class="form-check-label" for="flexRadioDefault4" >
+                                        informations
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="categorie" id="flexRadioDefault1" />
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         Hôtels
                                     </label>
@@ -119,12 +133,7 @@ const Cars = () => {
                                         Monuments
                                     </label>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categorie" id="flexRadioDefault4" />
-                                    <label class="form-check-label" for="flexRadioDefault4">
-                                        Guides
-                                    </label>
-                                </div>
+
 
                             </div>
                         </div>
@@ -138,15 +147,15 @@ const Cars = () => {
 
                 <div className='col-9 mx-auto mt-xl-0 mt-lg-5 mt-5'>
                     <div class="row">
-                        {agencies.map(elt => <CardAgency elt={elt} key={elt.id} />)}
+                        {informations.map(elt => <CardInfo elt={elt} key={elt.id} />)}
                     </div>
-                    <Pagination
-                        setElements={setAgencies}
-                        elementName="agencies"
-                        url={"api/home-agency-per-page/"}
-                        allElementsUrl={"api/all-agency"}
-                    />
-                         
+                    {/* <Pagination
+                        setElements={setInformations}
+                        elementName="informations"
+                        url={"api/home-information-per-page/"}
+                        allElementsUrl={"api/all-information"}
+                    /> */}
+
                 </div>
             </div>
         </section>
@@ -154,4 +163,4 @@ const Cars = () => {
     )
 }
 
-export default Cars
+export default Infos

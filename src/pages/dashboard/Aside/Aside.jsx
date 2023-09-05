@@ -68,7 +68,7 @@ const Aside = () => {
                                     <Link to="/dashboard/categories" className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i class="bi bi-tags-fill mx-2 fontSize22 pe-3 text-danger"></i>Catégories</Link>
                                 </div>
                                 <div className='dash_menu' >
-                                    <Link to="/dashboard/info" className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i class="fa-solid fa-circle-info mx-2 fontSize22 pe-3 text-danger"></i>Informations</Link>
+                                    <Link to="/dashboard/informations" className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i class="fa-solid fa-circle-info mx-2 fontSize22 pe-3 text-danger"></i>Informations</Link>
                                 </div>
                                 {/* <div className='dash_menu' >
                                     <Link to="/dashboard/bookmarks" className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i class="fa-solid fa-heart mx-2 fontSize22 pe-3 text-danger"></i>Favoris</Link>

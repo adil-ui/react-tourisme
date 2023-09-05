@@ -30,7 +30,7 @@ const Navbar = () => {
                             <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='guides' >Tourist guide</NavLink>
                         </li>
                         <li className='nav-item me-3 align-middle mt-lg-3' >
-                            <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='info' >Practical info</NavLink>
+                            <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='practical-info' >Practical info</NavLink>
                         </li>
                         
                         {user ?

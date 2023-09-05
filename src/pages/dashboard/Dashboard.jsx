@@ -92,8 +92,8 @@ const Dashboard = () => {
                 <div class="col-xxl-4 col-md-6 col-10 mb-5 mx-lg-0 mx-auto dash_card">
                     <div className='shadow-sm bg-white border-start border-5 d-flex align-items-center border-warning border-opacity-50 row px-4 py-3 rounded-4 mx-lg-0 mx-md-auto'>
                         <div className='col-6'>
-                            <p className='fw-semibold fs-4'>{nbrInfo}</p>
-                            {nbrInfo > 1 ? <p className='fw-semibold fs-5'>Catégories</p> :
+                            <p className='fw-semibold fs-4'>{nbrCategory}</p>
+                            {nbrCategory > 1 ? <p className='fw-semibold fs-5'>Catégories</p> :
                                 <p className='fw-semibold fs-5'>Catégorie</p>
                             }
 

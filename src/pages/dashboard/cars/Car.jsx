@@ -5,7 +5,7 @@ import { API_URL } from "../../../config/constants"
 
 import { Link } from "react-router-dom";
 
-const Hotel = () => {
+const Car = () => {
     const [agencies, setAgencies] = useState([])
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
@@ -214,9 +214,9 @@ const Hotel = () => {
                             agencies.map(elt => (
                                 <tr>
                                     <th scope="row" className="align-middle">{elt.id}</th>
-                                    <td><img src={API_URL + elt.picture} className="rounded-circle" alt="hotel_picture" width='45px ' /></td>
+                                    <td className="align-middle"><img src={API_URL + elt.picture} className="rounded-circle align-middle" alt="hotel_picture" width='45px ' /></td>
                                     <td className="align-middle">{elt.name}</td>
-                                    <td className="align-middle">{elt.price}</td>
+                                    <td className="align-middle">{elt.price} Dh</td>
                                     <td className="align-middle">{elt.city?.name}</td>
                                     <td className="align-middle">{elt.phone}</td>
                                     <td className="align-middle">
@@ -246,4 +246,4 @@ const Hotel = () => {
     )
 }
 
-export default Hotel
+export default Car
