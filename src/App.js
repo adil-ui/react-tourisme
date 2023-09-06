@@ -32,6 +32,7 @@ import Category from './pages/dashboard/categories/Category';
 import UpdateCategory from './pages/dashboard/categories/UpdateCategory';
 import UpdateInfo from './pages/dashboard/info/UpdateInfo';
 import Infos from './pages/pratical-info/Infos';
+import Bookmarks from './pages/dashboard/bookmarks/Bookmarks';
 
 
 function App() {
@@ -78,6 +79,8 @@ function App() {
             <Route path='edit-guide/:id' element={<UpdateGuide />} />
             <Route path='agencies' element={<Car />} />
             <Route path='edit-agency/:id' element={<UpdateCar />} />
+            <Route path='bookmarks' element={<Bookmarks />} />
+
           </Route>
         </Routes>
       </main>

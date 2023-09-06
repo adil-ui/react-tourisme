@@ -70,11 +70,11 @@ const Aside = () => {
                                 <div className='dash_menu' >
                                     <Link to="/dashboard/informations" className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i class="fa-solid fa-circle-info mx-2 fontSize22 pe-3 text-danger"></i>Informations</Link>
                                 </div>
-                                {/* <div className='dash_menu' >
-                                    <Link to="/dashboard/bookmarks" className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i class="fa-solid fa-heart mx-2 fontSize22 pe-3 text-danger"></i>Favoris</Link>
-                                </div> */}
                                 <div className='dash_menu' >
-                                    <Link onClick={logout} className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa-solid fa-right-from-bracket text-danger"></i>Déconnexion</Link>
+                                    <Link to="/dashboard/bookmarks" className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i class="fa-solid fa-heart mx-2 fontSize22 pe-3 text-danger"></i>Bookmarks</Link>
+                                </div>
+                                <div className='dash_menu' >
+                                    <Link onClick={logout} className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa-solid fa-right-from-bracket text-danger"></i>Logout</Link>
                                 </div>
                             </div>
                         {/* {userRole === 'Admin'?

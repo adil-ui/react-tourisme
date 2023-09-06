@@ -27,10 +27,10 @@ const Navbar = () => {
                         </li>
                        
                         <li className='nav-item me-3 align-middle mt-lg-3' >
-                            <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='guides' >Tourist guide</NavLink>
+                            <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='guides' >Tourist guides</NavLink>
                         </li>
                         <li className='nav-item me-3 align-middle mt-lg-3' >
-                            <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='practical-info' >Practical info</NavLink>
+                            <NavLink className=" fontSize17 nav-link navLink primaryColor  " to='practical-info' >Practical infos</NavLink>
                         </li>
                         
                         {user ?

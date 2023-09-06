@@ -1,18 +1,67 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import './Card.css'
 import { API_URL } from '../../config/constants'
 import $ from 'jquery'
-const book = (id) =>{
+import axios from 'axios'
+import AuthContext from '../../context/auth-context'
 
-        $(`#book_${id}`).css("display", "none");
-        $(`#bookk_${id}`).css("display", "block");
-
-}
 
 const Card = ({ elt }) => {
     const stars = [];
+    const {user} = useContext(AuthContext)
+    const [picture, setPicture] = useState(API_URL + elt?.picture)
+    const [name, setName] = useState(elt?.name)
+    useEffect(() => {
+        axios.get(API_URL + 'api/test-bookmark/' + name)
+            .then(response => {
+                console.log(response.data);
+                if (response.data.message === 'true') {
+                    $(`#book_${elt?.id}`).css("display", "none");
+                    $(`#bookk_${elt?.id}`).css("display", "flex");
+                } else {
+                    $(`#book_${elt?.id}`).css("display", "flex");
+                    $(`#bookk_${elt?.id}`).css("display", "none");
+                }
 
+            })
+    }, [])
+
+    const submit = () => {
+        console.log(picture);
+        const formData = new FormData();
+        formData.append("name", elt?.name);
+        formData.append("address", elt?.address);
+        formData.append("picture", picture);
+        formData.append("phone", elt?.phone);
+        formData.append("email", elt?.email);
+        formData.append("description", elt?.description);
+        formData.append("longitude", elt?.longitude);
+        formData.append("latitude", elt?.latitude);
+        formData.append("link", elt?.link);
+        formData.append("price", elt?.price);
+        formData.append("star", elt?.star);
+        formData.append("city", elt.city?.name);
+        try {
+            axios.post(API_URL + 'api/add-bookmark/' + user?.id, formData)
+                .then(response => {
+                    console.log(response.data);
+                    $(`#book_${elt?.id}`).css("display", "none");
+                    $(`#bookk_${elt?.id}`).css("display", "flex");
+                })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    const deleteBookmark = (id) => {
+        axios.delete(API_URL + 'api/delete-bookmark/' + id)
+            .then(response => {
+                console.log(response);
+                $(`#book_${elt?.id}`).css("display", "flex");
+                $(`#bookk_${elt?.id}`).css("display", "none");
+            });
+
+    }
     for (let i = 0; i < elt.star; i++) {
         stars.push(<i key={i} className="bi bi-star-fill"></i>);
     }
@@ -20,12 +69,10 @@ const Card = ({ elt }) => {
     return (
         <article className="col-xxl-3 col-lg-4 col-md-6 col-sm-9 col-10 mb-4 mx-auto card_container " >
             <div className="card border-0">
-                <div className='card_img position-relative'>
-                    <NavLink to={`/hotel-details/${elt.id}`}><img src={API_URL + elt.picture} alt="user_image" className="" /></NavLink>
-                    <div class="bookmarkIcon" onClick={() => book(elt?.id)}>
-                        <div id={`book_${elt?.id}`} ><i class="fa-regular fa-bookmark "></i></div>
-                        <div className='book' id={`bookk_${elt?.id}`} ><i class="fa-solid fa-bookmark "></i></div>
-                    </div>
+            <div className='card_img position-relative'>
+                    <NavLink to={`/agency-details/${elt.id}`}><img src={API_URL + elt?.picture} alt="user_image" className="" /></NavLink>
+                    <div className='bookmarkIcon' id={`book_${elt?.id}`} onClick={() => submit()}><i class="fa-regular fa-bookmark "></i></div>
+                    <div className='bookmarkIcon book' id={`bookk_${elt?.id}`} onClick={() => deleteBookmark(elt?.name)}><i class="fa-solid fa-bookmark "></i></div>
                 </div>
                 <div className="pt-3 px-2">
                     <Link to={`/hotel-details/${elt.id}`} className='text-decoration-none '><h5 className="fw-semibold primaryColor">{elt.name}</h5></Link>
