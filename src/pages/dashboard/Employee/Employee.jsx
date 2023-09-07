@@ -48,7 +48,7 @@ const Employee = () => {
     const searchData = (e) => {
         e.preventDefault();
 
-        axios.post(API_URL + "api/search/1", { search, searchValue })
+        axios.post(API_URL + "api/search-employe/1", { search, searchValue })
             .then(response => {
                 console.log(response.data)
                 setEmployes(response.data.employes)

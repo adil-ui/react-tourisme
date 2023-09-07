@@ -20,12 +20,14 @@ const Hotels = () => {
     const [cities, setCities] = useState([]);
     const [formData, setFormData] = useState();
     const [filtered, setFiltered] = useState(false);
+    const [loader, setLoader] = useState(false);
 
+    
     useEffect(() => {
         fetch(API_URL + 'api/get-cities')
             .then(response => response.json())
             .then(result => {
-                setCities(result.cities);
+                setCities(result?.cities);
             })
     }, [])
 
@@ -33,13 +35,18 @@ const Hotels = () => {
         window.scroll(0, 0);
     }, [])
     useEffect(() => {
+        setLoader(true)
         fetch(API_URL + "api/home-hotel-per-page/1")
             .then(response => response.json())
             .then(result => {
-                setHotels(result.hotels);
+                setHotels(result?.hotels);
+                setLoader(false)
             })
+        return
+
     }, [])
     const filter = async (e) => {
+        setLoader(true)
         e.preventDefault();
         setFiltered(true);
         const formData = new FormData();
@@ -50,14 +57,15 @@ const Hotels = () => {
         setFormData(formData);
         try {
             const response = await axios.post(API_URL + 'api/filter-hotels', formData)
-            setHotels(response.data.hotels)
+            setHotels(response.data?.hotels)
             window.scroll(0, 0);
-            console.log(response.data);
+            setLoader(false)
+
 
         } catch (error) {
             console.log(error);
         }
-
+        return
     }
     return (
         <section className="search py-5 mt-5">
@@ -74,8 +82,8 @@ const Hotels = () => {
                             <div className="col-xl-12 col-lg-4 col-md-12 col-sm-12 col-12">
                                 <select className="form-select py-2" id="ville" onChange={(e) => setCity(e.target.value)}>
                                     <option selected disabled>City</option>
-                                    {cities.map(city => (
-                                        <option value={city.id}>{city.name}</option>
+                                    {cities?.map(city => (
+                                        <option value={city?.id}>{city?.name}</option>
                                     ))}
                                 </select>
                             </div>
@@ -169,12 +177,17 @@ const Hotels = () => {
                 <div className='col-9 mx-auto mt-xl-0 mt-lg-5 mt-5'>
                     <div class="row gx-3">
 
-                        {hotels.length > 0 ?
-                            hotels?.map(elt => <Card elt={elt} key={elt.id} />)
-                            :
-                            <div className="shadow-sm bg-white rounded-3">
-                                <p className="text-center py-5 mt-4 fs-5 fw-semibold">No Results Found</p>
+                        {loader ?
+                            <div className="d-flex justify-content-center align-items-center py-5 my-5">
+                                <div className="loader shadow-sm"></div>
                             </div>
+                            :
+                            hotels.length > 0 ?
+                                hotels?.map(elt => <Card elt={elt} key={elt?.id} />)
+                                :
+                                <div className="shadow-sm bg-white rounded-3">
+                                    <p className="text-center py-5 mt-4 fs-5 fw-semibold">No Results Found</p>
+                                </div>
                         }
                     </div>
                     {filtered && hotels.length > 8 && <PaginationFilter

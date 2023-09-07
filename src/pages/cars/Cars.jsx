@@ -10,22 +10,23 @@ import Pagination from "../../components/Pagination/Pagination"
 const Cars = () => {
 
     const [agencies, setAgencies] = useState([]);
-    const [result, setResult] = useState(0);
     const [cities, setCities] = useState([]);
     const [city, setCity] = useState("");
     const [priceMax, setPriceMax] = useState("");
     const [priceMin, setPriceMin] = useState("");
     const [formData, setFormData] = useState();
     const [filtered, setFiltered] = useState(false);
+    const [loader, setLoader] = useState(false);
 
-  
-    // useEffect(() => {
-    //     fetch(API_URL + 'api/list-cities')
-    //         .then(response => response.json())
-    //         .then(result => {
-    //             setCities(result.cities);
-    //         })
-    // }, [])
+
+
+    useEffect(() => {
+        fetch(API_URL + 'api/get-cities')
+            .then(response => response.json())
+            .then(result => {
+                setCities(result.cities);
+            })
+    }, [])
 
     // const filter = async (e) => {
     //     e.preventDefault();
@@ -56,18 +57,19 @@ const Cars = () => {
 
     // }
     useEffect(() => {
+        setLoader(true)
         fetch(API_URL + "api/home-agency-per-page/1")
             .then(response => response.json())
             .then(result => {
                 setAgencies(result.agencies);
-            })
-    }, [])
-   
+                setLoader(false)
 
+            })
+        return
+    }, [])
     useEffect(() => {
         window.scroll(0, 0);
     }, [])
-    
 
     return (
         <section className="search py-5 mt-5">
@@ -97,12 +99,12 @@ const Cars = () => {
                                 <input type="number" onChange={(e) => setPriceMax(e.target.value)} className="form-control my_input" name='price' placeholder="Prix max" id="price" />
                             </div>
 
-                         
+
                             <div className='col-xl-12 col-md-6'>
                                 <h5 className="my-3 fw-semibold">Recherche par catégorie</h5>
 
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categorie" id="flexRadioDefault1"  />
+                                    <input class="form-check-input" type="radio" name="categorie" id="flexRadioDefault1" />
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         Hôtels
                                     </label>
@@ -138,7 +140,18 @@ const Cars = () => {
 
                 <div className='col-9 mx-auto mt-xl-0 mt-lg-5 mt-5'>
                     <div class="row">
-                        {agencies.map(elt => <CardAgency elt={elt} key={elt.id} />)}
+                        {loader ?
+                            <div className="d-flex justify-content-center align-items-center py-5 my-5">
+                                <div className="loader shadow-sm"></div>
+                            </div>
+                            :
+                            agencies.length > 0 ?
+                                agencies?.map(elt => <CardAgency elt={elt} key={elt.id} />)
+                                :
+                                <div className="shadow-sm bg-white rounded-3">
+                                    <p className="text-center py-5 mt-4 fs-5 fw-semibold">No Results Found</p>
+                                </div>
+                        }
                     </div>
                     <Pagination
                         setElements={setAgencies}
@@ -146,7 +159,7 @@ const Cars = () => {
                         url={"api/home-agency-per-page/"}
                         allElementsUrl={"api/all-agency"}
                     />
-                         
+
                 </div>
             </div>
         </section>

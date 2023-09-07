@@ -1,54 +1,45 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { API_URL } from '../../config/constants'
 import $ from 'jquery'
 import axios from 'axios'
 import AuthContext from '../../context/auth-context'
+import { throttle } from 'lodash'
 
 const CardAgency = ({ elt }) => {
-    const {user} = useContext(AuthContext)
-    const [picture, setPicture] = useState(API_URL + elt?.picture)
-    const [name, setName] = useState(elt?.name)
-    useEffect(() => {
-        axios.get(API_URL + 'api/test-bookmark/' + name)
-            .then(response => {
-                console.log(response.data);
-                if (response.data.message === 'true') {
-                    $(`#book_${elt?.id}`).css("display", "none");
-                    $(`#bookk_${elt?.id}`).css("display", "flex");
-                } else {
-                    $(`#book_${elt?.id}`).css("display", "flex");
-                    $(`#bookk_${elt?.id}`).css("display", "none");
-                }
-
-            })
-    }, [])
+    const { user } = useContext(AuthContext)
+    const picture = useState(elt?.picture)
+    const navigate = useNavigate();
 
     const submit = () => {
-        console.log(picture);
-        const formData = new FormData();
-        formData.append("name", elt?.name);
-        formData.append("address", elt?.address);
-        formData.append("picture", picture);
-        formData.append("phone", elt?.phone);
-        formData.append("email", elt?.email);
-        formData.append("description", elt?.description);
-        formData.append("longitude", elt?.longitude);
-        formData.append("latitude", elt?.latitude);
-        formData.append("link", elt?.link);
-        formData.append("price", elt?.price);
-        formData.append("city", elt.city?.name);
-        try {
-            axios.post(API_URL + 'api/add-bookmark/' + user?.id, formData)
-                .then(response => {
-                    console.log(response.data);
-                    $(`#book_${elt?.id}`).css("display", "none");
-                    $(`#bookk_${elt?.id}`).css("display", "flex");
-                })
-        } catch (error) {
-            console.log(error);
+        if (!user) {
+            navigate('/login')
+        } else {
+            const formData = new FormData();
+            formData.append("name", elt?.name);
+            formData.append("address", elt?.address);
+            formData.append("picture", picture);
+            formData.append("phone", elt?.phone);
+            formData.append("email", elt?.email);
+            formData.append("description", elt?.description);
+            formData.append("longitude", elt?.longitude);
+            formData.append("latitude", elt?.latitude);
+            formData.append("link", elt?.link);
+            formData.append("price", elt?.price);
+            formData.append("city", elt.city?.name);
+            try {
+                axios.post(API_URL + 'api/add-bookmark/' + user?.id, formData)
+                    .then(response => {
+                        console.log(response.data);
+                        $(`#book_${elt?.id}`).css("display", "none");
+                        $(`#bookk_${elt?.id}`).css("display", "flex");
+                    })
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
+
     const deleteBookmark = (id) => {
         axios.delete(API_URL + 'api/delete-bookmark/' + id)
             .then(response => {
@@ -58,6 +49,7 @@ const CardAgency = ({ elt }) => {
             });
 
     }
+
     return (
         <article className="col-xxl-3 col-lg-4 col-md-6 col-sm-9 col-10 mb-4 mx-auto card_container " >
             <div className="card border-0">

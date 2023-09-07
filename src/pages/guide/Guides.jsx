@@ -12,11 +12,9 @@ const Guides = () => {
     const [result, setResult] = useState(0);
     const [cities, setCities] = useState([]);
     const [city, setCity] = useState("");
-    const [priceMax, setPriceMax] = useState("");
-    const [priceMin, setPriceMin] = useState("");
     const [formData, setFormData] = useState();
     const [filtered, setFiltered] = useState(false);
-
+    const [loader, setLoader] = useState(false);
 
     // useEffect(() => {
     //     fetch(API_URL + 'api/list-cities')
@@ -31,17 +29,7 @@ const Guides = () => {
     //     setFiltered(true);
     //     const formData = new FormData();
     //     formData.append('city', city);
-    //     formData.append('sector', sector);
-    //     formData.append('category', category);
-    //     formData.append('type', type);
-    //     formData.append('livingRoom', livingRoom);
-    //     formData.append('bedroom', bedroom);
-    //     formData.append('bathroom', bathroom);
-    //     formData.append('floor', floor);
-    //     formData.append('areaMin', areaMin);
-    //     formData.append('areaMax', areaMax);
-    //     formData.append('priceMin', priceMin);
-    //     formData.append('priceMax', priceMax);
+    // 
     //     setFormData(formData);
     //     try {
     //         const response = await axios.post(API_URL + 'api/filter-properties', formData)
@@ -55,9 +43,11 @@ const Guides = () => {
 
     // }
     useEffect(() => {
+        setLoader(true)
         axios.get(API_URL + "api/home-guide-per-page/1")
             .then(result => {
                 setGuides(result.data.guides);
+                setLoader(false)
             })
     }, [])
 
@@ -87,14 +77,6 @@ const Guides = () => {
                                     ))}
                                 </select>
                             </div>
-
-                            <div className="col-xl-6 col-lg-4 col-sm-6 col-12">
-                                <input type="number" onChange={(e) => setPriceMin(e.target.value)} className="form-control my_input" name='price' placeholder="Prix min" id="price" />
-                            </div>
-                            <div className="col-xl-6 col-lg-4  col-sm-6 col-12">
-                                <input type="number" onChange={(e) => setPriceMax(e.target.value)} className="form-control my_input" name='price' placeholder="Prix max" id="price" />
-                            </div>
-
 
                             <div className='col-xl-12 col-md-6'>
                                 <h5 className="my-3 fw-semibold">Recherche par catégorie</h5>
@@ -136,7 +118,12 @@ const Guides = () => {
 
                 <div className='col-9 mx-auto mt-xl-0 mt-lg-5 mt-5'>
                     <div class="row">
-                        {guides.map(elt => <CardGuide elt={elt} key={elt.id} />)}
+                        {loader ?
+                            <div className="d-flex justify-content-center align-items-center py-5 my-5">
+                                <div className="loader shadow-sm"></div>
+                            </div>
+                            :
+                            guides.map(elt => <CardGuide elt={elt} key={elt.id} />)}
                     </div>
                     {/* <Pagination
                         setElements={setGuides}

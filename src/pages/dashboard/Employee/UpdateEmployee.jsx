@@ -56,7 +56,6 @@ const UpdateEmployee = () => {
   return (
     <div className="mx-auto  pt-4 pb-5 mt-2" >
       <form className="row px-5 mx-auto bg-transparent pb-5" onSubmit={submit} encType="multipart/form-data">
-        <h4 className="fw-semibold mb-4">Mes informations</h4>
         <div className="col-md-6 mt-4">
           <label className="form-label fw-semibold">Nom complet</label>
           <input type="text" className="form-control py-2" name='name' value={name} onChange={(e) => setName(e.target.value)} required />

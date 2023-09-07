@@ -11,15 +11,9 @@ const Infos = () => {
     const [informations, setInformations] = useState([]);
     const [categories, setCategories] = useState([])
     const [category, setCategory] = useState();
-    const [result, setResult] = useState(0);
-    const [cities, setCities] = useState([]);
-    const [city, setCity] = useState("");
-    const [priceMax, setPriceMax] = useState("");
-    const [priceMin, setPriceMin] = useState("");
     const [formData, setFormData] = useState();
     const [filtered, setFiltered] = useState(false);
-
-
+    const [loader, setLoader] = useState(false);
     // useEffect(() => {
     //     fetch(API_URL + 'api/list-cities')
     //         .then(response => response.json())
@@ -57,9 +51,12 @@ const Infos = () => {
 
     // }
     useEffect(() => {
+        setLoader(true)
         axios.get(API_URL + "api/home-information-per-page/1")
             .then(result => {
                 setInformations(result.data.informations);
+                setLoader(false)
+
             })
     }, [])
     useEffect(() => {
@@ -90,27 +87,18 @@ const Infos = () => {
                         </div>
                         <div className="form_search row px-2 w-100 mx-auto">
 
-                        <div className="col-md-12 mt-2">
-                                    <select id='category' className='form-select py-2' onChange={handleCategoryChange} >
-                                        <option value="" disabled selected>Sélectionnez un type</option>
-                                        {categories?.map(elt => (
-                                            <option value={elt.id}>{elt.name}</option>
-                                        ))}
-                                    </select>
-                                </div>
-
-                            <div className="col-xl-6 col-lg-4 col-sm-6 col-12">
-                                <input type="number" onChange={(e) => setPriceMin(e.target.value)} className="form-control my_input" name='price' placeholder="Prix min" id="price" />
+                            <div className="col-md-12 mt-2">
+                                <select id='category' className='form-select py-2' onChange={handleCategoryChange} >
+                                    <option value="" disabled selected>Sélectionnez un type</option>
+                                    {categories?.map(elt => (
+                                        <option value={elt.id}>{elt.name}</option>
+                                    ))}
+                                </select>
                             </div>
-                            <div className="col-xl-6 col-lg-4  col-sm-6 col-12">
-                                <input type="number" onChange={(e) => setPriceMax(e.target.value)} className="form-control my_input" name='price' placeholder="Prix max" id="price" />
-                            </div>
-
-
                             <div className='col-xl-12 col-md-6'>
                                 <h5 className="my-3 fw-semibold">Recherche par catégorie</h5>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categorie" id="flexRadioDefault4" checked/>
+                                    <input class="form-check-input" type="radio" name="categorie" id="flexRadioDefault4" checked />
                                     <label class="form-check-label" for="flexRadioDefault4" >
                                         informations
                                     </label>
@@ -147,7 +135,12 @@ const Infos = () => {
 
                 <div className='col-9 mx-auto mt-xl-0 mt-lg-5 mt-5'>
                     <div class="row">
-                        {informations.map(elt => <CardInfo elt={elt} key={elt.id} />)}
+                        {loader ?
+                            <div className="d-flex justify-content-center align-items-center py-5 my-5">
+                                <div className="loader shadow-sm"></div>
+                            </div>
+                            :
+                            informations.map(elt => <CardInfo elt={elt} key={elt.id} />)}
                     </div>
                     {/* <Pagination
                         setElements={setInformations}
