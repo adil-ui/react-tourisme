@@ -34,10 +34,10 @@ const Hero = () => {
             <img src="public/assets/slide-2.jpg" className="d-block slide_img w-100" alt="..." />
           </div>
           <div className="carousel-item position-relative  " data-bs-interval="2000">
-            <img src="public/assets/slide-2.jpg" className="d-block slide_img w-100" alt="..." />
+            <img src="public/assets/back.jpg" className="d-block slide_img w-100" alt="..." />
           </div>
           <div className="carousel-item position-relative" data-bs-interval="5000">
-            <img src="public/assets/slide-2.jpg" className="d-block slide_img w-100" alt="..." />
+            <img src="public/assets/slide-4.jpg" className="d-block slide_img w-100" alt="..." />
           </div>
         </div>
 
