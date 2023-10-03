@@ -1,5 +1,6 @@
 {
   "name": "react-tourguide",
+  "homepage": "https://adil-ui.github.io/guide-morocco",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
