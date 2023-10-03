@@ -84,13 +84,15 @@ const Hotel = () => {
             )
     }
     useEffect(() => {
-      const res =  axios.get('http://api.geonames.org/searchJSON?country=MA&maxRows=1000&username=ethisko')
-                if (Array.isArray(res?.data.geonames)) {
-                    setCities(res?.data.geonames.map(obj => obj.toponymName))
+        fetch('http://api.geonames.org/searchJSON?country=MA&maxRows=1000&username=ethisko')
+            .then(response => response.json())
+            .then(result => {
+                if (Array.isArray(result.geonames)) {
+                    setCities(result.geonames.map(obj => obj.toponymName))
                 } else {
-                    console.error("geonames is not an array:", res?.data.geonames);
+                    console.error("geonames is not an array:", result.geonames);
                 }
-           
+            })
     }, []);
 
     useEffect(() => {
