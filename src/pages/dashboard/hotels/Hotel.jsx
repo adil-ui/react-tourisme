@@ -99,6 +99,7 @@ const Hotel = () => {
             .then(response => response.json())
             .then(result => {
                 setCities(result?.cities);
+                console.log(result?.cities);
             })
     }, [])
 
