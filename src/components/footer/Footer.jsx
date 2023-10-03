@@ -8,7 +8,7 @@ const Footer = () => {
 			<section className="container">
 				<div className="row mt-5">
 					<div className="col-md-6 col-lg-3 mb-4 mb-md-0 ">
-						<Link to="/" ><img src="/assets/logo.png" alt="logo" width="200px" /></Link>
+						<Link to="/" ><img src="assets/logo.png" alt="logo" width="200px" /></Link>
 						<p className="mt-4 pe-3 ">Explore the wonders of Morocco with our tour guide. From imperial cities to spectacular deserts, immerse yourself in the cultural richness and natural beauty of this enchanting country.</p>
 						<div>
 							<h6 className='text-red fw-semibold fontSize18'>Follow us on : </h6>
