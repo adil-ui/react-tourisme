@@ -162,11 +162,7 @@ const Hotel = () => {
                                 <div className="col-md-6 mt-2">
                                     <label for="city" className="form-label m-0 fw-semibold">Ville</label>
                                     <select id='city' className='form-select py-2' onChange={handleCityChange} >
-                                        {city &&
-                                            <option value={city}>{city}</option>
-                                        }
-                                        <option value="">Sélectionnez une ville</option>
-
+                                        <option  selected disabled>Sélectionnez une ville</option>
                                         {cities?.map(city => (
                                             <option key={city?.id} value={city?.name}>{city?.name}</option>
                                         ))}
