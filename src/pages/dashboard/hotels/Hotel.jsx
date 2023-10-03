@@ -83,17 +83,24 @@ const Hotel = () => {
                 console.log(error)
             )
     }
+    // useEffect(() => {
+    //     fetch('http://api.geonames.org/searchJSON?country=MA&maxRows=1000&username=ethisko')
+    //         .then(response => response.json())
+    //         .then(result => {
+    //             if (Array.isArray(result.geonames)) {
+    //                 setCities(result.geonames.map(obj => obj.toponymName))
+    //             } else {
+    //                 console.error("geonames is not an array:", result.geonames);
+    //             }
+    //         })
+    // }, []);
     useEffect(() => {
-        fetch('http://api.geonames.org/searchJSON?country=MA&maxRows=1000&username=ethisko')
+        fetch(API_URL + 'api/get-cities')
             .then(response => response.json())
             .then(result => {
-                if (Array.isArray(result.geonames)) {
-                    setCities(result.geonames.map(obj => obj.toponymName))
-                } else {
-                    console.error("geonames is not an array:", result.geonames);
-                }
+                setCities(result?.cities);
             })
-    }, []);
+    }, [])
 
     useEffect(() => {
         window.scroll(0, 0);
