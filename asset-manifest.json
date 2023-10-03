@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/guide-morocco/static/css/main.b1db1ddd.css",
-    "main.js": "/guide-morocco/static/js/main.a74dce09.js",
-    "static/js/787.4813b240.chunk.js": "/guide-morocco/static/js/787.4813b240.chunk.js",
-    "static/media/footer-back.jpg": "/guide-morocco/static/media/footer-back.d2b5cae841315fdbe28f.jpg",
-    "index.html": "/guide-morocco/index.html",
-    "main.b1db1ddd.css.map": "/guide-morocco/static/css/main.b1db1ddd.css.map",
-    "main.a74dce09.js.map": "/guide-morocco/static/js/main.a74dce09.js.map",
-    "787.4813b240.chunk.js.map": "/guide-morocco/static/js/787.4813b240.chunk.js.map"
+    "main.css": "/react-tourisme/static/css/main.1bd0388d.css",
+    "main.js": "/react-tourisme/static/js/main.8af0b84c.js",
+    "static/js/787.4813b240.chunk.js": "/react-tourisme/static/js/787.4813b240.chunk.js",
+    "static/media/footer-back.jpg": "/react-tourisme/static/media/footer-back.d2b5cae841315fdbe28f.jpg",
+    "index.html": "/react-tourisme/index.html",
+    "main.1bd0388d.css.map": "/react-tourisme/static/css/main.1bd0388d.css.map",
+    "main.8af0b84c.js.map": "/react-tourisme/static/js/main.8af0b84c.js.map",
+    "787.4813b240.chunk.js.map": "/react-tourisme/static/js/787.4813b240.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b1db1ddd.css",
-    "static/js/main.a74dce09.js"
+    "static/css/main.1bd0388d.css",
+    "static/js/main.8af0b84c.js"
   ]
 }
