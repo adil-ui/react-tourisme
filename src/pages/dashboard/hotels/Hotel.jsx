@@ -168,7 +168,7 @@ const Hotel = () => {
                                         <option value="">Sélectionnez une ville</option>
 
                                         {cities?.map(city => (
-                                            <option key={city} value={city}>{city}</option>
+                                            <option key={city?.id} value={city?.name}>{city?.name}</option>
                                         ))}
                                     </select>
                                 </div>
