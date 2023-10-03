@@ -33,59 +33,89 @@ import UpdateCategory from './pages/dashboard/categories/UpdateCategory';
 import UpdateInfo from './pages/dashboard/info/UpdateInfo';
 import Infos from './pages/pratical-info/Infos';
 import Bookmarks from './pages/dashboard/bookmarks/Bookmarks';
+import Inscription from './pages/dashboard/inscriptions/Inscription';
 
 
 function App() {
   const [user, setUser] = useState();
-  useEffect(() =>{
-    if(localStorage.getItem('user')) {
+  const [userRole, setUserRole] = useState();
+
+  useEffect(() => {
+    if (localStorage.getItem('user')) {
       setUser(JSON.parse(localStorage.getItem('user')));
     }
   }, []);
+  useEffect(() => {
+    if (user) {
+      setUserRole(user?.role);
+    }
+  }, [user])
   return (
     <>
-    <AuthContext.Provider value={{ user, setUser }}>
-      <header>
-        <Navbar />
-      </header>
+      <AuthContext.Provider value={{ user, setUser }}>
+        <header>
+          <Navbar />
+        </header>
 
-      <main>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='login' element={<Login />} />
-          <Route path='forgot-password' element={<ForgotPassword />} />
-          <Route path='reset-password/:token' element={<ResetPassword />} />
-          <Route path='sign-up' element={<Register />} />
-          <Route path='hotel-details/:id' element={<DetailsHotel />} />
-          <Route path='agency-details/:id' element={<DetailsAgency/>} />
-          <Route path='guide-details/:id' element={<DetailsGuide/>} />
-          <Route path='hotels' element={<Hotels />} />
-          <Route path='practical-info' element={<Infos />} />
-          <Route path='agencies' element={<Cars />} />
-          <Route path='guides' element={<Guides />} />
-          <Route path='/dashboard' element={<Aside />}>
-            <Route path='' element={<Dashboard />} />
-            <Route path='profile' element={<Profile />} />
-            <Route path='users' element={<User />} />
-            <Route path='employees' element={<Employee />} />
-            <Route path='edit-employe/:id' element={<UpdateEmployee />} />
-            <Route path='hotels' element={<Hotel />} />
-            <Route path='edit-hotel/:id' element={<UpdateHotel />} />
-            <Route path='categories' element={<Category />} />
-            <Route path='edit-category/:id' element={<UpdateCategory />} />
-            <Route path='informations' element={<Info />} />
-            <Route path='edit-information/:id' element={<UpdateInfo />} />
-            <Route path='guides' element={<Guide />} />
-            <Route path='edit-guide/:id' element={<UpdateGuide />} />
-            <Route path='agencies' element={<Car />} />
-            <Route path='edit-agency/:id' element={<UpdateCar />} />
-            <Route path='bookmarks' element={<Bookmarks />} />
+        <main>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            {!user &&
+              <>
+                <Route path='login' element={<Login />} />
+                <Route path='forgot-password' element={<ForgotPassword />} />
+                <Route path='reset-password/:token' element={<ResetPassword />} />
+                <Route path='sign-up' element={<Register />} />
+              </>
+            }
 
-          </Route>
-        </Routes>
-      </main>
+            <Route path='hotel-details/:id' element={<DetailsHotel />} />
+            <Route path='agency-details/:id' element={<DetailsAgency />} />
+            <Route path='guide-details/:id' element={<DetailsGuide />} />
+            <Route path='hotels' element={<Hotels />} />
+            <Route path='practical-info' element={<Infos />} />
+            <Route path='agencies' element={<Cars />} />
+            <Route path='guides' element={<Guides />} />
 
-      <Footer />
+            {userRole ?
+              userRole === 'Director' || userRole === 'Admin' ?
+                <Route path='/dashboard' element={<Aside />}>
+                  <Route path='' element={<Dashboard />} />
+                  <Route path='profile' element={<Profile />} />
+                  <Route path='registrations' element={<Inscription />} />
+                  <Route path='users' element={<User />} />
+                  <Route path='employees' element={<Employee />} />
+                  <Route path='edit-employe/:id' element={<UpdateEmployee />} />
+                  <Route path='hotels' element={<Hotel />} />
+                  <Route path='edit-hotel/:id' element={<UpdateHotel />} />
+                  <Route path='categories' element={<Category />} />
+                  <Route path='edit-category/:id' element={<UpdateCategory />} />
+                  <Route path='informations' element={<Info />} />
+                  <Route path='edit-information/:id' element={<UpdateInfo />} />
+                  <Route path='guides' element={<Guide />} />
+                  <Route path='edit-guide/:id' element={<UpdateGuide />} />
+                  <Route path='agencies' element={<Car />} />
+                  <Route path='edit-agency/:id' element={<UpdateCar />} />
+
+                </Route>
+                :
+                <Route path='/dashboard' element={<Aside />}>
+                  <Route path='' element={<Profile />} />
+                  <Route path='profile' element={<Profile />} />
+                  <Route path='bookmarks' element={<Bookmarks />} />
+                </Route>
+
+              :
+              <Route path='/' element={<Home />} />
+
+            }
+
+            <Route path='*' element={<div className='page404 d-flex  justify-content-center align-items-center'><h2 className='text-danger fw-semibold'>404 Page Not Found</h2></div>} />
+
+          </Routes>
+        </main>
+
+        <Footer />
       </AuthContext.Provider>
     </>
   );

@@ -56,7 +56,7 @@ const Category = () => {
                 console.log(error)
             )
     }
-    
+
     useEffect(() => {
         window.scroll(0, 0);
     }, [])
@@ -128,7 +128,7 @@ const Category = () => {
                             categories.map(elt => (
                                 <tr>
                                     <th scope="row" className="align-middle">{elt.id}</th>
-                                    <td><img src={API_URL + elt.picture}  alt="elt_picture" width='150px ' /></td>
+                                    <td><img src={API_URL + elt.picture} alt="elt_picture" width='90px ' /></td>
                                     <td className="align-middle">{elt.name}</td>
                                     <td className="align-middle">
                                         <Link to={`/dashboard/edit-category/${elt.id}`} className="btn btn-primary me-1"><i className="bi bi-pencil-square"></i></Link>

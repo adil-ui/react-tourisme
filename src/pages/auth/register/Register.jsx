@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { API_URL } from '../../../config/constants';
 import './Register.css'
 
@@ -10,18 +10,21 @@ const Register = () => {
     const [phone, setPhone] = useState("");
     const [picture, setPicture] = useState("");
     const [email, setEmail] = useState("");
-    const [type, setType] = useState("");
+    const [role, setRole] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
-    const navigate = useNavigate();
 
+    const handleChangeRole = (e) => {
+        setRole(e.target.value)
+        console.log(e.target.value);
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("name", name);
         formData.append("address", address);
         formData.append("phone", phone);
-        formData.append("type", type);
+        formData.append("role", role);
         formData.append("picture", picture);
         formData.append("email", email);
         formData.append("password", password);
@@ -34,13 +37,14 @@ const Register = () => {
         }
     };
 
+
     return (
         <div className='row g-0'>
             <form className='register col-xl-4 col-lg-6 col-md-7 col-sm-9 col-10  py-2 px-4 rounded-4 shadow mx-auto row gy-0 gx-4' onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className='text-center mb-4'><img src="/assets/logo.png" alt="logo" width="130px" /></div>
                 <div className="col-md-6 mb-1">
                     <label for="type " className="form-label m-0">Type <span className="text-danger">*</span></label>
-                    <select id="type" name='type' className="form-select" onChange={(e) => setType(e.target.value)} required>
+                    <select id="type" name='type' className="form-select" onChange={handleChangeRole} required>
                         <option selected disabled>Select an option</option>
                         <option value='Tourist'>Tourist</option>
                         <option value='Hotel'>Hotel</option>

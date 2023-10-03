@@ -22,7 +22,7 @@ const Hotels = () => {
     const [filtered, setFiltered] = useState(false);
     const [loader, setLoader] = useState(false);
 
-    
+
     useEffect(() => {
         fetch(API_URL + 'api/get-cities')
             .then(response => response.json())
@@ -39,7 +39,7 @@ const Hotels = () => {
         fetch(API_URL + "api/home-hotel-per-page/1")
             .then(response => response.json())
             .then(result => {
-                setHotels(result?.hotels);
+                setHotels(result?.data);
                 setLoader(false)
             })
         return
@@ -50,6 +50,7 @@ const Hotels = () => {
         e.preventDefault();
         setFiltered(true);
         const formData = new FormData();
+        formData.append('type', 'Hotel');
         formData.append('city', city);
         formData.append('star', star);
         formData.append('priceMin', priceMin);
@@ -79,24 +80,24 @@ const Hotels = () => {
                         </div>
                         <div className="form_search row px-2 w-100 mx-auto">
 
-                            <div className="col-xl-12 col-lg-4 col-md-12 col-sm-12 col-12">
-                                <select className="form-select py-2" id="ville" onChange={(e) => setCity(e.target.value)}>
-                                    <option selected disabled>City</option>
+                            <div className="col-xl-12 col-lg-4 col-md-12 col-sm-12 col-12 my-0 py-0">
+                                <select className="form-select py-2 mb-3" id="ville" onChange={(e) => setCity(e.target.value)}>
+                                    <option selected disabled>Select a city</option>
                                     {cities?.map(city => (
                                         <option value={city?.id}>{city?.name}</option>
                                     ))}
                                 </select>
                             </div>
 
-                            <div className="col-xl-6 col-lg-4 col-sm-6 col-12">
-                                <input type="number" onChange={(e) => setPriceMin(e.target.value)} className="form-control my_input" name='price' placeholder="Price min" id="price" />
+                            <div className="col-xl-6 col-lg-4 col-sm-6 col-12 mb-3">
+                                <input type="number" onChange={(e) => setPriceMin(e.target.value)} className="form-control py-2" name='price' placeholder="Price min" id="price" />
                             </div>
-                            <div className="col-xl-6 col-lg-4  col-sm-6 col-12">
-                                <input type="number" onChange={(e) => setPriceMax(e.target.value)} className="form-control my_input" name='price' placeholder="Price max" id="price" />
+                            <div className="col-xl-6 col-lg-4  col-sm-6 col-12 my-0 py-0">
+                                <input type="number" onChange={(e) => setPriceMax(e.target.value)} className="form-control py-2" name='price' placeholder="Price max" id="price" />
                             </div>
 
                             <div className='col-xl-12 col-md-6'>
-                                <h5 className="mb-3 fw-semibold">Search by star</h5>
+                                <h5 className="mb-2 fw-semibold">Search by star</h5>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" value='5' name="flexRadioDefault" onChange={(e) => setStar(e.target.value)} id="flexRadioDefault1" />
                                     <label class="form-check-label" for="flexRadioDefault1">
@@ -131,8 +132,15 @@ const Hotels = () => {
                             </div>
 
                             <div className='col-xl-12 col-md-6'>
-                                <h5 className="my-3 fw-semibold">Search by category</h5>
-
+                                <h5 className="my-2 fw-semibold">Search by category</h5>
+                                <div class="form-check mb-2">
+                                    <Link to='/hotels' className="text-black">
+                                        <input class="form-check-input" type="radio" name="category" id="category2" checked />
+                                        <label class="form-check-label" for="category2">
+                                            Hotels
+                                        </label>
+                                    </Link>
+                                </div>
                                 <div class="form-check">
                                     <Link to='/agencies' className="text-black">
                                         <input class="form-check-input" type="radio" name="category" id="category2" />
@@ -174,7 +182,7 @@ const Hotels = () => {
                     </form>
                 </aside>
 
-                <div className='col-9 mx-auto mt-xl-0 mt-lg-5 mt-5'>
+                <div className='col-xl-9 col-12 mx-auto '>
                     <div class="row gx-3">
 
                         {loader ?
@@ -192,14 +200,14 @@ const Hotels = () => {
                     </div>
                     {filtered && hotels.length > 8 && <PaginationFilter
                         setElements={setHotels}
-                        elementName="hotels"
+                        elementName="data"
                         url={"api/filter-hotels-per-page/"}
                         allElementsUrl={"api/filter-hotels"}
                         formData={formData} />}
                     {!filtered &&
                         <Pagination
                             setElements={setHotels}
-                            elementName="hotels"
+                            elementName="data"
                             url={"api/home-hotel-per-page/"}
                             allElementsUrl={"api/all-hotel"}
                         />}

@@ -20,10 +20,10 @@ const UpdateInfo = () => {
             .then(result => {
                 console.log(result);
                 setInformation(result.information[0]);
-                setTitle(result.information[0].title);
-                setPicture(result.information[0].picture);
-                setDescription(result.information[0].description);
-                setCategory(result.information[0].category);
+                setTitle(result.information[0]?.title);
+                setPicture(result.information[0]?.picture);
+                setDescription(result.information[0]?.description);
+                setCategory(result.information[0]?.category);
 
 
             })
@@ -33,6 +33,7 @@ const UpdateInfo = () => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("title", title);
+        formData.append("category", category?.id);
         formData.append("picture", picture);
         formData.append("description", description);
 
@@ -69,7 +70,7 @@ const UpdateInfo = () => {
                         <option value={category?.id} selected>{category?.name}</option>
                         <option value="" disabled >Sélectionnez une catégorie</option>
                         {categories?.map(elt => (
-                            elt.name !== category.name &&
+                            elt.name !== category?.name &&
                             <option value={elt.id}>{elt.name}</option>
                         ))}
                     </select>

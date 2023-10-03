@@ -29,18 +29,18 @@ const Hero = () => {
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
         <div className="carousel-inner">
-          <div className="carousel-item position-relative active " data-bs-interval="3000">
-            <img src="/assets/back.jpg" className="d-block slide_img w-100" alt="..."  />
-          </div>
-          <div className="carousel-item position-relative" data-bs-interval="5000">
+
+          <div className="carousel-item position-relative active" data-bs-interval="5000">
             <img src="/assets/slide-2.jpg" className="d-block slide_img w-100" alt="..." />
           </div>
-         
+          <div className="carousel-item position-relative  " data-bs-interval="2000">
+            <img src="/assets/back.jpg" className="d-block slide_img w-100" alt="..." />
+          </div>
           <div className="carousel-item position-relative" data-bs-interval="5000">
             <img src="/assets/slide-4.jpg" className="d-block slide_img w-100" alt="..." />
           </div>
         </div>
-       
+
       </div>
     </div>
 

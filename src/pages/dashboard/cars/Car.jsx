@@ -27,7 +27,7 @@ const Car = () => {
     const handleCityChange = (event) => {
         setCity(event.target.value);
     };
- 
+
     const submit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -55,8 +55,8 @@ const Car = () => {
         fetch(API_URL + "api/agency-per-page/1")
             .then(response => response.json())
             .then(result => {
-                setAgencies(result.agencies);
-                setDataLenght(result.agenciesLenght);
+                setAgencies(result.data);
+                setDataLenght(result.dataLenght);
             })
     }, [])
     const deleteAgency = (id) => {
@@ -143,7 +143,7 @@ const Car = () => {
                                     <label className="form-label m-0 fw-semibold">Latitude</label>
                                     <input type="text" className="form-control py-2" name='name' value={latitude} onChange={(e) => setLatitude(e.target.value)} required />
                                 </div>
-                                
+
                                 <div className="col-md-6 mt-2">
                                     <label for="city" className="form-label m-0 fw-semibold">Ville</label>
                                     <select id='city' className='form-select py-2' onChange={handleCityChange} >
@@ -214,7 +214,7 @@ const Car = () => {
                             agencies.map(elt => (
                                 <tr>
                                     <th scope="row" className="align-middle">{elt.id}</th>
-                                    <td className="align-middle"><img src={API_URL + elt.picture} className="rounded-circle align-middle" alt="hotel_picture" width='45px ' /></td>
+                                    <td className="align-middle"><img src={API_URL + elt.picture} className="align-middle" alt="hotel_picture" width='45px ' /></td>
                                     <td className="align-middle">{elt.name}</td>
                                     <td className="align-middle">{elt.price} Dh</td>
                                     <td className="align-middle">{elt.city?.name}</td>
@@ -236,7 +236,7 @@ const Car = () => {
                 {dataLenght > 7 &&
                     <Pagination
                         setElements={setAgencies}
-                        elementName="agencies"
+                        elementName="data"
                         url={"api/agency-per-page/"}
                         allElementsUrl={"api/all-agency"}
                     />

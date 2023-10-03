@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { API_URL } from "../../config/constants"
 
-import './Cars.css'
 import axios from "axios"
 import CardAgency from "../../components/card-agency/CardAgency"
 import Pagination from "../../components/Pagination/Pagination"
@@ -61,7 +60,7 @@ const Cars = () => {
         fetch(API_URL + "api/home-agency-per-page/1")
             .then(response => response.json())
             .then(result => {
-                setAgencies(result.agencies);
+                setAgencies(result.data);
                 setLoader(false)
 
             })
@@ -78,14 +77,14 @@ const Cars = () => {
                 <aside className='col-xl-3 col-12 ps-0 pe-xl-5 mx-auto  aside'>
                     <form onSubmit='{filter}' className="shadow-sm  bg-white rounded-3 pb-4 mx-auto">
                         <div className="bgColor w-100 rounded-top-3 px-3 pt-2 pb-1 mb-3 d-flex justify-content-between align-items-center">
-                            <h4 className="mt-1 fw-semibold text-light">Filtre </h4>
+                            <h4 className="mt-1 fw-semibold text-light">Filter </h4>
                             <h4><i class="bi bi-funnel text-light align-middle"></i></h4>
                         </div>
                         <div className="form_search row px-2 w-100 mx-auto">
 
                             <div className="col-xl-12 col-lg-4 col-md-12 col-sm-12 col-12">
                                 <select className="form-select py-2" id="ville" onChange={(e) => setCity(e.target.value)}>
-                                    <option selected disabled>Ville</option>
+                                    <option selected disabled>Select a city</option>
                                     {cities.map(city => (
                                         <option value={city.id}>{city.name}</option>
                                     ))}
@@ -93,46 +92,60 @@ const Cars = () => {
                             </div>
 
                             <div className="col-xl-6 col-lg-4 col-sm-6 col-12">
-                                <input type="number" onChange={(e) => setPriceMin(e.target.value)} className="form-control my_input" name='price' placeholder="Prix min" id="price" />
+                                <input type="number" onChange={(e) => setPriceMin(e.target.value)} className="form-control my_input" name='price' placeholder="Price min" id="price" />
                             </div>
                             <div className="col-xl-6 col-lg-4  col-sm-6 col-12">
-                                <input type="number" onChange={(e) => setPriceMax(e.target.value)} className="form-control my_input" name='price' placeholder="Prix max" id="price" />
+                                <input type="number" onChange={(e) => setPriceMax(e.target.value)} className="form-control my_input" name='price' placeholder="Price max" id="price" />
                             </div>
+
 
 
                             <div className='col-xl-12 col-md-6'>
-                                <h5 className="my-3 fw-semibold">Recherche par catégorie</h5>
+                                <h5 className="my-3 fw-semibold">Search by category</h5>
+                                <div class="form-check mb-2">
+                                    <Link to='/agencies' className="text-black">
+                                        <input class="form-check-input" type="radio" name="category" id="category2" checked />
+                                        <label class="form-check-label" for="category2">
+                                            Car Rental Agencies
+                                        </label>
+                                    </Link>
+                                </div>
+                                <div class="form-check">
+                                    <Link to='/hotels' className="text-black">
+                                        <input class="form-check-input" type="radio" name="category" id="category2" />
+                                        <label class="form-check-label" for="category2">
+                                            Hotels
+                                        </label>
+                                    </Link>
+                                </div>
 
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categorie" id="flexRadioDefault1" />
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        Hôtels
-                                    </label>
+                                <div class="form-check my-2">
+                                    <Link to='/guides' className="text-black">
+
+                                        <input class="form-check-input" type="radio" name="category" id="category4" />
+                                        <label class="form-check-label" for="category4">
+                                            Tourist Guides
+                                        </label>
+                                    </Link>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categorie" id="flexRadioDefault2" />
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        Agences de location
-                                    </label>
+
+                                <div class="form-check ">
+                                    <Link to='/practical-info' className="text-black">
+
+                                        <input class="form-check-input" type="radio" name="category" id="category3" />
+                                        <label class="form-check-label" for="category3">
+                                            Practical Infos
+                                        </label>
+                                    </Link>
+
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categorie" id="flexRadioDefault3" />
-                                    <label class="form-check-label" for="flexRadioDefault3">
-                                        Monuments
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categorie" id="flexRadioDefault4" />
-                                    <label class="form-check-label" for="flexRadioDefault4">
-                                        Guides
-                                    </label>
-                                </div>
+
 
                             </div>
                         </div>
 
                         <div className="mt-4 px-3">
-                            <button className="btn btn-danger col-12 fw-semibold" style={{ height: '50px' }}>Chercher</button>
+                            <button className="btn btn-danger col-12 fw-semibold" style={{ height: '50px' }}>Search</button>
 
                         </div>
                     </form>
@@ -153,12 +166,15 @@ const Cars = () => {
                                 </div>
                         }
                     </div>
-                    <Pagination
-                        setElements={setAgencies}
-                        elementName="agencies"
-                        url={"api/home-agency-per-page/"}
-                        allElementsUrl={"api/all-agency"}
-                    />
+                    {agencies.length > 7 &&
+                        <Pagination
+                            setElements={setAgencies}
+                            elementName="data"
+                            url={"api/home-agency-per-page/"}
+                            allElementsUrl={"api/all-agency"}
+                        />
+                    }
+
 
                 </div>
             </div>

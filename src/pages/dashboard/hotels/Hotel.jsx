@@ -9,7 +9,7 @@ const Hotel = () => {
     const [hotels, setHotels] = useState([])
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
-    const [phone, setPhone] = useState('0620356950');
+    const [phone, setPhone] = useState('');
     const [picture, setPicture] = useState('');
     const [email, setEmail] = useState('');
     const [city, setCity] = useState('');
@@ -17,8 +17,8 @@ const Hotel = () => {
     const [star, setStar] = useState();
     const [price, setPrice] = useState();
     const [link, setLink] = useState('');
-    const [longitude, setLongitude] = useState('-6.882972');
-    const [latitude, setLatitude] = useState('33.976389');
+    const [longitude, setLongitude] = useState('');
+    const [latitude, setLatitude] = useState('');
     const [description, setDescription] = useState('');
     const [message, setMessage] = useState('');
     const [search, setSearch] = useState('all');
@@ -59,8 +59,8 @@ const Hotel = () => {
         fetch(API_URL + "api/hotel-per-page/1")
             .then(response => response.json())
             .then(result => {
-                setHotels(result.hotels);
-                setDataLenght(result.hotelsLenght);
+                setHotels(result.data);
+                setDataLenght(result.dataLenght);
             })
     }, [])
     const deleteHotel = (id) => {
@@ -72,11 +72,11 @@ const Hotel = () => {
     const searchData = (e) => {
         e.preventDefault();
 
-        axios.post(API_URL + "api/search/1", { search, searchValue })
+        axios.post(API_URL + "api/search-hotel/1", { search, searchValue })
             .then(response => {
                 console.log(response.data)
-                setHotels(response.data.hotels)
-                setDataLenght(response.data.hotelsLenght)
+                setHotels(response.data.data)
+                setDataLenght(response.data.dataLenght)
             })
 
             .catch(error =>
@@ -225,6 +225,7 @@ const Hotel = () => {
                             <th scope="col" className='primaryColor'>#</th>
                             <th scope="col" className='primaryColor'>Photo</th>
                             <th scope="col" className='primaryColor'>Nom Complet</th>
+                            <th scope="col" className='primaryColor'>Prix Min</th>
                             <th scope="col" className='primaryColor'>Etoile</th>
                             <th scope="col" className='primaryColor'>Ville</th>
                             <th scope="col" className='primaryColor'>Téléphone</th>
@@ -236,8 +237,9 @@ const Hotel = () => {
                             hotels.map(hotel => (
                                 <tr>
                                     <th scope="row" className="align-middle">{hotel.id}</th>
-                                    <td><img src={API_URL + hotel.picture} className="rounded-circle" alt="hotel_picture" width='45px ' /></td>
+                                    <td className="align-middle"><img src={API_URL + hotel.picture} className="" alt="hotel_picture" width='45px ' /></td>
                                     <td className="align-middle">{hotel.name}</td>
+                                    <td className="align-middle">{hotel.price} Dh/Nuit</td>
                                     <td className="align-middle">{hotel.star}</td>
                                     <td className="align-middle">{hotel.city?.name}</td>
                                     <td className="align-middle">{hotel.phone}</td>
@@ -258,7 +260,7 @@ const Hotel = () => {
                 {dataLenght > 7 &&
                     <Pagination
                         setElements={setHotels}
-                        elementName="hotels"
+                        elementName="data"
                         url={"api/hotel-per-page/"}
                         allElementsUrl={"api/all-hotel"}
                     />

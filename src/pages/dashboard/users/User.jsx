@@ -65,6 +65,7 @@ const User = () => {
                     <thead>
                         <tr>
                             <th scope="col" className='primaryColor'>#</th>
+                            <th scope="col" className='primaryColor'>Nom</th>
                             <th scope="col" className='primaryColor'>Email</th>
                             <th scope="col" className='primaryColor'>status</th>
                             <th scope="col" className='primaryColor'>role</th>

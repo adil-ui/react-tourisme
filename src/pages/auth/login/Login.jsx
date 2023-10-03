@@ -18,15 +18,17 @@ const Login = () => {
         e.preventDefault();
         try {
             let res = await axios.post(API_URL + "api/login", { email, password })
-            if (res.data.message === 'Your account is blocked') {
-                setMessage(res.data.message)
-            } else {
+
+            if (res.data.user) {
                 console.log(JSON.stringify(res.data.user));
                 setUser(res.data.user);
                 localStorage.setItem('user', JSON.stringify(res.data.user));
                 navigate('/dashboard')
             }
+            else {
+                setMessage(res.data.message)
 
+            }
         } catch (err) {
             console.log(err.response);
         }

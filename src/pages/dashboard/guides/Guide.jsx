@@ -53,8 +53,8 @@ const Guide = () => {
         fetch(API_URL + "api/guide-per-page/1")
             .then(response => response.json())
             .then(result => {
-                setGuides(result.guides);
-                setDataLenght(result.guidesLenght);
+                setGuides(result.data);
+                setDataLenght(result.dataLenght);
             })
     }, [])
     const deleteGuide = (id) => {
@@ -224,7 +224,7 @@ const Guide = () => {
                 {dataLenght > 7 &&
                     <Pagination
                         setElements={setGuides}
-                        elementName="guides"
+                        elementName="data"
                         url={"api/guide-per-page/"}
                         allElementsUrl={"api/all-guide"}
                     />

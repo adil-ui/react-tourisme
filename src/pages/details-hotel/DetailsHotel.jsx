@@ -41,7 +41,7 @@ const DetailsHotel = () => {
     }
     return (
         <section className='px-5 row my-5 py-5 mx-auto gx-2' >
-            <div className='col-lg-8 mx-auto my-4 py-2 pe-5'>
+            <div className='col-xl-8 col-lg-7  mx-auto my-4 py-2 pe-lg-5'>
                 <div>
                     <img src={API_URL + data?.picture} alt="user_image" className='img-fluid  w-100 rounded-3 shadow' />
                 </div>
@@ -49,12 +49,12 @@ const DetailsHotel = () => {
                     <div style={{ width: '120px' }} className='bg-success rounded-5 bg-opacity-25 border d-flex justify-content-center align-center px-3 py-1'>
                         <p className='text-success p-0 m-0 fw-semibold'> {data?.city?.name}</p>
                     </div>
-                    <div className='d-flex justify-content-between align-items-center mt-3'>
+                    <div className='d-sm-flex justify-content-between align-items-center mt-3'>
                         <h3 className='fw-bold'>{data?.name}</h3>
                         <h5 className="fw-semibold text-danger " ><span className='text-dark'>From</span>  {data?.price} Dh/night</h5>
                     </div>
                     <p className='text-warning fontSize18 my-2'>{myStars}</p>
-                    <div className='d-flex justify-content-between align-items-center my-2'>
+                    <div className='d-md-flex justify-content-between align-items-center my-2'>
                         <address className='fw-semibold fontSize20'><i class="bi bi-geo-alt-fill text-danger"></i> {data?.address}</address>
                         <p className="fw-semibold fontSize20" ><i class="bi bi-telephone-fill text-success  align-middle"></i> {data?.phone} </p>
                     </div>
@@ -67,23 +67,23 @@ const DetailsHotel = () => {
                     <p className='mt-3 lh-lg fontSize18' style={{ textAlign: 'justify' }}>{data?.description}</p>
                 </div>
             </div>
-            <div className='col-lg-4 my-4 py-2'>
+            <div className='col-xl-4 col-lg-5 my-4 py-2'>
                 <div className='mb-4'>
                     <h4 className='fw-bold mb-3'>Related hotels</h4>
-                    {dataRelated.map(elt =>
-                    <div className='row g-0 shadow-sm  border rounded-2 mb-2'>
-                        <div className='col-4'>
-                            <NavLink to={`/hotel-details/${elt?.id}`}><img src={API_URL + elt?.picture} alt="hotel_image" className="related-img rounded-start-2" /></NavLink>
-                        </div>
-                        <div className='col-8 px-1 pt-2'>
-                            <Link to={`/hotel-details/${elt?.id}`} className='text-decoration-none mb-0'><h6 className="fw-semibold primaryColor">{elt?.name}</h6></Link>
-                            <p className='text-warning fontSize12 mb-0'>{stars}</p>
-                            <p className='fw-semibold text-warning mb-0'>{elt?.star}-star</p>
-                            <p className="fw-semibold text-danger fontSize14 mb-0 pb-0" ><span className='text-dark'>From</span>  {elt?.price} Dh/night</p>
+                    {dataRelated.map(elt => elt.id !== data?.id &&
+                        <div className='row g-0 shadow-sm  border rounded-2 mb-2'>
+                            <div className='col-4'>
+                                <NavLink to={`/hotel-details/${elt?.id}`}><img src={API_URL + elt?.picture} alt="hotel_image" className="related-img img-fluid rounded-start-2" /></NavLink>
+                            </div>
+                            <div className='col-8 px-1 pt-2'>
+                                <Link to={`/hotel-details/${elt?.id}`} className='text-decoration-none mb-0'><h6 className="fw-semibold primaryColor">{elt?.name}</h6></Link>
+                                <p className='text-warning fontSize12 mb-0'>{stars}</p>
+                                <p className='fw-semibold text-warning mb-0'>{elt?.star}-star</p>
+                                <p className="fw-semibold text-danger fontSize14 mb-0 pb-0" ><span className='text-dark'>From</span>  {elt?.price} Dh/night</p>
 
+                            </div>
                         </div>
-                    </div>
-                     )}
+                    )}
                 </div>
 
                 <div className='border rounded-3 shadow-sm' style={{ height: '300px' }}>

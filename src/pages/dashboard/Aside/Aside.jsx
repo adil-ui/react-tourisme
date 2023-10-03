@@ -1,6 +1,5 @@
-import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
-import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { API_URL } from '../../../config/constants';
 import AuthContext from '../../../context/auth-context';
 import './Aside.css'
@@ -13,18 +12,17 @@ const Aside = () => {
     const navigate = useNavigate();
     useEffect(() => {
         if (user) {
-            setUserName(user.name);
-            setUserPicture(user.picture);
-            setUserRole(user.role);
+            setUserName(user?.name);
+            setUserPicture(user?.picture);
+            setUserRole(user?.role);
         }
-    }, [user])
+    }, [])
     const logout = () => {
-
+        navigate('/')
         localStorage.removeItem("user");
         setUserName("");
         setUserPicture("");
         setUser(null);
-        navigate('http://localhost:3000/login')
 
     }
     useEffect(() => {
@@ -39,18 +37,24 @@ const Aside = () => {
                             <img src={API_URL + userPicture} className="img-fluid avater rounded-circle mb-1" alt="" width='70px ' />
                             <h6 className='primaryColor fw-semibold fontSize18'>{userName}</h6>
                         </div>
-                        <div className='pb-3 '>
+
+                        {userRole === 'Director' || userRole === 'Admin' ?
+                            <div className='pb-3 '>
                                 <div className='dash_menu' >
                                     <Link to="/dashboard" className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa fa-tachometer-alt text-danger"></i>Dashboard</Link>
                                 </div>
                                 <div className='dash_menu' >
                                     <Link to="/dashboard/profile" className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa-solid fa-id-card text-danger"></i>Profile</Link>
                                 </div>
+                                {userRole === 'Director' ?
+                                    <div className='dash_menu' >
+                                        <Link to="/dashboard/employees" className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa fa-user-tie text-danger"></i> Employés</Link>
+                                    </div>
+                                    :
+                                    null
+                                }
                                 <div className='dash_menu' >
-                                    <Link to="/dashboard/employees" className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa fa-user-tie text-danger"></i> Employés</Link>
-                                </div>
-                                <div className='dash_menu' >
-                                    <Link to="/dashboard/inscriptions" className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa-solid fa-rectangle-list  text-danger"></i>Inscriptions</Link>
+                                    <Link to="/dashboard/registrations" className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa-solid fa-rectangle-list  text-danger"></i>Inscriptions</Link>
                                 </div>
                                 <div className='dash_menu' >
                                     <Link to="/dashboard/users" className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 bi bi-people-fill text-danger"></i>Utilisateurs</Link>
@@ -71,27 +75,26 @@ const Aside = () => {
                                     <Link to="/dashboard/informations" className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i class="fa-solid fa-circle-info mx-2 fontSize22 pe-3 text-danger"></i>Informations</Link>
                                 </div>
                                 <div className='dash_menu' >
-                                    <Link to="/dashboard/bookmarks" className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i class="fa-solid fa-heart mx-2 fontSize22 pe-3 text-danger"></i>Bookmarks</Link>
-                                </div>
-                                <div className='dash_menu' >
-                                    <Link onClick={logout} className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa-solid fa-right-from-bracket text-danger"></i>Logout</Link>
+                                    <Link to='/login' onClick={logout} className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa-solid fa-right-from-bracket text-danger"></i>Déconnexion</Link>
                                 </div>
                             </div>
-                        {/* {userRole === 'Admin'?
-                            
-                        //     :
-                        //     <div className='py-3 '>
-                        //         <div className='dash_menu py-3' >
-                        //             <Link to="/dashboard/profile" className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa-solid fa-id-card text-danger"></i>Profile</Link>
-                        //         </div>
-                        //         <div className='dash_menu py-3' >
-                        //             <Link to="/dashboard/info" className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i class="fa-solid fa-heart mx-2 fontSize22 pe-3 text-danger"></i>Favoris</Link>
-                        //         </div>
-                        //         <div className='dash_menu py-3' >
-                        //             <Link onClick={logout} className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item '><i className="mx-2 fontSize22 pe-3 fa-solid fa-right-from-bracket text-danger"></i>Déconnexion</Link>
-                        //         </div>
-                        //     </div>
-                        // } */}
+                            :
+                            <div className='py-3 '>
+                                <div className='dash_menu py-3' >
+                                    <Link to="/dashboard/profile" className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item fontSize17 '><i className="mx-2 fontSize22 pe-3 fa-solid fa-id-card text-danger"></i>Profile</Link>
+                                </div>
+                                {userRole === 'Tourist' ?
+                                    <div className='dash_menu py-3' >
+                                        <Link to="/dashboard/bookmarks" className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item fontSize17 '><i class="fa-solid fa-heart mx-2 fontSize22 pe-3 text-danger"></i>Bookmarks</Link>
+                                    </div>
+                                    : null
+                                }
+                                
+                                <div className='dash_menu py-3' >
+                                    <Link to='/login' onClick={logout} className='primaryColor fw-semibold text-decoration-none  ms-4 dash_item fontSize17 '><i className="mx-2 fontSize22 pe-3 fa-solid fa-right-from-bracket text-danger"></i>Déconnexion</Link>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </aside>
                 <Outlet />

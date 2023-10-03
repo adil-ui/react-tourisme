@@ -38,8 +38,8 @@ const Info = () => {
         fetch(API_URL + "api/information-per-page/1")
             .then(response => response.json())
             .then(result => {
-                setInformations(result.informations);
-                setDataLenght(result.informationsLenght);
+                setInformations(result.data);
+                setDataLenght(result.dataLenght);
             })
     }, [])
     useEffect(() => {
@@ -61,8 +61,8 @@ const Info = () => {
         axios.post(API_URL + "api/search-information/1", { search, searchValue })
             .then(response => {
                 console.log(response.data)
-                setInformations(response.data.informations)
-                setDataLenght(response.data.informationsLenght)
+                setInformations(response.data.data)
+                setDataLenght(response.data.dataLenght)
             })
 
             .catch(error =>
@@ -138,6 +138,7 @@ const Info = () => {
                         <option value="all" selected>Tout</option>
                         <option value="id">Id</option>
                         <option value="title">Titre</option>
+                        <option value="category">Catégorie</option>
                     </select>
                     <input type="text" className="form-control w-50 py-2" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="Recherche..." />
                     <button className="btn btn-outline-secondary px-4 py-2" type="submit" >Chercher</button>
@@ -152,6 +153,7 @@ const Info = () => {
                             <th scope="col" className='primaryColor'>#</th>
                             <th scope="col" className='primaryColor'>Photo</th>
                             <th scope="col" className='primaryColor'>Titre</th>
+                            <th scope="col" className='primaryColor'>Catégorie</th>
                             <th scope="col" className='primaryColor'>Action</th>
                         </tr>
                     </thead>
@@ -160,8 +162,9 @@ const Info = () => {
                             informations.map(elt => (
                                 <tr>
                                     <th scope="row" className="align-middle">{elt.id}</th>
-                                    <td className="align-middle"><img src={API_URL + elt.picture} className="rounded-circle align-middle" alt="hotel_picture" width='45px ' /></td>
+                                    <td className="align-middle"><img src={API_URL + elt.picture} className="align-middle" alt="hotel_picture" width='45px ' /></td>
                                     <td className="align-middle">{elt.title}</td>
+                                    <td className="align-middle">{elt.category?.name}</td>
                                     <td className="align-middle">
                                         <Link to={`/dashboard/edit-information/${elt.id}`} className="btn btn-primary me-1"><i className="bi bi-pencil-square"></i></Link>
                                         <button onClick={() => deleteInformation(elt.id)} className="btn btn-danger"><i className="fa-solid fa-trash-can"></i></button>
@@ -179,7 +182,7 @@ const Info = () => {
                 {dataLenght > 7 &&
                     <Pagination
                         setElements={setInformations}
-                        elementName="informations"
+                        elementName="data"
                         url={"api/information-per-page/"}
                         allElementsUrl={"api/all-information"}
                     />

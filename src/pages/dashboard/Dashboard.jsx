@@ -124,7 +124,7 @@ const Dashboard = () => {
                         <div className='col-6'>
                             <p className='fw-semibold fs-4'>{nbrCategory}</p>
                             {nbrCategory > 1 ? <p className='fw-semibold fs-5'>Catégories</p> :
-                                <p className='fw-semibold fs-5'>Catégorie</p>
+                                <p className='fw-semibold fs-5'>Catégories</p>
                             }
 
                         </div>
@@ -160,7 +160,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                 </div>
-               
+
 
             </div>
 

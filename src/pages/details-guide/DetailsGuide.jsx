@@ -35,11 +35,9 @@ const DetailsGuide = () => {
                     <div style={{ width: '120px' }} className='bg-success rounded-5 bg-opacity-25 border d-flex justify-content-center align-center px-3 py-1'>
                         <p className='text-success p-0 m-0 fw-semibold'> {data?.city?.name}</p>
                     </div>
-                        <h3 className='fw-bold'>{data?.name}</h3>
-                    <div className='d-flex justify-content-between align-items-center my-2'>
+                        <h3 className='fw-bold my-3'>{data?.name}</h3>
                         <address className='fw-semibold fontSize20'><i class="bi bi-geo-alt-fill text-danger"></i> {data?.address}</address>
                         {data?.phone && <p className="fw-semibold fontSize20" ><i class="bi bi-telephone-fill text-success  align-middle"></i> {data?.phone} </p>}
-                    </div>
                     <Link to={data?.link} target='_blank' className='text-dark fontSize20 text-decoration-none '><i className="fa-solid fa-globe"></i> Visit the website</Link>
 
                 </div>

@@ -46,7 +46,7 @@ const Guides = () => {
         setLoader(true)
         axios.get(API_URL + "api/home-guide-per-page/1")
             .then(result => {
-                setGuides(result.data.guides);
+                setGuides(result.data.data);
                 setLoader(false)
             })
     }, [])
@@ -64,45 +64,61 @@ const Guides = () => {
                 <aside className='col-xl-3 col-12 ps-0 pe-xl-5 mx-auto  aside'>
                     <form onSubmit='{filter}' className="shadow-sm  bg-white rounded-3 pb-4 mx-auto">
                         <div className="bgColor w-100 rounded-top-3 px-3 pt-2 pb-1 mb-3 d-flex justify-content-between align-items-center">
-                            <h4 className="mt-1 fw-semibold text-light">Filtre </h4>
+                            <h4 className="mt-1 fw-semibold text-light">Filter </h4>
                             <h4><i class="bi bi-funnel text-light align-middle"></i></h4>
                         </div>
                         <div className="form_search row px-2 w-100 mx-auto">
 
                             <div className="col-xl-12 col-lg-4 col-md-12 col-sm-12 col-12">
                                 <select className="form-select py-2" id="ville" onChange={(e) => setCity(e.target.value)}>
-                                    <option selected disabled>Ville</option>
+                                    <option selected disabled>Select a city</option>
                                     {cities.map(city => (
                                         <option value={city.id}>{city.name}</option>
                                     ))}
                                 </select>
                             </div>
 
+
                             <div className='col-xl-12 col-md-6'>
-                                <h5 className="my-3 fw-semibold">Recherche par catégorie</h5>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categorie" id="flexRadioDefault4" />
-                                    <label class="form-check-label" for="flexRadioDefault4">
-                                        Guides
-                                    </label>
+                                <h5 className="my-3 fw-semibold">Search by category</h5>
+                                <div class="form-check mb-2">
+                                    <Link to='/guides' className="text-black">
+
+                                        <input class="form-check-input" type="radio" name="category" id="category4" checked />
+                                        <label class="form-check-label" for="category4">
+                                            Tourist Guides
+                                        </label>
+                                    </Link>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categorie" id="flexRadioDefault1" />
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        Hôtels
-                                    </label>
+                                    <Link to='/hotels' className="text-black">
+                                        <input class="form-check-input" type="radio" name="category" id="category2" />
+                                        <label class="form-check-label" for="category2">
+                                            Hotels
+                                        </label>
+                                    </Link>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categorie" id="flexRadioDefault2" />
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        Agences de location
-                                    </label>
+                                <div class="form-check my-2">
+                                    <Link to='/agencies' className="text-black">
+                                        <input class="form-check-input" type="radio" name="category" id="category2" />
+                                        <label class="form-check-label" for="category2">
+                                            Car Rental Agencies
+                                        </label>
+                                    </Link>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categorie" id="flexRadioDefault3" />
-                                    <label class="form-check-label" for="flexRadioDefault3">
-                                        Monuments
-                                    </label>
+
+
+
+
+                                <div class="form-check ">
+                                    <Link to='/practical-info' className="text-black">
+
+                                        <input class="form-check-input" type="radio" name="category" id="category3" />
+                                        <label class="form-check-label" for="category3">
+                                            Practical Infos
+                                        </label>
+                                    </Link>
+
                                 </div>
 
 
@@ -110,7 +126,7 @@ const Guides = () => {
                         </div>
 
                         <div className="mt-4 px-3">
-                            <button className="btn btn-danger col-12 fw-semibold" style={{ height: '50px' }}>Chercher</button>
+                            <button className="btn btn-danger col-12 fw-semibold" style={{ height: '50px' }}>Search</button>
 
                         </div>
                     </form>
@@ -125,12 +141,15 @@ const Guides = () => {
                             :
                             guides.map(elt => <CardGuide elt={elt} key={elt.id} />)}
                     </div>
-                    {/* <Pagination
-                        setElements={setGuides}
-                        elementName="guides"
-                        url={"api/home-guide-per-page/"}
-                        allElementsUrl={"api/all-guide"}
-                    /> */}
+
+                    {guides.length > 7 &&
+                        <Pagination
+                            setElements={setGuides}
+                            elementName="data"
+                            url={"api/home-guide-per-page/"}
+                            allElementsUrl={"api/all-guide"}
+                        />
+                    }
 
                 </div>
             </div>

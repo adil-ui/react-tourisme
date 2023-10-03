@@ -143,6 +143,7 @@ const Employee = () => {
                             <th scope="col" className='primaryColor'>Photo</th>
                             <th scope="col" className='primaryColor'>CIN</th>
                             <th scope="col" className='primaryColor'>Nom Complet</th>
+                            <th scope="col" className='primaryColor'>Email</th>
                             <th scope="col" className='primaryColor'>Adresse</th>
                             <th scope="col" className='primaryColor'>Téléphone</th>
                             <th scope="col" className='primaryColor'>Action</th>
@@ -156,6 +157,7 @@ const Employee = () => {
                                     <td><img src={API_URL + elt.picture} className="rounded-circle" alt="elt_picture" width='38px ' /></td>
                                     <td className="align-middle">{elt.cin}</td>
                                     <td className="align-middle">{elt.name}</td>
+                                    <td className="align-middle">{elt.email}</td>
                                     <td className="align-middle">{elt.address}</td>
                                     <td className="align-middle">{elt.phone}</td>
                                     <td className="align-middle">

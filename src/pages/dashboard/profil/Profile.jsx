@@ -171,11 +171,11 @@ const Profile = () => {
     <div className="mx-auto  pt-4 pb-5 mt-2" >
       <form className="row px-5 mx-auto bg-transparent pb-5" onSubmit={updateUser} encType="multipart/form-data">
         <h4 className="fw-semibold mb-4">Mes informations</h4>
-        <div className="col-md-6 mt-4">
+        <div className="col-md-6 ">
           <label className="form-label fw-semibold">Nom complet</label>
           <input type="text" className="form-control py-2" name='name' value={userName} onChange={(e) => setUserName(e.target.value)} required />
         </div>
-        <div className="col-md-6 mt-4">
+        <div className="col-md-6">
           <label className="form-label fw-semibold">Téléphone</label>
           <input type="tel" className="form-control py-2" name='phone' value={userPhone} onChange={(e) => setUserPhone(e.target.value)} required />
         </div>
@@ -210,11 +210,11 @@ const Profile = () => {
             <div className="col-md-6 mt-4">
               <label for="city" className="form-label fw-semibold">Ville</label>
               <select id='city' className='form-select' onChange={handleCityChange} >
-              {city &&
-                 <option value={city}>{city}</option> 
+                {city &&
+                  <option value={city}>{city}</option>
                 }
                 <option value="">Sélectionnez une ville</option>
-                
+
                 {cities.map(city => (
                   <option key={city} value={city}>{city}</option>
                 ))}
@@ -232,20 +232,20 @@ const Profile = () => {
           </div>
           : null}
         {userRole === 'Hotel' &&
-        <div className="col-md-6 mt-4">
-              <label for="star" className="form-label fw-semibold">Etoile</label>
-              <select id='star' className='form-select' onChange={handleStarChange} required>
+          <div className="col-md-6 mt-4">
+            <label for="star" className="form-label fw-semibold">Etoile</label>
+            <select id='star' className='form-select' onChange={handleStarChange} required>
               {star !== '' &&
-                 <option value={star} selected>{star}</option> 
-                }
-                <option value="">Sélectionnez un nombre</option>
-                  <option  value='1'>1</option>
-                  <option  value='2'>2</option>
-                  <option  value='3'>3</option>
-                  <option  value='4'>4</option>
-                  <option  value='5'>5</option>
-              </select>
-            </div>
+                <option value={star} selected>{star}</option>
+              }
+              <option value="">Sélectionnez un nombre</option>
+              <option value='1'>1</option>
+              <option value='2'>2</option>
+              <option value='3'>3</option>
+              <option value='4'>4</option>
+              <option value='5'>5</option>
+            </select>
+          </div>
         }
         <div className="col-md-6 mb-3 mt-4">
           <label className="form-label fw-semibold">Email</label>

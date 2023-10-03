@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { API_URL } from '../../config/constants'
 import $ from 'jquery'
@@ -8,9 +8,13 @@ import AuthContext from '../../context/auth-context'
 
 const CardGuide = ({ elt }) => {
     const { user } = useContext(AuthContext)
-    const picture = useState(elt?.picture)
     const navigate = useNavigate();
-
+    const [userRole, setuserRole] = useState('')
+    useEffect(() => {
+        if (user) {
+            setuserRole(user?.role)
+        }
+    }, [])
     const submit = () => {
         if (!user) {
             navigate('/login')
@@ -18,9 +22,11 @@ const CardGuide = ({ elt }) => {
             const formData = new FormData();
             formData.append("name", elt?.name);
             formData.append("address", elt?.address);
-            formData.append("picture", picture);
+            formData.append("picture", elt?.picture);
             formData.append("phone", elt?.phone);
             formData.append("email", elt?.email);
+            formData.append("role", 'Guide');
+            formData.append("offer_id", elt?.id);
             formData.append("description", elt?.description);
             formData.append("longitude", elt?.longitude);
             formData.append("latitude", elt?.latitude);
@@ -48,12 +54,18 @@ const CardGuide = ({ elt }) => {
             });
     }
     return (
-        <article className="col-xxl-3 col-lg-4 col-md-6 col-sm-9 col-10 mb-4 mx-auto card_container " >
+        <article className="col-xxl-3 col-md-4 col-sm-6 col-10 mb-4 mx-lg-0 mx-auto card_container" >
             <div className="card border-0">
                 <div className='card_img position-relative'>
                     <NavLink to={`/guide-details/${elt.id}`}><img src={API_URL + elt?.picture} alt="user_image" className="" /></NavLink>
-                    <div className='bookmarkIcon' id={`book_${elt?.id}`} onClick={() => submit()}><i class="fa-regular fa-bookmark "></i></div>
-                    <div className='bookmarkIcon book' id={`bookk_${elt?.id}`} onClick={() => deleteBookmark(elt?.name)}><i class="fa-solid fa-bookmark "></i></div>
+                    {user?.role === 'Tourist' || userRole === '' ?
+                        <>
+                            <div className='bookmarkIcon' id={`book_${elt?.id}`} onClick={() => submit()}><i class="fa-regular fa-bookmark "></i></div>
+                            <div className='bookmarkIcon book' id={`bookk_${elt?.id}`} onClick={() => deleteBookmark(elt?.name)}><i class="fa-solid fa-bookmark "></i></div>
+                        </>
+                        : null
+                    }
+
                 </div>
                 <div className="pt-3 px-2">
                     <Link to={`/guide-details/${elt.id}`} className='text-decoration-none '><h5 className="fw-semibold primaryColor">{elt.name}</h5></Link>
