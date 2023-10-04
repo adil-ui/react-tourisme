@@ -106,8 +106,10 @@ function App() {
                 </Route>
 
               :
+              <>
               <Route path='/' element={<Home />} />
-
+              <Route path='/react-tourisme' element={<Home />} />
+              </>
             }
 
             {/* <Route path='*' element={<div className='page404 d-flex  justify-content-center align-items-center'><h2 className='text-danger fw-semibold'>404 Page Not Found</h2></div>} /> */}
