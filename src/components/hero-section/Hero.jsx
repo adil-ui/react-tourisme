@@ -1,7 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Hero.css'
 import { Link } from 'react-router-dom'
+import { API_URL } from '../../config/constants';
 const Hero = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch(API_URL + "api/get-picture")
+      .then(response => response.json())
+      .then(result => {
+        setData(result.pictures);
+      })
+  }, [])
+
   return (
     <div className='position-relative mb-5' >
       <div className="hero-back d-flex justify-content-center align-items-center" >
@@ -23,18 +34,36 @@ const Hero = () => {
       </div>
       <div id="carouselExampleInterval" className="carousel slide carousel-fade vh-100" data-bs-ride="carousel">
 
-        
-        <div className="carousel-inner">
 
-          <div className="carousel-item  active" data-bs-interval="5000">
-            <img src="assets/slide-2.jpg" className=" w-100" alt="..." />
-          </div>
-          <div className="carousel-item   " data-bs-interval="2000">
+        <div className="carousel-inner">
+          {data.map(elt =>
+            elt.name === 'slide-1' ?
+              <div className="carousel-item  active" data-bs-interval="3000">
+                <img src={API_URL + elt.picture} className=" w-100" alt="..." />
+              </div>
+              : null
+          )}
+          {data.map(elt =>
+            elt.name === 'slide-2' ?
+              <div className="carousel-item  " data-bs-interval="3000">
+                <img src={API_URL + elt.picture} className=" w-100" alt="..." />
+              </div>
+              : null
+          )}
+          {data.map(elt =>
+            elt.name === 'slide-3' ?
+              <div className="carousel-item  " data-bs-interval="3000">
+                <img src={API_URL + elt.picture} className=" w-100" alt="..." />
+              </div>
+              : null
+          )}
+
+          {/* <div className="carousel-item   " data-bs-interval="2000">
             <img src="assets/back.jpg" className=" w-100" alt="..." />
           </div>
           <div className="carousel-item " data-bs-interval="5000">
             <img src="assets/slide-4.jpg" className=" w-100" alt="..." />
-          </div>
+          </div> */}
         </div>
 
       </div>
