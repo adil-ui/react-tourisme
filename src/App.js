@@ -59,20 +59,20 @@ function App() {
 
         <main>
           <Routes>
-            <Route path='/' element={<Home />} />
+            <Route path='/react-tourisme' element={<Home />} />
             {!user &&
               <>
-                <Route path='login' element={<Login />} />
-                <Route path='forgot-password' element={<ForgotPassword />} />
-                <Route path='reset-password/:token' element={<ResetPassword />} />
-                <Route path='sign-up' element={<Register />} />
+                <Route path='/react-tourisme/login' element={<Login />} />
+                <Route path='/react-tourisme/forgot-password' element={<ForgotPassword />} />
+                <Route path='/react-tourisme/reset-password/:token' element={<ResetPassword />} />
+                <Route path='/react-tourisme/sign-up' element={<Register />} />
               </>
             }
 
             <Route path='hotel-details/:id' element={<DetailsHotel />} />
             <Route path='agency-details/:id' element={<DetailsAgency />} />
             <Route path='guide-details/:id' element={<DetailsGuide />} />
-            <Route path='hotels' element={<Hotels />} />
+            <Route path='/react-tourisme/hotels' element={<Hotels />} />
             <Route path='practical-info' element={<Infos />} />
             <Route path='agencies' element={<Cars />} />
             <Route path='guides' element={<Guides />} />
