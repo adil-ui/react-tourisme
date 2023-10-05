@@ -107,7 +107,7 @@ function App() {
 
               :
               <>
-              <Route path='/' element={<Home />} />
+              <Route path='/react-tourisme' element={<Home />} />
               </>
             }
 
