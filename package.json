@@ -1,6 +1,6 @@
 {
   "name": "react-tourguide",
-  "homepage": "https://adil-ui.github.io/react-tourisme",
+  // "homepage": "https://adil-ui.github.io/react-tourisme",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
