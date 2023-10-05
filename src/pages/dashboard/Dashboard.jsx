@@ -15,6 +15,7 @@ const Dashboard = () => {
     const [nbrInfo, setNbrInfo] = useState(0)
     const [nbrEmployes, setNbrEmployes] = useState(0)
     const [nbrMonuments, setNbrMonuments] = useState(0)
+    const [nbrInscriptions, setNbrInscriptions] = useState(0)
     const user = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
@@ -30,6 +31,7 @@ const Dashboard = () => {
                 setNbrInfo(result.data.informations);
                 setNbrEmployes(result.data.employees);
                 setNbrMonuments(result.data.monuments);
+                setNbrInscriptions(result.data.inscriptions);
             })
     }, [])
 
@@ -68,14 +70,14 @@ const Dashboard = () => {
                 <div class="col-xxl-4 col-md-6 col-10 mb-5 mx-lg-0 mx-auto dash_card">
                     <div className='shadow-sm bg-white border-start border-5 d-flex align-items-center border-danger row px-4 py-3 rounded-4 mx-lg-0 mx-md-auto'>
                         <div className='col-6'>
-                            <p className='fw-semibold fs-4'>{nbrCity}</p>
-                            {nbrCity > 1 ? <p className='fw-semibold fs-5'>Villes</p> :
-                                <p className='fw-semibold fs-5'>Ville</p>
+                            <p className='fw-semibold fs-4'>{nbrInscriptions}</p>
+                            {nbrInscriptions > 1 ? <p className='fw-semibold fs-5'>Inscriptions</p> :
+                                <p className='fw-semibold fs-5'>Inscription</p>
                             }
 
                         </div>
                         <div className='col-6 text-end'>
-                            <i class="fa-solid fa-city fontSize60 text-danger"></i>
+                            <i className="fa-solid fa-rectangle-list fontSize60  text-danger"></i>
                         </div>
                     </div>
                 </div>
@@ -150,13 +152,14 @@ const Dashboard = () => {
                 <div class="col-xxl-4 col-md-6 col-10 mb-5 mx-lg-0 mx-auto dash_card">
                     <div className='shadow-sm bg-white border-start border-5 d-flex align-items-center border-success row px-4 py-3 rounded-4 mx-lg-0 mx-md-auto'>
                         <div className='col-6'>
-                            <p className='fw-semibold fs-4'>{nbrMonuments}</p>
-                            {nbrMonuments > 1 ? <p className='fw-semibold fs-5'>Monuments</p> :
-                                <p className='fw-semibold fs-5'>Monument</p>
+                            <p className='fw-semibold fs-4'>{nbrCity}</p>
+                            {nbrCity > 1 ? <p className='fw-semibold fs-5'>Villes</p> :
+                                <p className='fw-semibold fs-5'>Ville</p>
                             }
                         </div>
                         <div className='col-6 text-end'>
-                            <i class="fa-solid fa-landmark fontSize60 text-success"></i>
+                            <i class="fa-solid fa-city fontSize60 text-success"></i>
+
                         </div>
                     </div>
                 </div>

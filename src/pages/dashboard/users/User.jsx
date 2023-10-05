@@ -77,7 +77,9 @@ const User = () => {
                             <th scope="col" className='primaryColor'>Email</th>
                             <th scope="col" className='primaryColor'>status</th>
                             <th scope="col" className='primaryColor'>role</th>
-                            <th scope="col" className='primaryColor'>Action</th>
+                            {userRole !== 'Admin' ?
+                                <th scope="col" className='primaryColor'>Action</th>
+                                : null}
                         </tr>
                     </thead>
                     <tbody className=''>
@@ -89,18 +91,18 @@ const User = () => {
                                     <td className="pt-3">{user.status}</td>
                                     <td className="pt-3">{user.role}</td>
                                     {userRole !== 'Admin' ?
-                                           user.status === 'Débloquer' ?
-                                           <td className="align-middle">
-                                               <button onClick={() => blockUser(user.id)} className="btn btn-danger"><i class="fa-solid fa-lock"></i> Bloquer</button>
-                                           </td>
-                                           :
-                                           <td className="align-middle">
-                                               <button onClick={() => unBlockUser(user.id)} className="btn btn-success"><i class="fa-solid fa-lock-open"></i> Débloquer</button>
-                                           </td>
-                                       
+                                        user.status === 'Débloquer' ?
+                                            <td className="align-middle">
+                                                <button onClick={() => blockUser(user.id)} className="btn btn-danger"><i class="fa-solid fa-lock"></i> Bloquer</button>
+                                            </td>
+                                            :
+                                            <td className="align-middle">
+                                                <button onClick={() => unBlockUser(user.id)} className="btn btn-success"><i class="fa-solid fa-lock-open"></i> Débloquer</button>
+                                            </td>
 
-                                            : null}
-                                   
+
+                                        : null}
+
 
                                 </tr>
                             ))

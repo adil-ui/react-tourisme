@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import Hero from './hero-section/Hero'
 import Top from './top/Top'
+import Hero from '../../components/hero-section/Hero';
 
 const Home = () => {
   
