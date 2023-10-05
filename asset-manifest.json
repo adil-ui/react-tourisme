@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/react-tourisme/static/css/main.1bd0388d.css",
-    "main.js": "/react-tourisme/static/js/main.a67eefab.js",
+    "main.js": "/react-tourisme/static/js/main.774f2ab7.js",
     "static/js/787.4813b240.chunk.js": "/react-tourisme/static/js/787.4813b240.chunk.js",
     "static/media/footer-back.jpg": "/react-tourisme/static/media/footer-back.d2b5cae841315fdbe28f.jpg",
     "index.html": "/react-tourisme/index.html",
     "main.1bd0388d.css.map": "/react-tourisme/static/css/main.1bd0388d.css.map",
-    "main.a67eefab.js.map": "/react-tourisme/static/js/main.a67eefab.js.map",
+    "main.774f2ab7.js.map": "/react-tourisme/static/js/main.774f2ab7.js.map",
     "787.4813b240.chunk.js.map": "/react-tourisme/static/js/787.4813b240.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1bd0388d.css",
-    "static/js/main.a67eefab.js"
+    "static/js/main.774f2ab7.js"
   ]
 }
