@@ -1,11 +1,13 @@
 import axios from "axios";
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Pagination from "../../../components/Pagination/Pagination";
 import { API_URL } from "../../../config/constants"
 
 import { Link } from "react-router-dom";
+import AuthContext from "../../../context/auth-context";
 
 const Hotel = () => {
+    const { user } = useContext(AuthContext);
     const [hotels, setHotels] = useState([])
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
@@ -24,6 +26,13 @@ const Hotel = () => {
     const [search, setSearch] = useState('all');
     const [searchValue, setSearchValue] = useState('');
     const [dataLenght, setDataLenght] = useState(0);
+    const [userRole, setUserRole] = useState('');
+    useEffect(() => {
+        if (user) {
+            setUserRole(user?.role)
+        }
+    }, [])
+
 
     const handleCityChange = (event) => {
         setCity(event.target.value);
@@ -162,7 +171,7 @@ const Hotel = () => {
                                 <div className="col-md-6 mt-2">
                                     <label for="city" className="form-label m-0 fw-semibold">Ville</label>
                                     <select id='city' className='form-select py-2' onChange={handleCityChange} >
-                                        <option  selected disabled>Sélectionnez une ville</option>
+                                        <option selected disabled>Sélectionnez une ville</option>
                                         {cities?.map(city => (
                                             <option key={city?.id} value={city?.name}>{city?.name}</option>
                                         ))}
@@ -249,7 +258,10 @@ const Hotel = () => {
                                     <td className="align-middle">{hotel.phone}</td>
                                     <td className="align-middle">
                                         <Link to={`/dashboard/edit-hotel/${hotel.id}`} className="btn btn-primary me-1"><i className="bi bi-pencil-square"></i></Link>
-                                        <button onClick={() => deleteHotel(hotel.id)} className="btn btn-danger"><i className="fa-solid fa-trash-can"></i></button>
+                                        {userRole ?
+                                            <button onClick={() => deleteHotel(hotel.id)} className="btn btn-danger"><i className="fa-solid fa-trash-can"></i></button>
+
+                                            : null}
                                     </td>
 
                                 </tr>
