@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { API_URL } from '../../../config/constants';
 import './Register.css'
@@ -13,6 +13,15 @@ const Register = () => {
     const [role, setRole] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        fetch(API_URL + "api/get-picture")
+            .then(response => response.json())
+            .then(result => {
+                setData(result.pictures);
+            })
+    }, [])
 
     const handleChangeRole = (e) => {
         setRole(e.target.value)
@@ -41,7 +50,12 @@ const Register = () => {
     return (
         <div className='row g-0'>
             <form className='register col-xl-4 col-lg-6 col-md-7 col-sm-9 col-10  py-2 px-4 rounded-4 shadow mx-auto row gy-0 gx-4' onSubmit={handleSubmit} encType="multipart/form-data">
-                <div className='text-center mb-4'><img src="assets/logo.png" alt="logo" width="130px" /></div>
+            {data.map(elt =>
+                    elt.name === 'logo' ?
+                        <div className='text-center mb-4'><img src={API_URL + elt.picture} alt="logo" width="130px" /></div>
+
+                        : null
+                )}
                 <div className="col-md-6 mb-1">
                     <label for="type " className="form-label m-0">Type <span className="text-danger">*</span></label>
                     <select id="type" name='type' className="form-select" onChange={handleChangeRole} required>

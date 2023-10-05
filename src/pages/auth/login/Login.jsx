@@ -13,6 +13,15 @@ const Login = () => {
     const [message, setMessage] = useState("");
     const { setUser } = useContext(AuthContext);
     const navigate = useNavigate();
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        fetch(API_URL + "api/get-picture")
+            .then(response => response.json())
+            .then(result => {
+                setData(result.pictures);
+            })
+    }, [])
 
     const clickLogin = async (e) => {
         e.preventDefault();
@@ -41,7 +50,12 @@ const Login = () => {
     return (
         <div className='row g-0 my-5 pt-4' >
             <form onSubmit={clickLogin} className="login col-xxl-3 col-xl-4 col-lg-5 col-md-6 col-sm-8 col-10  py-3 px-4 rounded-4 shadow mx-auto">
-                <div className='text-center mb-4'><img src="assets/logo.png" alt="logo" width="140px" /></div>
+                {data.map(elt =>
+                    elt.name === 'logo' ?
+                        <div className='text-center mb-4'><img src={API_URL + elt.picture} alt="logo" width="140px" /></div>
+
+                        : null
+                )}
 
                 <div className="mb-3 ">
                     <label className="form-label m-0">Email</label>
