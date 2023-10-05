@@ -59,20 +59,20 @@ function App() {
 
         <main>
           <Routes>
-            <Route path='/react-tourisme' element={<Home />} />
+            <Route path='/' element={<Home />} />
             {!user &&
               <>
-                <Route path='/react-tourisme/login' element={<Login />} />
-                <Route path='/react-tourisme/forgot-password' element={<ForgotPassword />} />
-                <Route path='/react-tourisme/reset-password/:token' element={<ResetPassword />} />
-                <Route path='/react-tourisme/sign-up' element={<Register />} />
+                <Route path='login' element={<Login />} />
+                <Route path='forgot-password' element={<ForgotPassword />} />
+                <Route path='reset-password/:token' element={<ResetPassword />} />
+                <Route path='sign-up' element={<Register />} />
               </>
             }
 
             <Route path='hotel-details/:id' element={<DetailsHotel />} />
             <Route path='agency-details/:id' element={<DetailsAgency />} />
             <Route path='guide-details/:id' element={<DetailsGuide />} />
-            <Route path='/react-tourisme/hotels' element={<Hotels />} />
+            <Route path='hotels' element={<Hotels />} />
             <Route path='practical-info' element={<Infos />} />
             <Route path='agencies' element={<Cars />} />
             <Route path='guides' element={<Guides />} />
@@ -107,11 +107,11 @@ function App() {
 
               :
               <>
-              <Route path='/react-tourisme' element={<Home />} />
+              <Route path='/' element={<Home />} />
               </>
             }
 
-            {/* <Route path='*' element={<div className='page404 d-flex  justify-content-center align-items-center'><h2 className='text-danger fw-semibold'>404 Page Not Found</h2></div>} /> */}
+            <Route path='*' element={<div className='page404 d-flex  justify-content-center align-items-center'><h2 className='text-danger fw-semibold'>404 Page Not Found</h2></div>} />
 
           </Routes>
         </main>
