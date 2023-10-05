@@ -41,7 +41,7 @@ const Register = () => {
     return (
         <div className='row g-0'>
             <form className='register col-xl-4 col-lg-6 col-md-7 col-sm-9 col-10  py-2 px-4 rounded-4 shadow mx-auto row gy-0 gx-4' onSubmit={handleSubmit} encType="multipart/form-data">
-                <div className='text-center mb-4'><img src="assets/logo.png" alt="logo" width="130px" /></div>
+                <div className='text-center mb-4'><img src="/assets/logo.png" alt="logo" width="130px" /></div>
                 <div className="col-md-6 mb-1">
                     <label for="type " className="form-label m-0">Type <span className="text-danger">*</span></label>
                     <select id="type" name='type' className="form-select" onChange={handleChangeRole} required>

@@ -41,7 +41,7 @@ const Login = () => {
     return (
         <div className='row g-0 my-5 pt-4' >
             <form onSubmit={clickLogin} className="login col-xxl-3 col-xl-4 col-lg-5 col-md-6 col-sm-8 col-10  py-3 px-4 rounded-4 shadow mx-auto">
-                <div className='text-center mb-4'><img src="assets/logo.png" alt="logo" width="140px" /></div>
+                <div className='text-center mb-4'><img src="/assets/logo.png" alt="logo" width="140px" /></div>
 
                 <div className="mb-3 ">
                     <label className="form-label m-0">Email</label>
