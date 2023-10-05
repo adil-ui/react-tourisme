@@ -59,6 +59,7 @@ const Hotel = () => {
         try {
             const response = await axios.post(API_URL + 'api/add-hotel', formData);
             setMessage(response.data.message);
+            setHotels(response.data.data)
         } catch (error) {
             console.log(error);
         }
@@ -258,7 +259,7 @@ const Hotel = () => {
                                     <td className="align-middle">{hotel.phone}</td>
                                     <td className="align-middle">
                                         <Link to={`/dashboard/edit-hotel/${hotel.id}`} className="btn btn-primary me-1"><i className="bi bi-pencil-square"></i></Link>
-                                        {userRole ?
+                                        {userRole !== 'Admin' ?
                                             <button onClick={() => deleteHotel(hotel.id)} className="btn btn-danger"><i className="fa-solid fa-trash-can"></i></button>
 
                                             : null}
