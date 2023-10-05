@@ -1,9 +1,10 @@
 import axios from "axios";
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Pagination from "../../../components/Pagination/Pagination";
 import { API_URL } from "../../../config/constants"
 
 import { Link } from "react-router-dom";
+import AuthContext from "../../../context/auth-context";
 
 const Guide = () => {
     const [guides, setGuides] = useState([])
@@ -22,7 +23,13 @@ const Guide = () => {
     const [search, setSearch] = useState('all');
     const [searchValue, setSearchValue] = useState('');
     const [dataLenght, setDataLenght] = useState(0);
-
+    const { user } = useContext(AuthContext);
+    const [userRole, setUserRole] = useState('');
+    useEffect(() => {
+        if (user) {
+            setUserRole(user?.role)
+        }
+    }, [])
     const handleCityChange = (event) => {
         setCity(event.target.value);
     };
@@ -161,6 +168,7 @@ const Guide = () => {
                                 </p>}
                                 <div className="modal-footer mt-3">
                                     <button type="submit" className="btn btn-primary px-4">Enregistrer</button>
+
                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 </div>
                             </form>
@@ -209,7 +217,9 @@ const Guide = () => {
                                     <td className="align-middle">{elt.phone}</td>
                                     <td className="align-middle">
                                         <Link to={`/dashboard/edit-guide/${elt.id}`} className="btn btn-primary me-1"><i className="bi bi-pencil-square"></i></Link>
-                                        <button onClick={() => deleteGuide(elt.id)} className="btn btn-danger"><i className="fa-solid fa-trash-can"></i></button>
+                                        {userRole !== 'Admin' ?
+                                            <button onClick={() => deleteGuide(elt.id)} className="btn btn-danger"><i className="fa-solid fa-trash-can"></i></button>
+                                            : null}
                                     </td>
 
                                 </tr>

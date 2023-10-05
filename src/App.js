@@ -108,7 +108,6 @@ function App() {
               :
               <>
               <Route path='/' element={<Home />} />
-              <Route path='https://adil-ui.github.io/react-tourisme/' element={<Home />} />
               </>
             }
 

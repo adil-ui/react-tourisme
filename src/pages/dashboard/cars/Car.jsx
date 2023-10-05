@@ -1,9 +1,10 @@
 import axios from "axios";
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Pagination from "../../../components/Pagination/Pagination";
 import { API_URL } from "../../../config/constants"
 
 import { Link } from "react-router-dom";
+import AuthContext from "../../../context/auth-context";
 
 const Car = () => {
     const [agencies, setAgencies] = useState([])
@@ -23,7 +24,13 @@ const Car = () => {
     const [search, setSearch] = useState('all');
     const [searchValue, setSearchValue] = useState('');
     const [dataLenght, setDataLenght] = useState(0);
-
+    const { user } = useContext(AuthContext);
+    const [userRole, setUserRole] = useState('');
+    useEffect(() => {
+        if (user) {
+            setUserRole(user?.role)
+        }
+    }, [])
     const handleCityChange = (event) => {
         setCity(event.target.value);
     };
@@ -221,7 +228,10 @@ const Car = () => {
                                     <td className="align-middle">{elt.phone}</td>
                                     <td className="align-middle">
                                         <Link to={`/dashboard/edit-agency/${elt.id}`} className="btn btn-primary me-1"><i className="bi bi-pencil-square"></i></Link>
+                                        {userRole !== 'Admin' ?
                                         <button onClick={() => deleteAgency(elt.id)} className="btn btn-danger"><i className="fa-solid fa-trash-can"></i></button>
+                                            
+                                            : null}
                                     </td>
 
                                 </tr>

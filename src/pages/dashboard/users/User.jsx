@@ -1,12 +1,20 @@
 import axios from "axios";
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Pagination from "../../../components/Pagination/Pagination";
 import { API_URL } from "../../../config/constants"
+import AuthContext from "../../../context/auth-context";
 const User = () => {
     const [users, setUsers] = useState([])
     const [dataLenght, setDataLenght] = useState(0);
     const [search, setSearch] = useState('all');
     const [searchValue, setSearchValue] = useState('');
+    const [userRole, setUserRole] = useState('');
+    const { user } = useContext(AuthContext);
+    useEffect(() => {
+        if (user) {
+            setUserRole(user?.role)
+        }
+    }, [])
 
 
     useEffect(() => {
@@ -80,15 +88,19 @@ const User = () => {
                                     <td className="pt-3">{user.email}</td>
                                     <td className="pt-3">{user.status}</td>
                                     <td className="pt-3">{user.role}</td>
-                                    {user.status === 'Débloquer' ?
-                                        <td className="align-middle">
-                                            <button onClick={() => blockUser(user.id)} className="btn btn-danger"><i class="fa-solid fa-lock"></i> Bloquer</button>
-                                        </td>
-                                        :
-                                        <td className="align-middle">
-                                            <button onClick={() => unBlockUser(user.id)} className="btn btn-success"><i class="fa-solid fa-lock-open"></i> Débloquer</button>
-                                        </td>
-                                    }
+                                    {userRole !== 'Admin' ?
+                                           user.status === 'Débloquer' ?
+                                           <td className="align-middle">
+                                               <button onClick={() => blockUser(user.id)} className="btn btn-danger"><i class="fa-solid fa-lock"></i> Bloquer</button>
+                                           </td>
+                                           :
+                                           <td className="align-middle">
+                                               <button onClick={() => unBlockUser(user.id)} className="btn btn-success"><i class="fa-solid fa-lock-open"></i> Débloquer</button>
+                                           </td>
+                                       
+
+                                            : null}
+                                   
 
                                 </tr>
                             ))

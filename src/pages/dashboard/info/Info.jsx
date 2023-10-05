@@ -1,9 +1,10 @@
 import axios from "axios";
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Pagination from "../../../components/Pagination/Pagination";
 import { API_URL } from "../../../config/constants"
 
 import { Link } from "react-router-dom";
+import AuthContext from "../../../context/auth-context";
 
 const Info = () => {
     const [informations, setInformations] = useState([])
@@ -16,7 +17,13 @@ const Info = () => {
     const [search, setSearch] = useState('all');
     const [searchValue, setSearchValue] = useState('');
     const [dataLenght, setDataLenght] = useState(0);
-
+    const { user } = useContext(AuthContext);
+    const [userRole, setUserRole] = useState('');
+    useEffect(() => {
+        if (user) {
+            setUserRole(user?.role)
+        }
+    }, [])
 
     const submit = async (e) => {
         e.preventDefault();
@@ -167,7 +174,10 @@ const Info = () => {
                                     <td className="align-middle">{elt.category?.name}</td>
                                     <td className="align-middle">
                                         <Link to={`/dashboard/edit-information/${elt.id}`} className="btn btn-primary me-1"><i className="bi bi-pencil-square"></i></Link>
-                                        <button onClick={() => deleteInformation(elt.id)} className="btn btn-danger"><i className="fa-solid fa-trash-can"></i></button>
+                                        {userRole !== 'Admin' ?
+                                            <button onClick={() => deleteInformation(elt.id)} className="btn btn-danger"><i className="fa-solid fa-trash-can"></i></button>
+
+                                            : null}
                                     </td>
 
                                 </tr>

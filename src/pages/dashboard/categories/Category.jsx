@@ -1,9 +1,10 @@
 import axios from "axios";
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Pagination from "../../../components/Pagination/Pagination";
 import { API_URL } from "../../../config/constants"
 
 import { Link } from "react-router-dom";
+import AuthContext from "../../../context/auth-context";
 
 const Category = () => {
     const [categories, setCategories] = useState([])
@@ -13,7 +14,13 @@ const Category = () => {
     const [search, setSearch] = useState('all');
     const [searchValue, setSearchValue] = useState('');
     const [dataLenght, setDataLenght] = useState(0);
-
+    const { user } = useContext(AuthContext);
+    const [userRole, setUserRole] = useState('');
+    useEffect(() => {
+        if (user) {
+            setUserRole(user?.role)
+        }
+    }, [])
     const submit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -132,7 +139,10 @@ const Category = () => {
                                     <td className="align-middle">{elt.name}</td>
                                     <td className="align-middle">
                                         <Link to={`/dashboard/edit-category/${elt.id}`} className="btn btn-primary me-1"><i className="bi bi-pencil-square"></i></Link>
+                                        {userRole !== 'Admin' ?
                                         <button onClick={() => deleteCategory(elt.id)} className="btn btn-danger"><i className="fa-solid fa-trash-can"></i></button>
+                                            
+                                            : null}
                                     </td>
 
                                 </tr>
